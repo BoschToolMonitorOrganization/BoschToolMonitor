@@ -5,7 +5,7 @@
     <title>Work Piece Carrier Form</title>
 </head>
 <body>
-<form action=#" th:action=@{/workPieceCarrier}" th:object="${workPieceCarrier}" method="post">
+<form action=#" th:action=@{/workPieceCarrier}" th:object="${WorkPieceCarrier}" method="post" enctype="multipart/form-data">
     <h1>Characteristics</h1>
     <h2>File Details</h2>
     <p>Author: <input type="text" th:field="*{author}"/></p>
@@ -28,22 +28,22 @@
     <hr>
 
     <h1>Features</h1>
-    <h2>Drawing Library: <input type="file" th:field="*{drawingLibrary}"/></h2>
+    <h2>Drawing Library: <input type="file" th:field="*{drawingLibrary}" multiple="multiple"/></h2>
 
     <hr>
 
     <h1>Repair Ticket</h1>
     <h2>Reason for change: <input type="text" th:field="*{reasonForChange}"/></h2>
     <h2>Reason Category: <input type="text" th:field="*{reasonCategory}"/></h2>
-    <input type="checkbox" th:field="*{toolLifeAchieved}"/><label>Tool Life Achieved</label>
+    <input type="checkbox" th:field="*{toolLifeAchieved}"/><h2>Tool Life Achieved</h2>
     <h2>Location:<input type="text" th:field="*{locationRepairTicket}"/></h2>
     <h2>Downtime Impact in Minutes: <input type="text" th:field="*{downTimeImpact}"/></h2>
 
     <hr>
 
     <h1>File Storage</h1>
-    <h2>PDFs:<input type="file" th:field="*{PDFs}"/></h2>
-    <h2>CADs:<input type="file" th:field="*{CADs}"/></h2>
+    <h2>PDFs:<input type="file" th:field="*{PDFs}" multiple="multiple"/></h2>
+    <h2>CADs:<input type="file" th:field="*{CADs}" multiple="multiple"/></h2>
     <h2>JPEG:<input type="file" th:field="*{JPEG}"/></h2>
 </form>
 
