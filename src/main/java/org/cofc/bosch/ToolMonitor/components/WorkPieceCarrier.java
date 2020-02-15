@@ -4,13 +4,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class WorkPieceCarrier {
     private String author;
-    private int revisionNumber;
+    private String revisionNumber;
     private String revisionReason;
     private String fileType;
 
     private MultipartFile[] componentsList;
     private String workPieceCarrierNumber;
-    private String location;
+    private String valueStream;
+    private String productionLine;
+    private String productType;
 
     private MultipartFile[] drawingLibrary;
 
@@ -24,6 +26,30 @@ public class WorkPieceCarrier {
     private MultipartFile[] CADs;
     private MultipartFile JPEG;
 
+    public String getValueStream() {
+        return valueStream;
+    }
+
+    public void setValueStream(String valueStream) {
+        this.valueStream = valueStream;
+    }
+
+    public String getProductionLine() {
+        return productionLine;
+    }
+
+    public void setProductionLine(String productionLine) {
+        this.productionLine = productionLine;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
+
     public String getAuthor() {
         return author;
     }
@@ -32,11 +58,11 @@ public class WorkPieceCarrier {
         this.author = author;
     }
 
-    public int getRevisionNumber() {
+    public String getRevisionNumber() {
         return revisionNumber;
     }
 
-    public void setRevisionNumber(int revisionNumber) {
+    public void setRevisionNumber(String revisionNumber) {
         this.revisionNumber = revisionNumber;
     }
 
@@ -70,14 +96,6 @@ public class WorkPieceCarrier {
 
     public void setWorkPieceCarrierNumber(String workPieceCarrierNumber) {
         this.workPieceCarrierNumber = workPieceCarrierNumber;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public MultipartFile[] getDrawingLibrary() {
