@@ -66,9 +66,9 @@ public class BaseController {
             statement.setString(5, carrier.getJPEG().getOriginalFilename());
             statement.setString(6, "jpeg");
             statement.setBlob(7, carrier.getJPEG().getInputStream());
+            statement.addBatch();
 
             for(MultipartFile file : carrier.getComponentsList()) {
-                statement.addBatch();
                 statement.setString(1, carrier.getWorkPieceCarrierNumber());
                 statement.setString(2, carrier.getValueStream());
                 statement.setString(3, carrier.getProductionLine());
@@ -76,10 +76,10 @@ public class BaseController {
                 statement.setString(5, file.getOriginalFilename());
                 statement.setString(6, "component");
                 statement.setBlob(7, file.getInputStream());
+                statement.addBatch();
             }
 
             for(MultipartFile file : carrier.getComponentsList()) {
-                statement.addBatch();
                 statement.setString(1, carrier.getWorkPieceCarrierNumber());
                 statement.setString(2, carrier.getValueStream());
                 statement.setString(3, carrier.getProductionLine());
@@ -87,10 +87,10 @@ public class BaseController {
                 statement.setString(5, file.getOriginalFilename());
                 statement.setString(6, "drawing");
                 statement.setBlob(7, file.getInputStream());
+                statement.addBatch();
             }
 
             for(MultipartFile file : carrier.getPDFs()) {
-                statement.addBatch();
                 statement.setString(1, carrier.getWorkPieceCarrierNumber());
                 statement.setString(2, carrier.getValueStream());
                 statement.setString(3, carrier.getProductionLine());
@@ -98,10 +98,10 @@ public class BaseController {
                 statement.setString(5, file.getOriginalFilename());
                 statement.setString(6, "pdf");
                 statement.setBlob(7, file.getInputStream());
+                statement.addBatch();
             }
 
             for(MultipartFile file : carrier.getCADs()) {
-                statement.addBatch();
                 statement.setString(1, carrier.getWorkPieceCarrierNumber());
                 statement.setString(2, carrier.getValueStream());
                 statement.setString(3, carrier.getProductionLine());
@@ -109,6 +109,7 @@ public class BaseController {
                 statement.setString(5, file.getOriginalFilename());
                 statement.setString(6, "cad");
                 statement.setBlob(7, file.getInputStream());
+                statement.addBatch();
             }
 
             statement.executeBatch();
@@ -123,7 +124,6 @@ public class BaseController {
             System.out.println(e.getMessage() + "\n");
             e.printStackTrace();
         }
-
 
         return "workPieceCarrierSubmission";
     }
