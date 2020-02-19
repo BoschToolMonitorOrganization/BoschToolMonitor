@@ -5,48 +5,48 @@ input[type=text], select, textarea{
     border: 2px solid #ccc;
     border-radius: 4px;
 }
-  
-  .container  {
+
+.container  {
     border-radius: 50px;
     background-color: whitesmoke;
     padding: 20px;
     border-style: solid;
     text-align: right;
-    
-    
-    
 
-  }
-  
-  body {
-      background-color: orangered;
-  }
 
-  h1 {
-      text-align: center;
-      text-decoration: underline;
-  }
-  h2 {
-      margin-right: 500px;
-      
-  }
 
-  /* File type heading */
-  label {
-      padding: 0px;
-      font-weight: bold;
-      font-size: 22px;
-      margin-right: 10px;
-      
-  }
 
-  select {
-      margin-right: 610px;
-      width: 11.5%;
-  }
- 
- /* Style the submit button */
- input[type=submit] {
+}
+
+body {
+    background-color: orangered;
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+}
+h2 {
+    margin-right: 500px;
+
+}
+
+/* File type heading */
+label {
+    padding: 0px;
+    font-weight: bold;
+    font-size: 22px;
+    margin-right: 10px;
+
+}
+
+select {
+    margin-right: 610px;
+    width: 11.5%;
+}
+
+/* Style the submit button */
+input[type=submit] {
     background-color: lightgray;
     color: black;
     padding: 12px 20px;
@@ -55,7 +55,6 @@ input[type=text], select, textarea{
     cursor: pointer;
     float: right;
     margin-bottom: 20px;
-  }
- 
+}
+
     
-  
