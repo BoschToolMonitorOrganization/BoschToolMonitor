@@ -19,11 +19,6 @@ configurations {
     }
 }
 
-wrapper {
-    distributionType = Wrapper.DistributionType.ALL
-    gradleVersion = '4.10'
-}
-
 repositories {
     mavenCentral()
 }
