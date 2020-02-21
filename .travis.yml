@@ -4,12 +4,13 @@ dist: trusty
 
 jdk:
   - oraclejdk8
-  
-    script:
-      - gradle check
-      - gradle build
+
+script:
+  - gradle check
+  - gradle build
 
 sudo: true
+
 cache:
   directories:
     - $HOME/.m2
