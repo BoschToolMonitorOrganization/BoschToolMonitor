@@ -5,6 +5,13 @@ dist: trusty
 jdk:
   - oraclejdk8
 
+before_install:
+  - wget http://services.gradle.org/distributions/gradle-5.3-bin.zip
+  - unzip -qq gradle-5.3-bin.zip
+  - export GRADLE_HOME=$PWD/gradle-5.3
+  - export PATH=$GRADLE_HOME/bin:$PATH
+  - gradle -v
+
 script:
   - gradle check
   - gradle build
