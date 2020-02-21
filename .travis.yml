@@ -5,10 +5,6 @@ dist: trusty
 jdk:
 - oraclejdk8
 
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.3'
-}
-
 sudo: true
 cache:
   directories:
