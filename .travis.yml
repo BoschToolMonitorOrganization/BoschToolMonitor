@@ -2,14 +2,14 @@ language: java
 
 dist: trusty
 
-before_install:
-  - apt-get install gradle
-
 os:
   - linux
 
 jdk:
   - oraclejdk8
+
+env:
+  GRADLE_VERSION=4.10.3
 
 sudo: true
 
