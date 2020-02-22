@@ -2,17 +2,14 @@ language: java
 
 dist: trusty
 
+before_install:
+  - apt-get install gradle
+
 os:
   - linux
-  - osx
-  - windows
 
 jdk:
   - oraclejdk8
-
-script:
-  - gradle wrapper
-  - ./gradlew wrapper --gradle-version 4.10
 
 sudo: true
 
