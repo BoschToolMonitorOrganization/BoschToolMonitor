@@ -5,6 +5,10 @@ plugins {
     id 'war'
 }
 
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.10.3'
+}
+
 group = 'com.cofc.bosch'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'

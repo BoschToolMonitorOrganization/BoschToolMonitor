@@ -5,20 +5,11 @@ dist: trusty
 os:
   - linux
 
-matrix:
-  include:
-    - jdk: openjdk8
-      env: GRADLE_VERSION=4.10.3
+jdk:
+  - oraclejdk8
 
-install: true
-
-before_script:
-  - gradle wrapper --gradle-version=$GRADLE_VERSION
-  
-script:
-  - ./gradlew clean build
-
-sudo: true
+before_install:
+  - gradle -b wrapper.gradle wrapper
 
 cache:
   directories:
