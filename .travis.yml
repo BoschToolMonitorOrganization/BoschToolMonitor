@@ -10,8 +10,13 @@ matrix:
     - jdk: openjdk8
       env: GRADLE_VERSION=4.10.3
 
-env:
-  GRADLE_VERSION=4.10.3
+install: true
+
+before_script:
+  - gradle wrapper --gradle-version=$GRADLE_VERSION
+  
+script:
+  - ./gradlew clean build
 
 sudo: true
 
