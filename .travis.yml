@@ -5,8 +5,10 @@ dist: trusty
 os:
   - linux
 
-jdk:
-  - oraclejdk8
+matrix:
+  include:
+    - jdk: openjdk8
+      env: GRADLE_VERSION=4.10.3
 
 env:
   GRADLE_VERSION=4.10.3
