@@ -12,7 +12,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.ViewResolver;
+import org.thymeleaf.spring5.SpringTemplateEngine;
+import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,7 +32,9 @@ public class BaseControllerTest {
 
     @Before
     public void setup() {
-        this.mockMvc = MockMvcBuilders.standaloneSetup(baseController).setViewResolvers(new InternalResourceViewResolver()).build();
+        ViewResolver resolver = new ThymeleafViewResolver();
+        ((ThymeleafViewResolver) resolver).setTemplateEngine(new SpringTemplateEngine());
+        this.mockMvc = MockMvcBuilders.standaloneSetup(baseController).setViewResolvers(resolver).build();
     }
 
     @Test
