@@ -20,8 +20,8 @@ public class BaseController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @RequestMapping("/welcome")
-    public @ResponseBody String firstPage() {
+    @GetMapping("/welcome")
+    public String firstPage() {
         return "welcome";
     }
 
