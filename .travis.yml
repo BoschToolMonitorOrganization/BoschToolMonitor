@@ -2,10 +2,15 @@ language: java
 
 dist: trusty
 
-jdk:
-- oraclejdk8
+os:
+  - linux
 
-sudo: true
+jdk:
+  - oraclejdk8
+
+before_install:
+  - gradle -b wrapper.gradle wrapper
+
 cache:
   directories:
-  - $HOME/.m2
+    - $HOME/.m2
