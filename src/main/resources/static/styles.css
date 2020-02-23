@@ -1,4 +1,5 @@
 /* Style inputs, select elements and textareas */
+
 input[type=text], select, textarea{
     width: 30%;
     padding: 10px;
@@ -12,9 +13,6 @@ input[type=text], select, textarea{
     padding: 20px;
     border-style: solid;
     text-align: right;
-
-
-
 
 }
 
@@ -47,6 +45,17 @@ select {
 
 /* Style the submit button */
 input[type=submit] {
+    background-color: lightgray;
+    color: black;
+    padding: 12px 20px;
+    border: solid;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    margin-bottom: 20px;
+}
+
+input[type=cancel] {
     background-color: lightgray;
     color: black;
     padding: 12px 20px;
