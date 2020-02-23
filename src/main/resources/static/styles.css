@@ -12,10 +12,6 @@ input[type=text], select, textarea{
     padding: 20px;
     border-style: solid;
     text-align: right;
-
-
-
-
 }
 
 body {
@@ -26,9 +22,9 @@ h1 {
     text-align: center;
     text-decoration: underline;
 }
+
 h2 {
     margin-right: 500px;
-
 }
 
 /* File type heading */
@@ -37,7 +33,6 @@ label {
     font-weight: bold;
     font-size: 22px;
     margin-right: 10px;
-
 }
 
 select {

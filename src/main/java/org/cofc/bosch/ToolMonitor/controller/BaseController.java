@@ -18,6 +18,7 @@ public class BaseController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+
     @GetMapping("/")
     public String homePage() {
         return "welcome";
@@ -48,4 +49,9 @@ public class BaseController {
         return "workPieceCarriers";
     }
 
+
+    //for mocking in tests (mockito sucks)
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 }
