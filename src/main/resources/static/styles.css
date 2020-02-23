@@ -25,6 +25,7 @@ h1 {
 
 h2 {
     margin-right: 500px;
+
 }
 
 /* File type heading */
@@ -33,6 +34,7 @@ label {
     font-weight: bold;
     font-size: 22px;
     margin-right: 10px;
+
 }
 
 select {
@@ -42,6 +44,17 @@ select {
 
 /* Style the submit button */
 input[type=submit] {
+    background-color: lightgray;
+    color: black;
+    padding: 12px 20px;
+    border: solid;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+    margin-bottom: 20px;
+}
+
+input[type=cancel] {
     background-color: lightgray;
     color: black;
     padding: 12px 20px;

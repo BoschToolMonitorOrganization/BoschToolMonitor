@@ -1,58 +1,93 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" href="styles.css"/>
+<link rel="stylesheet" type="text/css" href="styles.css?v=1.1"/>
 <head>
     <meta charset="UTF-8">
     <title>Work Piece Carrier Form</title>
 </head>
 <body>
 <form action="#" th:action="@{/workpiece}" th:object="${WorkPieceCarrier}" method="post" enctype="multipart/form-data">
-    <h1>Characteristics</h1>
-    <h2>File Details</h2>
-    <p>Author: <input type="text" name="author" th:field="*{author}"/></p>
-    <p>Revision #: <input type="text" name="revisionNumber" th:field="*{revisionNumber}"/></p>
-    <p>Revision Reason: <input type="text" name="revisionReason" th:field="*{revisionReason}"/></p>
 
-    <label>File Type:</label>
-    <select th:field="*{fileType}" type="text" name="fileType">
-        <option value="Assembly Drawing">Assembly Drawing</option>
-        <option value="BOM">BOM</option>
-        <option value="Component Drawing">Component Drawing"</option>
-        <option value="Data Sheet">Data Sheet</option>
-        <option value="Reference Image">Reference Image</option>
-    </select>
+    <div class = "container">
+        <h1>Characteristics</h1>
+        <h2>File Details</h2>
+        <h2>Author: <input type="text" name="author" th:field="*{author}"/></h2>
+        <h2>Revision #: <input type="text" name="revisionNumber" th:field="*{revisionNumber}"/></h2>
+        <h2>Revision Reason: <input type="text" name="revisionReason" th:field="*{revisionReason}"/></h2>
 
-    <h2>Components List: <input type="file" name="componentsList" th:field="*{componentsList}" multiple="multiple"/>
-    </h2>
-    <h2>Value Stream: <input type="text" th:field="*{valueStream}"/></h2>
-    <h2>Production Line: <input type="text" th:field="*{productionLine}"/></h2>
-    <h2>Product Type: <input type="text" th:field="*{productType}"/></h2>
-    <h2>Work Piece Carrier Number: <input type="text" th:field="*{workPieceCarrierNumber}"/></h2>
+        <label>File Type:</label>
+        <select th:field="*{fileType}" type="text" name="fileType">
+            <option value="Assembly Drawing">Assembly Drawing</option>
+            <option value="BOM">BOM</option>
+            <option value="Component Drawing">Component Drawing"</option>
+            <option value="Data Sheet">Data Sheet</option>
+            <option value="Reference Image">Reference Image</option>
+        </select>
 
-    <hr/>
+        <h2>Components List: <input type="file" name="componentsList" th:field="*{componentsList}" multiple="multiple"/></h2>
 
-    <h1>Features</h1>
-    <h2>Drawing Library: <input type="file" name="drawingLibrary" th:field="*{drawingLibrary}" multiple="multiple"/>
-    </h2>
+        <h2>Value Stream: </h2>
+        <select th:field="*{valueStream}" type="text" name="fileType">
+            <option value="CC">CC</option>
+            <option value="CRIN">CRIN</option>
+            <option value="HDEV5">HDEV5</option>
+            <option value="HDEV6">HDEV6</option>
+            <option value="HPD5">HPD5</option>
+        </select>
 
-    <hr/>
+        <h2>Production Line: </h2>
+        <select th:field="*{productionLine}" type="text" name="fileType">
+            <option value="Assembly Line">Assembly Line</option>
+            <option value="Final Assembly Line">Final Assembly Line</option>
+            <option value="Magnet Line">Magnet Line</option>
+            <option value="Test Line">Test Line</option>
+        </select>
 
-    <h1>Repair Ticket</h1>
-    <h2>Reason for change: <input type="text" name="reasonForChange" th:field="*{reasonForChange}"/></h2>
-    <h2>Reason Category: <input type="text" name="reasonCategory" th:field="*{reasonCategory}"/></h2>
-    <h2>Tool Life Achieved:<input type="checkbox" name="toolLifeAchieved" th:field="*{toolLifeAchieved}"/></h2>
-    <h2>Location:<input type="text" name="locationRepairTicket" th:field="*{locationRepairTicket}"/></h2>
-    <h2>Downtime Impact in Minutes: <input type="text" name="downTimeImpact" th:field="*{downTimeImpact}"/></h2>
+        <h2>Product Type: </h2>
+        <select th:field="*{productType}" type="text" name="fileType">
+            <option value="CAT">CAT</option>
+            <option value="CRIN1">CRIN1</option>
+            <option value="CRIN3">CRIN3</option>
+            <option value="IVECO">IVECO</option>
+        </select>
 
-    <hr/>
+        <h2>Work Piece Carrier Number: </h2>
+        <input type="number" id="points" name="points" th:field="*{workPieceCarrierNumber}" step="1">
 
-    <h1>File Storage</h1>
-    <h2>PDFs:<input type="file" name="PDFs" th:field="*{PDFs}" multiple="multiple"/></h2>
-    <h2>CADs:<input type="file" name="CADs" th:field="*{CADs}" multiple="multiple"/></h2>
-    <h2>JPEG:<input type="file" name="JPEG" th:field="*{JPEG}"/></h2>
+    </div>
 
+    <br>
+
+    <div class = "container">
+        <h1>Features</h1>
+        <h2>Drawing Library: <input type="file" name="drawingLibrary" th:field="*{drawingLibrary}" multiple="multiple"/></h2>
+    </div>
+
+    <br>
+
+    <div class = "container">
+        <h1>Repair Ticket</h1>
+        <h2>Reason for change: <input type="text" name="reasonForChange" th:field="*{reasonForChange}"/></h2>
+        <h2>Reason Category: <input type="text" name="reasonCategory" th:field="*{reasonCategory}"/></h2>
+        <h2>Tool Life Achieved:<input type="checkbox" name="toolLifeAchieved" th:field="*{toolLifeAchieved}"/></h2>
+        <h2>Location:<input type="text" name="locationRepairTicket" th:field="*{locationRepairTicket}"/></h2>
+        <h2>Downtime Impact in Minutes: <input type="text" name="downTimeImpact" th:field="*{downTimeImpact}"/></h2>
+    </div>
+
+    <br>
+
+    <div class = "container">
+        <h1>File Storage</h1>
+        <h2>PDFs:<input type="file" name="PDFs" th:field="*{PDFs}" multiple="multiple"/></h2>
+        <h2>CADs:<input type="file" name="CADs" th:field="*{CADs}" multiple="multiple"/></h2>
+        <h2>JPEG:<input type="file" name="JPEG" th:field="*{JPEG}"/></h2>
+    </div>
+
+    <br>
+
+    <input type="cancel" value="Cancel"/>
     <input type="submit" value="Submit"/>
-</form>
 
+</form>
 </body>
 </html>
