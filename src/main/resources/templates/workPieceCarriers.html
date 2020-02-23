@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="styles.css"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Work Piece Carriers</title>
+</head>
+<body>
+
+<h1>Work Piece Carriers</h1>
+
+<form>
+    <button type="submit" formaction="./workpiece">Submit a Work Piece Carrier</button>
+</form>
+
+<table>
+
+    <thead>
+    <tr>
+        <th> Value Stream</th>
+        <th>Production Line</th>
+        <th>Product Type</th>
+        <th>WPC Number</th>
+        <th>Author</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="carrier : ${carriers}">
+        <td th:text="${carrier.valueStream}"/>
+        <td th:text="${carrier.productionLine}"/>
+        <td th:text="${carrier.productType}"/>
+        <td th:text="${carrier.workPieceCarrierNumber}"/>
+        <td th:text="${carrier.author}"/>
+    </tr>
+    </tbody>
+
+</table>
+</body>
+</html>
