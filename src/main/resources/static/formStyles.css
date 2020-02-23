@@ -38,13 +38,32 @@ label {
 
 }
 
-select {
-    margin-right: 610px;
-    width: 11.5%;
+#complist {
+    margin-right: 25px;
 }
 
-/* Style the submit button */
+#points {
+    margin-right: 115px;
+}
+
+#filetype {
+    margin-bottom: px;
+}
+form select {
+    display: inline-block;
+    width: 11.5%;
+    margin-right: 612.5px;
+    margin-bottom: 10px;
+    padding: 20px;
+}
+
+input[type=checkbox] {
+    margin-right: 248px;
+    margin-left: 10px;
+}
+/* Style the submit and cancel buttons */
 input[type=submit] {
+    font-weight: bold;
     background-color: lightgray;
     color: black;
     padding: 12px 20px;
@@ -56,12 +75,31 @@ input[type=submit] {
 }
 
 input[type=cancel] {
+    font-weight: bold;
     background-color: lightgray;
     color: black;
-    padding: 12px 20px;
+    padding: 12px 0px 12px 0px;
     border: solid;
+    border-color: black;
     border-radius: 4px;
     cursor: pointer;
     float: right;
     margin-bottom: 20px;
+    text-align: center;
+
+}
+
+/* Actions when hovered over button */
+input[type=cancel]:hover {
+    background-color: crimson;
+    border-color: black;
+    transition-duration: 0.1s;
+    color: white;
+}
+
+input[type=submit]:hover {
+    background-color: forestgreen;
+    border-color: black;
+    transition-duration: 0.1s;
+    color: white;
 }

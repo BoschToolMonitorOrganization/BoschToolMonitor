@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" href="styles.css?v=1.1"/>
+<!-- <link rel="stylesheet" type="text/css" href="styles.css?v=1.1"/> -->
 <head>
     <meta charset="UTF-8">
     <title>Work Piece Carrier Form</title>
@@ -15,7 +15,7 @@
         <h2>Revision #: <input type="text" name="revisionNumber" th:field="*{revisionNumber}"/></h2>
         <h2>Revision Reason: <input type="text" name="revisionReason" th:field="*{revisionReason}"/></h2>
 
-        <label>File Type:</label>
+        <label id="filetype">File Type:</label>
         <select th:field="*{fileType}" type="text" name="fileType">
             <option value="Assembly Drawing">Assembly Drawing</option>
             <option value="BOM">BOM</option>
@@ -24,9 +24,9 @@
             <option value="Reference Image">Reference Image</option>
         </select>
 
-        <h2>Components List: <input type="file" name="componentsList" th:field="*{componentsList}" multiple="multiple"/></h2>
+        <h2>Components List: <input type="file" id="complist" name="componentsList" th:field="*{componentsList}" multiple="multiple"/></h2>
 
-        <h2>Value Stream: </h2>
+        <label>Value Stream: </label>
         <select th:field="*{valueStream}" type="text" name="fileType">
             <option value="CC">CC</option>
             <option value="CRIN">CRIN</option>
@@ -35,7 +35,9 @@
             <option value="HPD5">HPD5</option>
         </select>
 
-        <h2>Production Line: </h2>
+        <br>
+
+        <label>Production Line: </label>
         <select th:field="*{productionLine}" type="text" name="fileType">
             <option value="Assembly Line">Assembly Line</option>
             <option value="Final Assembly Line">Final Assembly Line</option>
@@ -43,7 +45,9 @@
             <option value="Test Line">Test Line</option>
         </select>
 
-        <h2>Product Type: </h2>
+        <br>
+
+        <label>Product Type: </label>
         <select th:field="*{productType}" type="text" name="fileType">
             <option value="CAT">CAT</option>
             <option value="CRIN1">CRIN1</option>
@@ -51,8 +55,8 @@
             <option value="IVECO">IVECO</option>
         </select>
 
-        <h2>Work Piece Carrier Number: </h2>
-        <input type="number" id="points" name="points" th:field="*{workPieceCarrierNumber}" step="1">
+        <h2>Work Piece Carrier Number: <input type="number" id="points" name="points" th:field="*{workPieceCarrierNumber}" step="1"></h2>
+
 
     </div>
 
@@ -85,8 +89,8 @@
 
     <br>
 
-    <input type="cancel" value="Cancel"/>
     <input type="submit" value="Submit"/>
+    <input type="cancel" value="Cancel"/>
 
 </form>
 </body>
