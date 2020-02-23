@@ -1,5 +1,4 @@
 /* Style inputs, select elements and textareas */
-
 input[type=text], select, textarea{
     width: 30%;
     padding: 10px;
@@ -13,7 +12,6 @@ input[type=text], select, textarea{
     padding: 20px;
     border-style: solid;
     text-align: right;
-
 }
 
 body {
@@ -24,6 +22,7 @@ h1 {
     text-align: center;
     text-decoration: underline;
 }
+
 h2 {
     margin-right: 500px;
 
