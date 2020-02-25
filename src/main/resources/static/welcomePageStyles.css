@@ -1,0 +1,73 @@
+.container  {
+    border-radius: 50px;
+    background-color: whitesmoke;
+    padding: 20px;
+    border-style: solid;
+    text-align: right;
+}
+
+body {
+    background-color: orangered;
+}
+
+h1 {
+    text-align: center;
+    text-decoration: underline;
+}
+
+#submitWPC {
+    background-color: lightgray;
+    color: black;
+    padding: 12px 20px;
+    border: solid;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 730px;
+    margin-bottom: 5px;
+}
+
+#viewWPC {
+    background-color: lightgray;
+    color: black;
+    padding: 12px 20px;
+    border: solid;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 738px;
+    margin-bottom: 5px;
+}
+
+#homePage {
+    background-color: lightgray;
+    color: black;
+    padding: 12px 20px;
+    border: solid;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    margin-right: 738px;
+    margin-bottom: 5px;
+}
+
+#submitWPC:hover {
+    background-color: orange;
+    border-color: black;
+    transition-duration: 0.1s;
+    color: white;
+}
+
+#viewWPC:hover {
+    background-color: orange;
+    border-color: black;
+    transition-duration: 0.1s;
+    color: white;
+}
+
+#homePage:hover {
+    background-color: orange;
+    border-color: black;
+    transition-duration: 0.1s;
+    color: white;
+}

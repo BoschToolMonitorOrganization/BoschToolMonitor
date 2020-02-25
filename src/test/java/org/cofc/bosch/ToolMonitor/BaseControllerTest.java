@@ -4,8 +4,10 @@ import org.cofc.bosch.ToolMonitor.controller.BaseController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -26,12 +28,17 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class BaseControllerTest {
 
     private MockMvc mockMvc;
+    private BaseController baseController;
 
-    @InjectMocks
-    BaseController baseController;
+    @Mock
+    private JdbcTemplate jdbcTemplate;
 
     @Before
     public void setup() {
+        baseController = new BaseController();
+        baseController.setJdbcTemplate(jdbcTemplate);
+        MockitoAnnotations.initMocks(this);
+
         ViewResolver resolver = new ThymeleafViewResolver();
         ((ThymeleafViewResolver) resolver).setTemplateEngine(new SpringTemplateEngine());
         this.mockMvc = MockMvcBuilders.standaloneSetup(baseController).setViewResolvers(resolver).build();
@@ -42,6 +49,7 @@ public class BaseControllerTest {
         mockMvc.perform(get("/welcome"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
+                .andExpect(view().name("welcome"))
                 .andReturn();
     }
 
@@ -52,6 +60,14 @@ public class BaseControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("workPieceCarrierForm"))
                 .andReturn();
+    }
 
+    @Test
+    public void workPieceCarrierTable() throws Exception {
+        mockMvc.perform(get("/workpiececarriers"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
+                .andExpect(view().name("workPieceCarriers"))
+                .andReturn();
     }
 }
