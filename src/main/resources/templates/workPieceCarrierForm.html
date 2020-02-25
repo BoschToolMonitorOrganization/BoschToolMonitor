@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<!-- <link rel="stylesheet" type="text/css" href="styles.css?v=1.1"/> -->
+<link rel="stylesheet" type="text/css" href="styles.css?v=1.2"/>
 <head>
     <meta charset="UTF-8">
     <title>Work Piece Carrier Form</title>
@@ -10,9 +10,10 @@
 
     <div class = "container">
         <h1>Characteristics</h1>
-        <h2>File Details</h2>
+        <br>
+        <h1 id="subheading">File Details</h1>
         <h2>Author: <input type="text" name="author" th:field="*{author}"/></h2>
-        <h2>Revision #: <input type="text" name="revisionNumber" th:field="*{revisionNumber}"/></h2>
+        <h2>Revision Number: <input type="text" name="revisionNumber" th:field="*{revisionNumber}"/></h2>
         <h2>Revision Reason: <input type="text" name="revisionReason" th:field="*{revisionReason}"/></h2>
 
         <label id="filetype">File Type:</label>
@@ -25,6 +26,9 @@
         </select>
 
         <h2>Components List: <input type="file" id="complist" name="componentsList" th:field="*{componentsList}" multiple="multiple"/></h2>
+
+        <br>
+        <h1 id="subheading">Location</h1>
 
         <label>Value Stream: </label>
         <select th:field="*{valueStream}" type="text" name="fileType">
@@ -55,7 +59,7 @@
             <option value="IVECO">IVECO</option>
         </select>
 
-        <h2>Work Piece Carrier Number: <input type="number" id="points" name="points" th:field="*{workPieceCarrierNumber}" step="1"></h2>
+        <h2>WPC Number: <input type="number" id="points" name="points" th:field="*{workPieceCarrierNumber}" step="1"></h2>
 
 
     </div>
@@ -74,7 +78,7 @@
         <h2>Reason for change: <input type="text" name="reasonForChange" th:field="*{reasonForChange}"/></h2>
         <h2>Reason Category: <input type="text" name="reasonCategory" th:field="*{reasonCategory}"/></h2>
         <h2>Tool Life Achieved:<input type="checkbox" name="toolLifeAchieved" th:field="*{toolLifeAchieved}"/></h2>
-        <h2>Location:<input type="text" name="locationRepairTicket" th:field="*{locationRepairTicket}"/></h2>
+        <h2>Location: <input type="text" name="locationRepairTicket" th:field="*{locationRepairTicket}"/></h2>
         <h2>Downtime Impact in Minutes: <input type="text" name="downTimeImpact" th:field="*{downTimeImpact}"/></h2>
     </div>
 
@@ -82,9 +86,9 @@
 
     <div class = "container">
         <h1>File Storage</h1>
-        <h2>PDFs:<input type="file" name="PDFs" th:field="*{PDFs}" multiple="multiple"/></h2>
-        <h2>CADs:<input type="file" name="CADs" th:field="*{CADs}" multiple="multiple"/></h2>
-        <h2>JPEG:<input type="file" name="JPEG" th:field="*{JPEG}"/></h2>
+        <h2>PDFs: <input type="file" name="PDFs" th:field="*{PDFs}" multiple="multiple"/></h2>
+        <h2>CADs: <input type="file" name="CADs" th:field="*{CADs}" multiple="multiple"/></h2>
+        <h2>JPEG: <input type="file" name="JPEG" th:field="*{JPEG}"/></h2>
     </div>
 
     <br>
