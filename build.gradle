@@ -32,7 +32,11 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
     implementation 'org.springframework.session:spring-session-core'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    implementation 'org.mariadb.jdbc:mariadb-java-client:2.1.2'
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.19'
+    // https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client
+    compile group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.5.4'
+
 
     // https://mvnrepository.com/artifact/org.webjars/jquery
     compile group: 'org.webjars', name: 'jquery', version: '3.4.1'
