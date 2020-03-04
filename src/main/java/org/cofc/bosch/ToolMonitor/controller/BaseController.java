@@ -1,7 +1,9 @@
 package org.cofc.bosch.ToolMonitor.controller;
 
-import org.cofc.bosch.ToolMonitor.components.WorkPieceCarrier;
-import org.cofc.bosch.ToolMonitor.components.WorkPieceCarrierMapper;
+import org.cofc.bosch.ToolMonitor.WPCCombo.WPCCombo;
+import org.cofc.bosch.ToolMonitor.WPCCombo.WPCComboRowMapper;
+import org.cofc.bosch.ToolMonitor.components.WorkPieceCarrier.WorkPieceCarrier;
+import org.cofc.bosch.ToolMonitor.components.WorkPieceCarrier.WorkPieceCarrierMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -86,6 +88,30 @@ public class BaseController {
         model.addAttribute("carriers", carriers);
 
         return "workPieceCarriers";
+    }
+
+    @GetMapping("/wpccombos")
+    public String WPCCombos(Model model) {
+        List<WPCCombo> carriers = jdbcTemplate.query("Select * from WPCCombos", new WPCComboRowMapper());
+        model.addAttribute("combos", carriers);
+        model.addAttribute("combo", new WPCCombo());
+
+        return "wpcCombos";
+    }
+
+    @PostMapping("/wpccombo")
+    public String wpcComboSubmit(@ModelAttribute WPCCombo combo, Model model) {
+        try {
+            WPCCombo.enterWPCComboIntoDB(combo, jdbcTemplate);
+            model.addAttribute("combo", new WPCCombo());
+        } catch (DataAccessException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("combo", combo);
+        }
+        List<WPCCombo> combos = jdbcTemplate.query("Select * from WPCCombos", new WPCComboRowMapper());
+        model.addAttribute("combos", combos);
+
+        return "wpcCombos";
     }
 
 

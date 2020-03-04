@@ -1,4 +1,4 @@
-package org.cofc.bosch.ToolMonitor.components;
+package org.cofc.bosch.ToolMonitor.components.WorkPieceCarrier;
 
 import org.springframework.jdbc.core.RowMapper;
 
