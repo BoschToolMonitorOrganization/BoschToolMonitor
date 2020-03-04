@@ -4,49 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Work Piece Carrier Form</title>
+    <script type="text/javascript">
+        function sendAjaxRequestValueStream() {
+            var valueStream = $("#valueStream").val();
+            $.get("/productionLines?=valueStream=" + valueStream, function (data) {
+                $("#productionLine").empty();
+                data.forEach(function (item, i) {
+                    var option = "<option value = " + item + ">" + item + "</option>";
+                    $("#productionLine").append(option);
+                });
+            });
+        };
+
+        function sendAjaxRequestProductionLine() {
+            var productionLine = $("#productionLine").val();
+            var valueStream = $("#valueStream").val();
+            $.get("/productTypes?=valueStream" + valueStream + '&productionLine=' + productionLine, function (data) {
+                $("#productType").empty();
+                data.forEach(function (item, i) {
+                    var option = "<option value = " + item + ">" + item + "</option>";
+                    $("#productType").append(option);
+                });
+            });
+        };
+
+        $(document).ready(function () {
+            $("#valueStream").change(function () {
+                sendAjaxRequestValueStream();
+            });
+            $("#productionLine").change(function () {
+                sendAjaxRequestProductionLine();
+            });
+        });
+    </script>
 </head>
 <body>
 <h1>Create a Work Piece Carrier</h1>
 <label th:if="${error != null && error.message != null}" th:text="${error.message}"/>
 <form action="#" th:action="@{/workpiece}" th:object="${WorkPieceCarrier}" method="post" enctype="multipart/form-data">
 
-    <script>
-        function sendAjaxRequestValueStream() {
-        var valueStream = $("#valueStream").val();
-        $.get( "/productionLines?=valueStream=" + valueStream, function( data ) {
-            $("#productionLine").empty();
-            data.forEach(function(item, i) {
-                var option = "<option value = " + item + ">" + item +  "</option>";
-                $("#productionLine").append(option);
-            });
-        });
-
-            function sendAjaxRequestProductionLine() {
-                var productionLine = $("#productionLine").val();
-                var valueStream = $("#valueStream").val();
-                $.get( "/productionLines?=valueStream" + valueStream + '&productionLine=' + productionLine, function( data ) {
-                    $("#productType").empty();
-                    data.forEach(function(item, i) {
-                        var option = "<option value = " + item + ">" + item +  "</option>";
-                        $("#productType").append(option);
-                    });
-                });
-
-        $(document).ready(function() {
-            $("#valueStream").change(function() {
-                sendAjaxRequestValueStream();
-            });
-            $("#productionLine").change(function() {
-                sendAjaxRequestProductionLine();
-            });
-        });
-    </script>
-
-    <div class = "container">
+    <div class="container">
 
         <label>Value Stream: </label>
-        <select th:field="*{valueStream}" id="valueStream" type="text" name="fileType">
-            <option th:each="valueStream : ${model.valueStreams}"
+        <select th:field="*{valueStream}" id="valueStream" type="text" name="fileType" onchange="sendAjaxRequestValueStream()">
+            <option th:each="valueStream : ${valueStreams}"
                     th:value="${valueStream}"
                     th:text="${valueStream}"
             </option>
@@ -55,26 +56,17 @@
         <br>
 
         <label>Production Line: </label>
-        <select th:field="*{productionLine}" type="text">
-            <option value="Assembly Line">Assembly Line</option>
-            <option value="Final Assembly Line">Final Assembly Line</option>
-            <option value="Magnet Line">Magnet Line</option>
-            <option value="Test Line">Test Line</option>
+        <select th:field="*{productionLine}" type="text" onchange="sendAjaxRequestProductionLine()">
         </select>
 
         <br>
 
         <label>Product Type: </label>
         <select th:field="*{productType}" type="text" id="productType">
-            <option value="CAT">CAT</option>
-            <option value="CRIN1">CRIN1</option>
-            <option value="CRIN3">CRIN3</option>
-            <option value="IVECO">IVECO</option>
-
-
         </select>
 
-        <h2>WPC Number: <input type="number" id="points" name="points" th:field="*{workPieceCarrierNumber}" step="1"></h2>
+        <h2>WPC Number: <input type="number" id="points" name="points" th:field="*{workPieceCarrierNumber}" step="1">
+        </h2>
 
     </div>
 
