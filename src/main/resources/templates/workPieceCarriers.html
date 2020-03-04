@@ -1,25 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head runat="mysql">
-    <script src = "https://code.jquery.com/jquery-3.3.1.js"></script>
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" />
-    <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js" ></script>
-    <script type = "text/javascript">
-
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
         $(document).ready(function () {
             $('#myTable').dataTable();
         });
     </script>
-<!--<link rel="stylesheet" type="text/css" href="styles.css?v=1.1"/>-->
-<!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.js"
-        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-        crossorigin="anonymous"></script>-->
-
-
-
-
     <meta charset="UTF-8"/>
     <title>Work Piece Carriers</title>
 </head>
@@ -30,8 +19,6 @@
 <form>
     <button type="submit" formaction="./workpiece">Submit a Work Piece Carrier</button>
 </form>
-
-<!--<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">-->
 
 <table id="myTable" class="display">
 
@@ -50,33 +37,10 @@
         <td th:text="${carrier.productionLine}"/>
         <td th:text="${carrier.productType}"/>
         <td th:text="${carrier.workPieceCarrierNumber}"/>
-        <td th:text="${carrier.author}"/>
     </tr>
     </tbody>
 
 </table>
 
 </body>
-<!--<script>
-    function myFunction() {
-        var input, filter, table, tr, td, i, txtValue;
-        input = document.getElementById("myInput");
-        filter = input.value.toUpperCase();
-        table = document.getElementById("myTable");
-        tr = table.getElementsByTagName("tr");
-        for (i = 0; i < tr.length; i++) {
-            tds = tr[i].getElementsByTagName("td");
-            tr[i].style.display = "none";
-            for (j = 0; j < tds.length; j++) {
-                td = tds[j];
-                if (td) {
-                    txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                        tr[i].style.display = "";
-                    }
-                }
-            }
-        }
-    }
-</script>-->
 </html>
