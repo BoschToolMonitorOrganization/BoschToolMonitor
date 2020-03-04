@@ -34,6 +34,7 @@ public class BaseController {
         valueStreams.add("CRIN");
         valueStreams.add("CRINV2");
         model.addAttribute("valueStreams", valueStreams);
+        model.addAttribute("WorkPieceCarrier", new WorkPieceCarrier());
         return "workPieceCarrierForm";
     }
 
