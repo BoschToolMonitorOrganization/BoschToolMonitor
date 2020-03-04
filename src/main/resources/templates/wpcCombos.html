@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head runat="mysql">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').dataTable();
+        });
+    </script>
+    <meta charset="UTF-8"/>
+    <title>WPC Combos</title>
+</head>
+<body>
+<label th:if="${error != null}" th:text="${error}"/>
+
+<form action="#" th:action="@{/wpccombo}" th:object="${combo}" method="post">
+
+    <div class="container">
+        <h2>ValueStream: <input type="text" th:field="*{valueStream}" step="1">
+        </h2>
+        <br>
+        <h2>Production Line: <input type="text" th:field="*{productionLine}">
+        </h2>
+        <br>
+        <h2>Product Type: <input type="text" th:field="*{productType}">
+        </h2>
+    </div>
+
+    <input type="submit" value="Submit"/>
+
+</form>
+
+<br>
+
+<table id="myTable" class="display">
+
+    <thead>
+    <tr>
+        <th>Value Stream</th>
+        <th>Production Line</th>
+        <th>Product Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="combo : ${combos}">
+        <td th:text="${combo.valueStream}"/>
+        <td th:text="${combo.productionLine}"/>
+        <td th:text="${combo.productType}"/>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>
