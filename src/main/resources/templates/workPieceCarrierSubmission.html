@@ -3,29 +3,33 @@
 <link rel="stylesheet" type="text/css" href="welcomePageStyles.css?v=1.11"/>
 
 <head>
-  <meta charset="UTF-8">
-  <title>You submitted your work piece carrier</title>
+    <meta charset="UTF-8">
+    <title>You submitted your work piece carrier</title>
 </head>
 
 <body>
-  <div class = "container">
+<div class="container">
     <h1>Congrats! You Submitted your work piece carrier!</h1>
+    <h2 th:text="'Value Stream: ' + ${carrier.valueStream}"/>
+    <h2 th:text="'Production Line: ' + ${carrier.productionLine}"/>
+    <h2 th:text="'Product Type: ' + ${carrier.productType}"/>
+    <h2 th:text="'WPC#: ' + ${carrier.workPieceCarrierNumber}"/>
     <div id="submitDiv">
 
-      <form>
-        <button type="submit" id="homePage" formaction="./welcome">Go To Home Page</button>
-      </form>
+        <form>
+            <button type="submit" id="homePage" formaction="./welcome">Go To Home Page</button>
+        </form>
 
-      <form>
-        <button type="submit" id="submitWPC" formaction="./workpiece">Submit Another Work Piece Carrier</button>
-      </form>
+        <form>
+            <button type="submit" id="submitWPC" formaction="./workpiece">Submit Another Work Piece Carrier</button>
+        </form>
 
-      <form>
-        <button type="submit" id="viewWPC" formaction="./workpiececarriers">View Work Piece Carriers</button>
-      </form>
+        <form>
+            <button type="submit" id="viewWPC" formaction="./workpiececarriers">View Work Piece Carriers</button>
+        </form>
 
     </div>
-  </div>
+</div>
 </body>
 
 </html>

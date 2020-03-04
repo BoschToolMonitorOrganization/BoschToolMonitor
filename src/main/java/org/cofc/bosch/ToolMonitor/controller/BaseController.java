@@ -3,6 +3,7 @@ package org.cofc.bosch.ToolMonitor.controller;
 import org.cofc.bosch.ToolMonitor.components.WorkPieceCarrier;
 import org.cofc.bosch.ToolMonitor.components.WorkPieceCarrierMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +35,7 @@ public class BaseController {
         valueStreams.add("CRIN");
         valueStreams.add("CRINV2");
         model.addAttribute("valueStreams", valueStreams);
-        model.addAttribute("WorkPieceCarrier", new WorkPieceCarrier());
+        model.addAttribute("carrier", new WorkPieceCarrier());
         return "workPieceCarrierForm";
     }
 
@@ -67,23 +68,24 @@ public class BaseController {
     }
 
     @PostMapping("/workpiece")
-    public String workPieceCarrierSubmit(@ModelAttribute WorkPieceCarrier carrier) {
-        WorkPieceCarrier.enterWPCIntoDatabase(carrier, jdbcTemplate);
+    public String workPieceCarrierSubmit(@ModelAttribute WorkPieceCarrier carrier, Model model) {
+        model.addAttribute("carrier", carrier);
+        try {
+            WorkPieceCarrier.enterWPCIntoDatabase(carrier, jdbcTemplate);
+        } catch (DataAccessException e) {
+            model.addAttribute("error", e.getMessage());
+            model.addAttribute("valueStreams", new ArrayList<>());
+            return "workPieceCarrierForm";
+        }
         return "workPieceCarrierSubmission";
     }
 
     @GetMapping("/workpiececarriers")
     public String workPieceCarriers(Model model) {
-        List<WorkPieceCarrier> carriers = jdbcTemplate.query("Select * from WorkPieceCarriers", new WorkPieceCarrierMapper());
+        List<WorkPieceCarrier> carriers = jdbcTemplate.query("Select * from WPCs", new WorkPieceCarrierMapper());
         model.addAttribute("carriers", carriers);
 
         return "workPieceCarriers";
-    }
-
-    @RequestMapping(value = "/getwpcs")
-    public @ResponseBody
-    List<WorkPieceCarrier> getWPCs(Model model) {
-        return jdbcTemplate.query("Select * from WorkPieceCarriers", new WorkPieceCarrierMapper());
     }
 
 

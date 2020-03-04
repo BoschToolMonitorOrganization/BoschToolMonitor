@@ -43,7 +43,7 @@ public class WorkPieceCarrier {
 
 
     public static void enterWPCIntoDatabase(WorkPieceCarrier carrier, JdbcTemplate jdbcTemplate) {
-        jdbcTemplate.execute("insert into WorkPieceCarriers values(\""
+        jdbcTemplate.execute("insert into WPCs values(\""
                 + carrier.getValueStream() + "\", \""
                 + carrier.getProductionLine() + "\", \""
                 + carrier.getProductType() + "\", "
