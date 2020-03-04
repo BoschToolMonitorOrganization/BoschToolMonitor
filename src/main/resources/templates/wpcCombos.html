@@ -50,6 +50,7 @@
         <th>Value Stream</th>
         <th>Production Line</th>
         <th>Product Type</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
@@ -57,6 +58,9 @@
         <td th:text="${combo.valueStream}"/>
         <td th:text="${combo.productionLine}"/>
         <td th:text="${combo.productType}"/>
+        <td>
+            <a th:href="@{/wpccombo/delete(valueStream=${combo.valueStream}, productionLine=${combo.productionLine}, productType=${combo.productType})}" class="btn">Delete</a>
+        </td>
     </tr>
     </tbody>
 

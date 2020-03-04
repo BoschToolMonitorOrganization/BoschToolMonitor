@@ -34,10 +34,16 @@ public class WPCCombo {
     }
 
 
-    public static void enterWPCComboIntoDB(WPCCombo combo, JdbcTemplate jdbcTemplate) {
+    public void enterWPCComboIntoDB(JdbcTemplate jdbcTemplate) {
         jdbcTemplate.execute("insert into WPCCombos values(\""
-                + combo.getValueStream() + "\", \""
-                + combo.getProductionLine() + "\", \""
-                + combo.getProductType() + "\")");
+                + valueStream + "\", \""
+                + productionLine + "\", \""
+                + productType + "\")");
+    }
+
+    public static void deleteWPCCombo(String valueStream, String productionLine, String productType, JdbcTemplate jdbcTemplate) {
+        jdbcTemplate.execute("Delete From WPCCombos where valueStream=\"" + valueStream +
+                "\" and productionLine=\"" + productionLine +
+                "\" and productType=\"" + productType + "\";");
     }
 }
