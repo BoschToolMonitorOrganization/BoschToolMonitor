@@ -14,18 +14,27 @@
 </head>
 <body>
 <label th:if="${error != null}" th:text="${error}"/>
-
+<form>
+    <button type="submit" formaction="./">Go to Home Page</button>
+</form>
+<form>
+    <button type="submit"  formaction="./workpiece">Submit a Work Piece Carrier</button>
+</form>
+<form>
+    <button type="submit" formaction="./workpiececarriers">View Work Piece Carriers</button>
+</form>
 <form action="#" th:action="@{/wpccombo}" th:object="${combo}" method="post">
 
     <div class="container">
-        <h2>ValueStream: <input type="text" th:field="*{valueStream}" step="1">
-        </h2>
+        <h2>Create a WPC Combo</h2>
+        <label>ValueStream: <input type="text" th:field="*{valueStream}" step="1">
+        </label>
         <br>
-        <h2>Production Line: <input type="text" th:field="*{productionLine}">
-        </h2>
+        <label>Production Line: <input type="text" th:field="*{productionLine}">
+        </label>
         <br>
-        <h2>Product Type: <input type="text" th:field="*{productType}">
-        </h2>
+        <label>Product Type: <input type="text" th:field="*{productType}">
+        </label>
     </div>
 
     <input type="submit" value="Submit"/>
