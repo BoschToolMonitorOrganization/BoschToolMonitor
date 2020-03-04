@@ -40,13 +40,14 @@
 </head>
 <body>
 <h1>Create a Work Piece Carrier</h1>
-<label th:if="${error != null && error.message != null}" th:text="${error.message}"/>
-<form action="#" th:action="@{/workpiece}" th:object="${WorkPieceCarrier}" method="post" enctype="multipart/form-data">
+<label th:if="${error != null}" th:text="${error}"/>
+<form action="#" th:action="@{/workpiece}" th:object="${carrier}" method="post" enctype="multipart/form-data">
 
     <div class="container">
 
         <label>Value Stream: </label>
-        <select th:field="*{valueStream}" id="valueStream" type="text" name="fileType" onchange="sendAjaxRequestValueStream()">
+        <select th:field="*{valueStream}" id="valueStream" type="text" name="fileType"
+                onchange="sendAjaxRequestValueStream()">
             <option th:each="valueStream : ${valueStreams}"
                     th:value="${valueStream}"
                     th:text="${valueStream}"
@@ -57,12 +58,14 @@
 
         <label>Production Line: </label>
         <select th:field="*{productionLine}" type="text" onchange="sendAjaxRequestProductionLine()">
+            <option th:text="prod" th:value="prod"/>
         </select>
 
         <br>
 
         <label>Product Type: </label>
         <select th:field="*{productType}" type="text" id="productType">
+            <option th:text="prod" th:value="prod"/>
         </select>
 
         <h2>WPC Number: <input type="number" id="points" name="points" th:field="*{workPieceCarrierNumber}" step="1">
