@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,8 +30,39 @@ public class BaseController {
 
     @GetMapping("/workpiece")
     public String workPieceCarrierForm(Model model) {
-        model.addAttribute("WorkPieceCarrier", new WorkPieceCarrier());
+        List<String> valueStreams = new ArrayList<>();
+        valueStreams.add("CRIN");
+        valueStreams.add("CRINV2");
+        model.addAttribute("valueStreams", valueStreams);
         return "workPieceCarrierForm";
+    }
+
+    @RequestMapping(value = "/productionLines")
+    @ResponseBody
+    public List<String> getProductionLines(@RequestParam String valueStream) {
+        List<String> productionLines = new ArrayList<>();
+
+        productionLines.add("productionLine1");
+        productionLines.add("productionLine2");
+        productionLines.add("productionLine3");
+        productionLines.add("productionLine4");
+        productionLines.add("productionLine5");
+
+        return productionLines;
+    }
+
+    @RequestMapping(value = "/productTypes")
+    @ResponseBody
+    public List<String> getRegions(@RequestParam String productionLine, @RequestParam String valueStream) {
+        List<String> productTypes = new ArrayList<>();
+
+        productTypes.add("productType1");
+        productTypes.add("productType2");
+        productTypes.add("productType3");
+        productTypes.add("productType4");
+        productTypes.add("productType5");
+
+        return productTypes;
     }
 
     @PostMapping("/workpiece")

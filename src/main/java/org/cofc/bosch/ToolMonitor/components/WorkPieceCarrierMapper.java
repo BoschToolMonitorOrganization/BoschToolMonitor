@@ -12,19 +12,10 @@ public class WorkPieceCarrierMapper implements RowMapper<WorkPieceCarrier> {
 
         WorkPieceCarrier carrier = new WorkPieceCarrier();
 
-        carrier.setAuthor(rs.getString("author"));
-        carrier.setRevisionNumber(rs.getString("revisionNumber"));
-        carrier.setRevisionReason(rs.getString("revisionReason"));
-        carrier.setFileType(rs.getString("fileType"));
-        carrier.setWorkPieceCarrierNumber(rs.getString("workpieceCarrierNumber"));
+        carrier.setWorkPieceCarrierNumber(rs.getInt("workpieceCarrierNumber"));
         carrier.setValueStream(rs.getString("valueStream"));
         carrier.setProductionLine(rs.getString("productionLine"));
         carrier.setProductType(rs.getString("productType"));
-        carrier.setReasonForChange(rs.getString("reasonForChange"));
-        carrier.setReasonCategory(rs.getString("reasonCategory"));
-        carrier.setToolLifeAchieved(rs.getBoolean("toolLifeAchieved"));
-        carrier.setLocationRepairTicket(rs.getString("locationRepairTicket"));
-        carrier.setDownTimeImpact(rs.getString("downTimeImpact"));
 
         return carrier;
     }
