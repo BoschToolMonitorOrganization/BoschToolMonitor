@@ -1,85 +1,54 @@
 /* Style inputs, select elements and textareas */
 
-input[type=text], select, textarea{
-    width: 30%;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-}
-
-.container  {
-    border-radius: 50px;
-    background-color: whitesmoke;
-    padding: 10px;
-    border-style: solid;
-    text-align: right;
-    border-width: 5%;
-
-
-
-}
-
 body {
-    background-color: royalblue;
+    background-color: orangered;
 }
 
 h1 {
     text-align: center;
-    text-decoration: underline;
-    font-family: 'Cambria', sans-serif;
-
-}
-h2 {
-    margin-right: 500px;
-    font-family: 'Cambria', sans-serif;
-    font-size: 20px;
-
-}
-
-#subheading {
-    font-size: 20px;
     text-decoration: none;
-    margin-right: 80px;
-}
-
-/* File type heading */
-label {
-    padding: 0px;
-    font-weight: bold;
-    font-size: 22px;
-    margin-right: 10px;
     font-family: 'Cambria', sans-serif;
+}
+
+h2 {
+    text-align: center;
+    text-decoration: none;
+    font-family: 'Cambria', sans-serif;
+}
+
+.container {
+    border-radius: 50px;
+    background-color: whitesmoke;
+    padding: 10px;
+    border-style: solid;
+}
+
+label {
+    margin-right: 5px;
+    font-family: 'Cambria', sans-serif;
+    font-weight: bold;
     font-size: 20px;
-
+    text-align: center;
 }
 
-#complist {
-    margin-right: 25px;
-}
-
-#points {
-    margin-right: 135px;
-    margin-left: 5px;
-    width: 120px;
-    margin-top: 0px;
-}
-
-#filetype {
-    margin-bottom: px;
-}
-form select {
-    display: inline-block;
+select[type=text]{
+    display: inline;
     width: 11.5%;
-    margin-right: 612.5px;
-    margin-bottom: 10px;
     padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
 }
 
-input[type=checkbox] {
-    margin-right: 248px;
-    margin-left: 10px;
+/* Extra margin to align inputs */
+#prodLine {
+    margin-right: 35px;
 }
-/* Style the submit and cancel buttons */
+
+#prodType {
+    margin-right: 4px;
+}
+
+/* Styles the submit and cancel buttons */
 input[type=submit] {
     font-weight: bold;
     background-color: lightgray;
@@ -89,6 +58,7 @@ input[type=submit] {
     border-radius: 4px;
     cursor: pointer;
     float: right;
+    margin-top: 5px;
     margin-bottom: 20px;
 }
 
@@ -98,25 +68,24 @@ input[type=cancel] {
     color: black;
     padding: 12px 0px 12px 0px;
     border: solid;
-    border-color: black;
     border-radius: 4px;
     cursor: pointer;
     float: right;
+    margin-top: 5px;
     margin-bottom: 20px;
     text-align: center;
-
 }
 
-/* Actions when hovered over button */
-input[type=cancel]:hover {
-    background-color: crimson;
+/* Actions when hovered over submit/cancel buttons */
+input[type=submit]:hover {
+    background-color: forestgreen;
     border-color: black;
     transition-duration: 0.1s;
     color: white;
 }
 
-input[type=submit]:hover {
-    background-color: forestgreen;
+input[type=cancel]:hover {
+    background-color: crimson;
     border-color: black;
     transition-duration: 0.1s;
     color: white;
