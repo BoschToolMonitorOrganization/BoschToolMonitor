@@ -3,16 +3,17 @@
     background-color: whitesmoke;
     padding: 20px;
     border-style: solid;
-    text-align: right;
+    text-align: center;
 }
 
 body {
-    background-color: orangered;
+    background-color: whitesmoke;
 }
 
 h1 {
     text-align: center;
-    text-decoration: underline;
+    text-decoration: none;
+    font-family: 'Cambria', sans-serif;
 }
 
 #submitWPC {
@@ -22,9 +23,7 @@ h1 {
     border: solid;
     border-radius: 4px;
     cursor: pointer;
-    text-align: center;
-    margin-right: 730px;
-    margin-bottom: 5px;
+
 }
 
 #viewWPC {
@@ -34,21 +33,24 @@ h1 {
     border: solid;
     border-radius: 4px;
     cursor: pointer;
-    text-align: center;
-    margin-right: 738px;
-    margin-bottom: 5px;
+
 }
 
-#homePage {
+#comboWPC {
     background-color: lightgray;
     color: black;
     padding: 12px 20px;
     border: solid;
     border-radius: 4px;
     cursor: pointer;
-    text-align: center;
-    margin-right: 738px;
-    margin-bottom: 5px;
+
+}
+
+#comboWPC:hover {
+    background-color: orange;
+    border-color: black;
+    transition-duration: 0.1s;
+    color: white;
 }
 
 #submitWPC:hover {
@@ -65,9 +67,3 @@ h1 {
     color: white;
 }
 
-#homePage:hover {
-    background-color: orange;
-    border-color: black;
-    transition-duration: 0.1s;
-    color: white;
-}
