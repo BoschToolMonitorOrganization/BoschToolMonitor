@@ -134,4 +134,4 @@ VALUES
 	('HPD5', 'Test Line', 'CAT'),
 	('HPD5', 'Test Line', 'IVECO'),
 	('HPD5', 'Test Line', 'DMAX'),
-	('HPD5', 'Test Line', 'Tier3'),
+	('HPD5', 'Test Line', 'Tier3');
