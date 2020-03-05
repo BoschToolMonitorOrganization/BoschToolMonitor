@@ -62,18 +62,17 @@ input[type=submit] {
     margin-bottom: 20px;
 }
 
-input[type=cancel] {
+#cancel {
     font-weight: bold;
     background-color: lightgray;
     color: black;
-    padding: 12px 0px 12px 0px;
+    padding: 12px 20px;
     border: solid;
     border-radius: 4px;
     cursor: pointer;
     float: right;
     margin-top: 5px;
     margin-bottom: 20px;
-    text-align: center;
 }
 
 /* Actions when hovered over submit/cancel buttons */
@@ -84,7 +83,7 @@ input[type=submit]:hover {
     color: white;
 }
 
-input[type=cancel]:hover {
+#cancel:hover {
     background-color: crimson;
     border-color: black;
     transition-duration: 0.1s;
