@@ -16,7 +16,6 @@
 <body>
 
 <label th:if="${error != null}" th:text="${error}"/>
-
     <div class="container">
         <form>
             <button type="submit" formaction="./">Go to Home Page</button>
@@ -56,6 +55,7 @@
         <th>Value Stream</th>
         <th>Production Line</th>
         <th>Product Type</th>
+        <th>Delete</th>
     </tr>
     </thead>
 
@@ -64,6 +64,9 @@
         <td th:text="${combo.valueStream}"/>
         <td th:text="${combo.productionLine}"/>
         <td th:text="${combo.productType}"/>
+        <td>
+            <a th:href="@{/wpccombo/delete(valueStream=${combo.valueStream}, productionLine=${combo.productionLine}, productType=${combo.productType})}" class="btn">Delete</a>
+        </td>
     </tr>
     </tbody>
 

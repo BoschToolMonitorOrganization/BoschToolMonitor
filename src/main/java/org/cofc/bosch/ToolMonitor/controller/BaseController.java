@@ -102,7 +102,7 @@ public class BaseController {
     @PostMapping("/wpccombo")
     public String wpcComboSubmit(@ModelAttribute WPCCombo combo, Model model) {
         try {
-            WPCCombo.enterWPCComboIntoDB(combo, jdbcTemplate);
+            combo.enterWPCComboIntoDB(jdbcTemplate);
             model.addAttribute("combo", new WPCCombo());
         } catch (DataAccessException e) {
             model.addAttribute("error", e.getMessage());
@@ -110,6 +110,20 @@ public class BaseController {
         }
         List<WPCCombo> combos = jdbcTemplate.query("Select * from WPCCombos", new WPCComboRowMapper());
         model.addAttribute("combos", combos);
+
+        return "wpcCombos";
+    }
+
+    @GetMapping("/wpccombo/delete")
+    public String deleteWPCCombo(@RequestParam String productionLine, @RequestParam String valueStream, @RequestParam String productType, Model model) {
+        try {
+            WPCCombo.deleteWPCCombo(valueStream, productionLine, productType, jdbcTemplate);
+        } catch (DataAccessException e) {
+            model.addAttribute("error", e.getMessage());
+        }
+        List<WPCCombo> combos = jdbcTemplate.query("Select * from WPCCombos", new WPCComboRowMapper());
+        model.addAttribute("combos", combos);
+        model.addAttribute("combo", new WPCCombo());
 
         return "wpcCombos";
     }
