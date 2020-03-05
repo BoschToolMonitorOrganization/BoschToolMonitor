@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="wpcComboStyles.css"/>
 <head runat="mysql">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
@@ -13,18 +14,22 @@
     <title>WPC Combos</title>
 </head>
 <body>
-<label th:if="${error != null}" th:text="${error}"/>
-<form>
-    <button type="submit" formaction="/BoschToolMonitor/">Go to Home Page</button>
-</form>
-<form>
-    <button type="submit"  formaction="/BoschToolMonitor/workpiece">Submit a Work Piece Carrier</button>
-</form>
-<form>
-    <button type="submit" formaction="/BoschToolMonitor/workpiececarriers">View Work Piece Carriers</button>
-</form>
-<form action="#" th:action="@{/wpccombo}" th:object="${combo}" method="post">
 
+<label th:if="${error != null}" th:text="${error}"/>
+    <div class="container">
+        <form>
+            <button type="submit" formaction="./">Go to Home Page</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./workpiece">Submit a Work Piece Carrier</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./workpiececarriers">View Work Piece Carriers</button>
+        </form>
+    </div>
+    <br>
+
+<form action="#" th:action="@{/wpccombo}" th:object="${combo}" method="post">
     <div class="container">
         <h2>Create a WPC Combo</h2>
         <label>ValueStream: <input type="text" th:field="*{valueStream}" step="1">
@@ -35,9 +40,9 @@
         <br>
         <label>Product Type: <input type="text" th:field="*{productType}">
         </label>
+        <br>
+        <input type="submit" value="Submit"/>
     </div>
-
-    <input type="submit" value="Submit"/>
 
 </form>
 
@@ -53,6 +58,7 @@
         <th>Delete</th>
     </tr>
     </thead>
+
     <tbody>
     <tr th:each="combo : ${combos}">
         <td th:text="${combo.valueStream}"/>
