@@ -4,26 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Work Piece Carrier Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
         function sendAjaxRequestValueStream() {
             var valueStream = $("#valueStream").val();
-            $.get("/productionLines?=valueStream=" + valueStream, function (data) {
-                $("#productionLine").empty();
+            $.get("/BoschToolMonitor/productionLines?valueStream=" + valueStream, function (data) {
+                $("#prodLine").empty();
+                $("#prodType").empty();
                 data.forEach(function (item, i) {
                     var option = "<option value = " + item + ">" + item + "</option>";
-                    $("#productionLine").append(option);
+                    $("#prodLine").append(option);
+                    if(i == 1) {
+                        $("#prodLine").value = item;
+                    }
                 });
             });
         };
 
         function sendAjaxRequestProductionLine() {
-            var productionLine = $("#productionLine").val();
+            var productionLine = $("#prodLine").val();
             var valueStream = $("#valueStream").val();
-            $.get("/productTypes?=valueStream" + valueStream + '&productionLine=' + productionLine, function (data) {
-                $("#productType").empty();
+            $.get("/BoschToolMonitor/productTypes?valueStream=" + valueStream + '&productionLine=' + productionLine, function (data) {
+                $("#prodType").empty();
                 data.forEach(function (item, i) {
                     var option = "<option value = " + item + ">" + item + "</option>";
-                    $("#productType").append(option);
+                    $("#prodType").append(option);
+                    if(i == 1) {
+                        $("#prodType").value = item;
+                    }
                 });
             });
         };
@@ -31,8 +39,9 @@
         $(document).ready(function () {
             $("#valueStream").change(function () {
                 sendAjaxRequestValueStream();
+                sendAjaxRequestProductionLine();
             });
-            $("#productionLine").change(function () {
+            $("#prodLine").change(function () {
                 sendAjaxRequestProductionLine();
             });
         });
@@ -48,25 +57,25 @@
     <div class="container">
 
         <h2>Value Stream:
-        <select th:field="*{valueStream}" type="text" name="fileType"
-                onchange="sendAjaxRequestValueStream()">
-            <option th:each="valueStream : ${valueStreams}"
-                    th:value="${valueStream}"
-                    th:text="${valueStream}"
-            </option>
-        </select>
+            <select th:field="*{valueStream}" type="text" name="fileType" id="valueStream">
+                <option th:each="valueStream : ${valueStreams}"
+                        th:value="${valueStream}" th:text="${valueStream}"
+                </option>
+            </select>
         </h2>
 
         <h2>Production Line:
-        <select th:field="*{productionLine}" type="text" id="prodLine" onchange="sendAjaxRequestProductionLine()">
-            <option th:text="prod" th:value="prod"/>
-        </select>
+            <select type="text" id="prodLine" th:if="${prodLines} != null" th:field="*{productionLine}">
+                <option th:each="prodLine : ${prodLines}"
+                        th:value="${prodLine}" th:text="${prodLine}"/>
+            </select>
         </h2>
 
         <h2>Product Type:
-        <select th:field="*{productType}" type="text" id="prodType">
-            <option th:text="prod" th:value="prod"/>
-        </select>
+            <select type="text" id="prodType" th:if="${prodTypes} != null" th:field="*{productType}">
+                <option th:each="prodType : ${prodTypes}"
+                        th:value="${prodType}" th:text="${prodType}"/>
+            </select>
         </h2>
 
         <h2>WPC Number: <input type="number" name="points" th:field="*{workPieceCarrierNumber}" step="1">
