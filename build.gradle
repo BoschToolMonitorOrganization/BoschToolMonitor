@@ -5,6 +5,11 @@ plugins {
     id 'war'
 }
 
+bootWar {
+    baseName = 'BoschToolMonitor'
+    archiveName 'BoschToolMonitor.war'
+}
+
 group = 'com.cofc.bosch'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
