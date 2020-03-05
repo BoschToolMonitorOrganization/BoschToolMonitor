@@ -33,10 +33,20 @@ public class BaseController {
 
     @GetMapping("/workpiece")
     public String workPieceCarrierForm(Model model) {
-        List<String> valueStreams = new ArrayList<>();
-        valueStreams.add("CRIN");
-        valueStreams.add("CRINV2");
+        List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
+        List<String> prodLines = null;
+        List<String> prodTypes = null;
+        if (!valueStreams.isEmpty()) {
+            prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos where valueStream=\""
+                    + valueStreams.get(0) + "\";", String.class);
+            if (!prodLines.isEmpty()) {
+                prodTypes = jdbcTemplate.queryForList("Select Distinct productType From WPCCombos where valueStream=\""
+                        + valueStreams.get(0) + "\" and productionLine=\"" + prodLines.get(0) + "\";", String.class);
+            }
+        }
         model.addAttribute("valueStreams", valueStreams);
+        model.addAttribute("prodLines", prodLines);
+        model.addAttribute("prodTypes", prodTypes);
         model.addAttribute("carrier", new WorkPieceCarrier());
         return "workPieceCarrierForm";
     }
@@ -44,29 +54,13 @@ public class BaseController {
     @RequestMapping(value = "/productionLines")
     @ResponseBody
     public List<String> getProductionLines(@RequestParam String valueStream) {
-        List<String> productionLines = new ArrayList<>();
-
-        productionLines.add("productionLine1");
-        productionLines.add("productionLine2");
-        productionLines.add("productionLine3");
-        productionLines.add("productionLine4");
-        productionLines.add("productionLine5");
-
-        return productionLines;
+        return jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos where valueStream=\"" + valueStream + "\";", String.class);
     }
 
     @RequestMapping(value = "/productTypes")
     @ResponseBody
     public List<String> getRegions(@RequestParam String productionLine, @RequestParam String valueStream) {
-        List<String> productTypes = new ArrayList<>();
-
-        productTypes.add("productType1");
-        productTypes.add("productType2");
-        productTypes.add("productType3");
-        productTypes.add("productType4");
-        productTypes.add("productType5");
-
-        return productTypes;
+        return jdbcTemplate.queryForList("Select Distinct productType From WPCCombos where valueStream=\"" + valueStream + "\" and productionLine=\"" + productionLine + "\";", String.class);
     }
 
     @PostMapping("/workpiece")
