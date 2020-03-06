@@ -70,7 +70,20 @@ public class BaseController {
             WorkPieceCarrier.enterWPCIntoDatabase(carrier, jdbcTemplate);
         } catch (DataAccessException e) {
             model.addAttribute("error", e.getMessage());
-            model.addAttribute("valueStreams", new ArrayList<>());
+            List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
+            List<String> prodLines = null;
+            List<String> prodTypes = null;
+            if (!valueStreams.isEmpty()) {
+                prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos where valueStream=\""
+                        + carrier.getValueStream() + "\";", String.class);
+                if (!prodLines.isEmpty()) {
+                    prodTypes = jdbcTemplate.queryForList("Select Distinct productType From WPCCombos where valueStream=\""
+                            + carrier.getValueStream() + "\" and productionLine=\"" + carrier.getProductionLine() + "\";", String.class);
+                }
+            }
+            model.addAttribute("valueStreams", valueStreams);
+            model.addAttribute("prodLines", prodLines);
+            model.addAttribute("prodTypes", prodTypes);
             return "workPieceCarrierForm";
         }
         return "workPieceCarrierSubmission";
