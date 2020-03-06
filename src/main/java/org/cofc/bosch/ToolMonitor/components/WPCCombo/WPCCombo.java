@@ -1,4 +1,4 @@
-package org.cofc.bosch.ToolMonitor.WPCCombo;
+package org.cofc.bosch.ToolMonitor.components.WPCCombo;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 

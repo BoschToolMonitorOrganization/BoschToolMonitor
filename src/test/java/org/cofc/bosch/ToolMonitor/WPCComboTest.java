@@ -1,6 +1,6 @@
 package org.cofc.bosch.ToolMonitor;
 
-import org.cofc.bosch.ToolMonitor.controller.BaseController;
+import org.cofc.bosch.ToolMonitor.controller.WPCComboController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,40 +25,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
-public class BaseControllerTest {
+public class WPCComboTest {
 
     private MockMvc mockMvc;
-    private BaseController baseController;
+    private WPCComboController wpcComboController;
 
     @Mock
     private JdbcTemplate jdbcTemplate;
 
     @Before
     public void setup() {
-        baseController = new BaseController();
-        baseController.setJdbcTemplate(jdbcTemplate);
+        wpcComboController = new WPCComboController();
+        wpcComboController.setJdbcTemplate(jdbcTemplate);
         MockitoAnnotations.initMocks(this);
 
         ViewResolver resolver = new ThymeleafViewResolver();
         ((ThymeleafViewResolver) resolver).setTemplateEngine(new SpringTemplateEngine());
-        this.mockMvc = MockMvcBuilders.standaloneSetup(baseController).setViewResolvers(resolver).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(wpcComboController).setViewResolvers(resolver).build();
     }
 
     @Test
-    public void welcome() throws Exception {
-        mockMvc.perform(get("/welcome"))
+    public void wpcComboFormAndTable() throws Exception {
+        mockMvc.perform(get("/wpccombos"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
-                .andExpect(view().name("welcome"))
-                .andReturn();
-    }
-
-    @Test
-    public void homePage() throws Exception {
-        mockMvc.perform(get("/"))
-                .andDo(MockMvcResultHandlers.print())
-                .andExpect(status().isOk())
-                .andExpect(view().name("welcome"))
+                .andExpect(view().name("wpcCombos"))
                 .andReturn();
     }
 }
