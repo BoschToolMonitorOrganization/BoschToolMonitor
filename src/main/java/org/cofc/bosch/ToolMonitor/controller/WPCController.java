@@ -1,0 +1,78 @@
+package org.cofc.bosch.ToolMonitor.controller;
+
+import org.cofc.bosch.ToolMonitor.components.WorkPieceCarrier.WorkPieceCarrier;
+import org.cofc.bosch.ToolMonitor.components.WorkPieceCarrier.WorkPieceCarrierMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
+
+@Controller
+public class WPCController {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    @GetMapping("/workpiece")
+    public String workPieceCarrierForm(Model model) {
+        List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
+        List<String> prodLines = null;
+        List<String> prodTypes = null;
+        if (!valueStreams.isEmpty()) {
+            prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos where valueStream=\""
+                    + valueStreams.get(0) + "\";", String.class);
+            if (!prodLines.isEmpty()) {
+                prodTypes = jdbcTemplate.queryForList("Select Distinct productType From WPCCombos where valueStream=\""
+                        + valueStreams.get(0) + "\" and productionLine=\"" + prodLines.get(0) + "\";", String.class);
+            }
+        }
+        model.addAttribute("valueStreams", valueStreams);
+        model.addAttribute("prodLines", prodLines);
+        model.addAttribute("prodTypes", prodTypes);
+        model.addAttribute("carrier", new WorkPieceCarrier());
+        return "workPieceCarrierForm";
+    }
+
+    @PostMapping("/workpiece")
+    public String workPieceCarrierSubmit(@ModelAttribute WorkPieceCarrier carrier, Model model) {
+        model.addAttribute("carrier", carrier);
+        try {
+            WorkPieceCarrier.enterWPCIntoDatabase(carrier, jdbcTemplate);
+        } catch (DataAccessException e) {
+            model.addAttribute("error", e.getMessage());
+            List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
+            List<String> prodLines = null;
+            List<String> prodTypes = null;
+            if (!valueStreams.isEmpty()) {
+                prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos where valueStream=\""
+                        + carrier.getValueStream() + "\";", String.class);
+                if (!prodLines.isEmpty()) {
+                    prodTypes = jdbcTemplate.queryForList("Select Distinct productType From WPCCombos where valueStream=\""
+                            + carrier.getValueStream() + "\" and productionLine=\"" + carrier.getProductionLine() + "\";", String.class);
+                }
+            }
+            model.addAttribute("valueStreams", valueStreams);
+            model.addAttribute("prodLines", prodLines);
+            model.addAttribute("prodTypes", prodTypes);
+            return "workPieceCarrierForm";
+        }
+        return "workPieceCarrierSubmission";
+    }
+
+    @GetMapping("/workpiececarriers")
+    public String workPieceCarriers(Model model) {
+        List<WorkPieceCarrier> carriers = jdbcTemplate.query("Select * from WPCs", new WorkPieceCarrierMapper());
+        model.addAttribute("carriers", carriers);
+
+        return "workPieceCarriers";
+    }
+
+    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
+}

@@ -1,6 +1,6 @@
 package org.cofc.bosch.ToolMonitor;
 
-import org.cofc.bosch.ToolMonitor.controller.BaseController;
+import org.cofc.bosch.ToolMonitor.controller.WPCController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,40 +25,40 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 @Transactional(propagation = Propagation.NOT_SUPPORTED)
-public class BaseControllerTest {
+public class WPCControllerTest {
 
     private MockMvc mockMvc;
-    private BaseController baseController;
+    private WPCController wpcController;
 
     @Mock
     private JdbcTemplate jdbcTemplate;
 
     @Before
     public void setup() {
-        baseController = new BaseController();
-        baseController.setJdbcTemplate(jdbcTemplate);
+        wpcController = new WPCController();
+        wpcController.setJdbcTemplate(jdbcTemplate);
         MockitoAnnotations.initMocks(this);
 
         ViewResolver resolver = new ThymeleafViewResolver();
         ((ThymeleafViewResolver) resolver).setTemplateEngine(new SpringTemplateEngine());
-        this.mockMvc = MockMvcBuilders.standaloneSetup(baseController).setViewResolvers(resolver).build();
+        this.mockMvc = MockMvcBuilders.standaloneSetup(wpcController).setViewResolvers(resolver).build();
     }
 
     @Test
-    public void welcome() throws Exception {
-        mockMvc.perform(get("/welcome"))
+    public void workPieceCarrierForm() throws Exception {
+        mockMvc.perform(get("/workpiece"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
-                .andExpect(view().name("welcome"))
+                .andExpect(view().name("workPieceCarrierForm"))
                 .andReturn();
     }
 
     @Test
-    public void homePage() throws Exception {
-        mockMvc.perform(get("/"))
+    public void workPieceCarrierTable() throws Exception {
+        mockMvc.perform(get("/workpiececarriers"))
                 .andDo(MockMvcResultHandlers.print())
                 .andExpect(status().isOk())
-                .andExpect(view().name("welcome"))
+                .andExpect(view().name("workPieceCarriers"))
                 .andReturn();
     }
 }
