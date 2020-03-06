@@ -65,14 +65,14 @@
         </h2>
 
         <h2>Production Line:
-            <select type="text" id="prodLine" th:if="${prodLines} != null" th:field="*{productionLine}">
+            <select type="text" id="productionLine" th:if="${prodLines} != null" th:field="*{productionLine}">
                 <option th:each="prodLine : ${prodLines}"
                         th:value="${prodLine}" th:text="${prodLine}"/>
             </select>
         </h2>
 
         <h2>Product Type:
-            <select type="text" id="prodType" th:if="${prodTypes} != null" th:field="*{productType}">
+            <select type="text" id="productType" th:if="${prodTypes} != null" th:field="*{productType}">
                 <option th:each="prodType : ${prodTypes}"
                         th:value="${prodType}" th:text="${prodType}"/>
             </select>
