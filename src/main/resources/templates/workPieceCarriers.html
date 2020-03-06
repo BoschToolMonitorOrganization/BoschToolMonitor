@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="wpcComboStyles.css"/>
 <head runat="mysql">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
@@ -16,12 +17,18 @@
 
 <h1>Work Piece Carriers</h1>
 
-<form>
-    <button type="submit" formaction="./workpiece">Submit a Work Piece Carrier</button>
-</form>
-<form>
-    <button type="submit" formaction="./wpccombos">Manage WPC Combos</button>
-</form>
+    <div class="container">
+        <form>
+            <button type="submit" formaction="./welcome">Go to Home Page</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./workpiece">Submit a Work Piece Carrier</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./wpccombos">Manage WPC Combos</button>
+        </form>
+    </div>
+    <br>
 
 <table id="myTable" class="display">
 
