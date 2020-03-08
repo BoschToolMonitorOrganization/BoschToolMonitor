@@ -1,16 +1,31 @@
 Create table WPCs (
-    valueStream VARCHAR(25),
+    valueStream VARCHAR(50),
     productionLine VARCHAR(50),
-    productType VARCHAR(40),
+    productType VARCHAR(50),
     workPieceCarrierNumber int,
-    PRIMARY KEY (valueStream , productionLine , productType, workPieceCarrierNumber)
+    PRIMARY KEY (valueStream , productionLine , productType, workPieceCarrierNumber),
+    FOREIGN KEY (valueStream, productionLine, productType) REFERENCES WPCCombos(valueStream, productionLine, productType)
 );
 
 Create table WPCCombos (
-    valueStream VARCHAR(25),
+    valueStream VARCHAR(50),
     productionLine VARCHAR(50),
-    productType VARCHAR(40),
+    productType VARCHAR(50),
     PRIMARY KEY (valueStream , productionLine , productType)
+);
+
+create table wpcFiles (
+    valueStream VARCHAR(50),
+    productionLine VARCHAR(50),
+    productType VARCHAR(50),
+    author VARCHAR(100),
+    revisionNumber int,
+    revisionReason VARCHAR(100),
+    fileType VARCHAR(50),
+    fileName VARCHAR(100),
+    fileData MEDIUMBLOB,
+    PRIMARY KEY (valueStream, productionLine, productType, author, revisionNumber, fileType, fileName),
+    FOREIGN KEY (valueStream, productionLine, productType) REFERENCES WPCCombos(valueStream, productionLine, productType)
 );
 
 INSERT INTO WPCCombos (valueStream, productionLine, productType)
