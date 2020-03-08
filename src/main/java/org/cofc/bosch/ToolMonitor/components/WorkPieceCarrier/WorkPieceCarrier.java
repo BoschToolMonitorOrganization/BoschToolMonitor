@@ -41,13 +41,11 @@ public class WorkPieceCarrier {
         this.productType = productType;
     }
 
-
-    public static void enterWPCIntoDatabase(WorkPieceCarrier carrier, JdbcTemplate jdbcTemplate) {
+    public  void enterWPCIntoDatabase(JdbcTemplate jdbcTemplate) {
         jdbcTemplate.execute("insert into WPCs values(\""
-                + carrier.getValueStream() + "\", \""
-                + carrier.getProductionLine() + "\", \""
-                + carrier.getProductType() + "\", "
-                + carrier.getWorkPieceCarrierNumber() + ")");
+                + valueStream + "\", \""
+                + productionLine + "\", \""
+                + productType + "\", "
+                + workPieceCarrierNumber + ")");
     }
-
 }

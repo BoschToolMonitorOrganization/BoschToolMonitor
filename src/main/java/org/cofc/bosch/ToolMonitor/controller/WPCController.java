@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+import static org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities.initWPCCombosInModel;
+
 @Controller
 public class WPCController {
     @Autowired
@@ -20,20 +22,7 @@ public class WPCController {
 
     @GetMapping("/workpiece")
     public String workPieceCarrierForm(Model model) {
-        List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
-        List<String> prodLines = null;
-        List<String> prodTypes = null;
-        if (!valueStreams.isEmpty()) {
-            prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos where valueStream=\""
-                    + valueStreams.get(0) + "\";", String.class);
-            if (!prodLines.isEmpty()) {
-                prodTypes = jdbcTemplate.queryForList("Select Distinct productType From WPCCombos where valueStream=\""
-                        + valueStreams.get(0) + "\" and productionLine=\"" + prodLines.get(0) + "\";", String.class);
-            }
-        }
-        model.addAttribute("valueStreams", valueStreams);
-        model.addAttribute("prodLines", prodLines);
-        model.addAttribute("prodTypes", prodTypes);
+        initWPCCombosInModel(model, jdbcTemplate);
         model.addAttribute("carrier", new WorkPieceCarrier());
         return "workPieceCarrierForm";
     }
@@ -42,7 +31,7 @@ public class WPCController {
     public String workPieceCarrierSubmit(@ModelAttribute WorkPieceCarrier carrier, Model model) {
         model.addAttribute("carrier", carrier);
         try {
-            WorkPieceCarrier.enterWPCIntoDatabase(carrier, jdbcTemplate);
+            carrier.enterWPCIntoDatabase(jdbcTemplate);
         } catch (DataAccessException e) {
             model.addAttribute("error", e.getMessage());
             List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
