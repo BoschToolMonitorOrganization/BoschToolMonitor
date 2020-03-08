@@ -6,32 +6,27 @@
     <title>Work Piece Carrier Form</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
+
         function sendAjaxRequestValueStream() {
             var valueStream = $("#valueStream").val();
             $.get("/BoschToolMonitor/productionLines?valueStream=" + valueStream, function (data) {
-                $("#prodLine").empty();
-                $("#prodType").empty();
+                $("#productionLine").empty();
+                $("#productType").empty();
                 data.forEach(function (item, i) {
-                    var option = "<option value = " + item + ">" + item + "</option>";
-                    $("#prodLine").append(option);
-                    if(i == 1) {
-                        $("#prodLine").value = item;
-                    }
+                    var option = "<option>" + item + "</option>";
+                    $("#productionLine").append(option);
                 });
             });
         };
 
         function sendAjaxRequestProductionLine() {
-            var productionLine = $("#prodLine").val();
+            var productionLine = $("#productionLine").val();
             var valueStream = $("#valueStream").val();
             $.get("/BoschToolMonitor/productTypes?valueStream=" + valueStream + '&productionLine=' + productionLine, function (data) {
-                $("#prodType").empty();
+                $("#productType").empty();
                 data.forEach(function (item, i) {
-                    var option = "<option value = " + item + ">" + item + "</option>";
-                    $("#prodType").append(option);
-                    if(i == 1) {
-                        $("#prodType").value = item;
-                    }
+                    var option = "<option>" + item + "</option>";
+                    $("#productType").append(option);
                 });
             });
         };
@@ -41,7 +36,7 @@
                 sendAjaxRequestValueStream();
                 sendAjaxRequestProductionLine();
             });
-            $("#prodLine").change(function () {
+            $("#productionLine").change(function () {
                 sendAjaxRequestProductionLine();
             });
         });
