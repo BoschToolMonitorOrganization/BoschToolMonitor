@@ -56,6 +56,41 @@ public class WPCFileController {
         return "wpcFileSubmission";
     }
 
+    @GetMapping("/wpcFilesForWPC")
+    public String wpcFilesForWPC(@RequestParam String productionLine, @RequestParam String valueStream,
+                                 @RequestParam String productType, Model model) {
+        List<WPCFile> wpcFiles = jdbcTemplate.query("Select * From wpcFiles where valueStream=\"" +
+                valueStream + "\" and productionLine=\"" + productionLine + "\" and productType=\"" +
+                productType + "\";", new WPCFileRowMapper());
+        model.addAttribute("wpcFiles", wpcFiles);
+
+        return "wpcFiles";
+    }
+
+    @GetMapping("/delete_WPCFileForWPC")
+    public String deleteWPCFileForWPC(@RequestParam String productionLine, @RequestParam String valueStream,
+                                      @RequestParam String productType, @RequestParam String author, @RequestParam int revisionNumber,
+                                      @RequestParam String fileType, @RequestParam String fileName, Model model) {
+        WPCFile.deleteWPCFile(jdbcTemplate, valueStream, productionLine, productType, author, revisionNumber, fileType, fileName);
+        List<WPCFile> wpcFiles = jdbcTemplate.query("Select * From wpcFiles where valueStream=\"" +
+                valueStream + "\" and productionLine=\"" + productionLine + "\" and productType=\"" +
+                productType + "\";", new WPCFileRowMapper());
+        model.addAttribute("wpcFiles", wpcFiles);
+
+        return "wpcFiles";
+    }
+
+    @GetMapping("/delete_WPCFile")
+    public String deleteWPCFile(@RequestParam String productionLine, @RequestParam String valueStream,
+                                @RequestParam String productType, @RequestParam String author, @RequestParam int revisionNumber,
+                                @RequestParam String fileType, @RequestParam String fileName, Model model) {
+        WPCFile.deleteWPCFile(jdbcTemplate, valueStream, productionLine, productType, author, revisionNumber, fileType, fileName);
+        List<WPCFile> wpcFiles = jdbcTemplate.query("Select * From wpcFiles", new WPCFileRowMapper());
+        model.addAttribute("wpcFiles", wpcFiles);
+
+        return "wpcFiles";
+    }
+
     @GetMapping("/wpcFiles")
     public String wpcFiles(Model model) {
         List<WPCFile> wpcFiles = jdbcTemplate.query("Select * From wpcFiles", new WPCFileRowMapper());
