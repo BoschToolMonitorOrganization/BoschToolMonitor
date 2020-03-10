@@ -107,7 +107,7 @@ public class WPCFileController {
         Blob data = jdbcTemplate.query("select fileData From wpcFiles where valueStream=\"" +
                         valueStream + "\" and productionLine=\"" + productionLine + "\" and productType=\"" +
                         productType + "\" and author=\"" + author + "\" and revisionNumber=" + revisionNumber +
-                        " and fileType=\"" + fileType + "\" and fileName=\"" + fileName + "\");",
+                        " and fileType=\"" + fileType + "\" and fileName=\"" + fileName + "\";",
                 new ResultSetExtractor<Blob>() {
                     @Override
                     public Blob extractData(ResultSet rs) throws SQLException {
