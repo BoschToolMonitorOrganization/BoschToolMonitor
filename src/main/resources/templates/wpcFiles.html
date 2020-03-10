@@ -1,10 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="wpcComboStyles.css"/>
+<head runat="mysql">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').dataTable();
+        });
+    </script>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>WPC Files</title>
 </head>
 <body>
+
+    <h1>WPC Files</h1>
+
+    <div class="container">
+        <form>
+            <button type="submit" formaction="./welcome">Go to Home Page</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./workpiece">Submit a Work Piece Carrier</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./wpccombos">Manage WPC Combos</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./createWPCFile">Submit a WPC File</button>
+        </form>
+
+    </div>
+    <br>
+
+    <table id="myTable" class="display">
+        <thead>
+        <tr>
+            <th>Value Stream</th>
+            <th>Production Line</th>
+            <th>Production Type</th>
+            <th>Author</th>
+            <th>Revision Number</th>
+            <th>Revision Reason</th>
+            <th>File Type</th>
+            <th>File Name</th>
+            <th>File Data</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="wpcFile : ${wpcFiles}">
+                <td th:text="${wpcFile.valueStream}"/>
+                <td th:text="${wpcFile.productionLine}"/>
+                <td th:text="${wpcFile.productType}"/>
+                <td th:text="${wpcFile.author}"/>
+                <td th:text="${wpcFile.revisionNumber}"/>
+                <td th:text="${wpcFile.revisionReason}"/>
+                <td th:text="${wpcFile.fileType}"/>
+                <td th:text="${wpcFile.fileName}"/>
+                <td th:text="${wpcFile.fileData}"/>
+            </tr>
+        </tbody>
+    </table>
 
 </body>
 </html>
