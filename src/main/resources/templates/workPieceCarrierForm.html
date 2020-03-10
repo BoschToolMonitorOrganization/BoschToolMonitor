@@ -54,7 +54,7 @@
         <h2>Value Stream:
             <select th:field="*{valueStream}" type="text" name="fileType" id="valueStream">
                 <option th:each="valueStream : ${valueStreams}"
-                        th:value="${valueStream}" th:text="${valueStream}"
+                        th:value="${valueStream}" th:text="${valueStream}"/>
                 </option>
             </select>
         </h2>
