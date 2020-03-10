@@ -1,10 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="formStyles.css"/>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>WPC File Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function sendAjaxRequestValueStream() {
+            var valueStream = $("#valueStream").val();
+            $.get("/BoschToolMonitor/productionLines?valueStream=" + valueStream, function (data) {
+                $("#productionLine").empty();
+                $("#productType").empty();
+                data.forEach(function (item, i) {
+                    var option = "<option>" + item + "</option>";
+                    $("#productionLine").append(option);
+                });
+            });
+        };
+
+        function sendAjaxRequestProductionLine() {
+            var productionLine = $("#productionLine").val();
+            var valueStream = $("#valueStream").val();
+            $.get("/BoschToolMonitor/productTypes?valueStream=" + valueStream + '&productionLine=' + productionLine, function (data) {
+                $("#productType").empty();
+                data.forEach(function (item, i) {
+                    var option = "<option>" + item + "</option>";
+                    $("#productType").append(option);
+                });
+            });
+        };
+
+        $(document).ready(function () {
+            $("#valueStream").change(function () {
+                sendAjaxRequestValueStream();
+                sendAjaxRequestProductionLine();
+            });
+            $("#productionLine").change(function () {
+                sendAjaxRequestProductionLine();
+            });
+        });
+     </script>
 </head>
+
 <body>
+    <h1>Create a WPC File</h1>
+
+    <label th:if="${error != null}" th:text="${error}"/>
+    <form action="#" th:action="@{/createWPCFile}" th:object="${wpcFile}" method="post" enctype="multipart/form-data">
+
+     <div class="container">
+        <h2>Value Stream:
+            <select th:field="*{valueStream}" type="text" name="fileType" id="valueStream">
+                <option th:each="valueStream : ${valueStreams}"
+                        th:value="${valueStream}" th:text="${valueStream}"/>
+                </option>
+            </select>
+        </h2>
+
+        <h2>Production Line:
+            <select type="text" id="productionLine" th:if="${prodLines} != null" th:field="*{productionLine}">
+                <option th:each="prodLine : ${prodLines}"
+                        th:value="${prodLine}" th:text="${prodLine}"/>
+            </select>
+        </h2>
+
+        <h2>Product Type:
+            <select type="text" id="productType" th:if="${prodTypes} != null" th:field="*{productType}">
+                <option th:each="prodType : ${prodTypes}"
+                        th:value="${prodType}" th:text="${prodType}"/>
+            </select>
+        </h2>
+
+        <h2>Author: <input type="text" name="author" th:field="*{author}"/></h2>
+        <h2>Revision Number: <input type="text" name="revisionNumber" th:field="*{revisionNumber}"/></h2>
+        <h2>Revision Reason: <input type="text" name="revisionReason" th:field="*{revisionReason}"/></h2>
+
+        <h2>File Type: <input type="text" name="fileType" th:field="*{fileType}"/></h2>
+        <h2>File Name: <input type="text" name="fileName" th:field="*{fileName}"/></h2>
+        <h2>File Data: <input type="file" name="fileData" th:field="*{fileData}" multiple="multiple"/></h2>
+    </div>
+
+        <input type="submit" value="Submit"/>
+
+    </form>
+
+    <form>
+        <button type="submit" id="cancel" formaction="./welcome">Cancel</button>
+    </form>
 
 </body>
+
 </html>
