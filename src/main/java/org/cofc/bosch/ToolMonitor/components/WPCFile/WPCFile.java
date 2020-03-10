@@ -117,4 +117,14 @@ public class WPCFile {
                     }
                 });
     }
+
+    public static void deleteWPCFile(JdbcTemplate jdbcTemplate, String valueStream, String productionLine, String productType,
+                                     String author, int revisionNumber, String fileType, String fileName) {
+        jdbcTemplate.execute("Delete From WPCFiles where where valueStream=\"" +
+                valueStream + "\" and productionLine=\"" + productionLine + "\" and productType=\"" +
+                productType + "\" and author=\"" + author + "\" and revisionNumber=" + revisionNumber +
+                " and fileType=\"" + fileType + "\" and fileName=\"" + fileName + "\");");
+    }
+
+
 }
