@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="welcomePageStyles.css?v=1.11"/>
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>You successfully submitted your WPC file</title>
 </head>
+
 <body>
+    <div class="container">
+        <h1>Congrats! You submitted your WPC file!</h1>
+        <h2 th:text="'Value Stream: ' + ${wpcFile.valueStream}"/>
+        <h2 th:text="'Production Line: ' + ${wpcFile.productionLine}"/>
+        <h2 th:text="'Product Type: ' + ${wpcFile.productType}"/>
+        <h2 th:text="'Author: ' + ${wpcFile.author}"/>
+        <h2 th:text="'Revision Number: ' + ${wpcFile.revisionNumber}"/>
+        <h2 th:text="'Revision Reason: ' + ${wpcFile.revisionReason}"/>
+        <h2 th:text="'File Type: ' + ${wpcFile.fileType}"/>
+        <h2 th:text="'File Name: ' + ${wpcFile.fileName}"/>
+        <h2 th:text="'File Data: ' + ${wpcFile.fileData}"/>
+    </div>
+    <br>
+    <div class="container">
+        <form>
+            <button type="submit" formaction="./welcome">Go to Home Page</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./workpiece">Submit a Work Piece Carrier</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./wpccombos">Manage WPC Combos</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./createWPCFile">Submit Another WPC File</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./wpcFiles">View WPC Files</button>
+        </form>
+    </div>
+
 
 </body>
+
 </html>
