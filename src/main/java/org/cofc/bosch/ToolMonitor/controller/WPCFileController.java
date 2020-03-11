@@ -111,6 +111,7 @@ public class WPCFileController {
                 new ResultSetExtractor<Blob>() {
                     @Override
                     public Blob extractData(ResultSet rs) throws SQLException {
+                        rs.next();
                         return rs.getBlob("fileData");
                     }
                 });
