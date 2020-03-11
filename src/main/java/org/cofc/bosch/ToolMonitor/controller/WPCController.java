@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -57,6 +58,15 @@ public class WPCController {
     public String workPieceCarriers(Model model) {
         List<WorkPieceCarrier> carriers = jdbcTemplate.query("Select * from WPCs", new WorkPieceCarrierMapper());
         model.addAttribute("carriers", carriers);
+
+        return "workPieceCarriers";
+    }
+
+    @GetMapping("/delete_wpc")
+    public String deleteWPC(Model model, @RequestParam String productionLine, @RequestParam String valueStream,
+                            @RequestParam String productType, @RequestParam int workPieceCarrierNumber) {
+        WorkPieceCarrier.deleteWPC(valueStream, productionLine, productType, workPieceCarrierNumber, jdbcTemplate);
+        model.addAttribute("carriers", jdbcTemplate.query("Select * from WPCs", new WorkPieceCarrierMapper()));
 
         return "workPieceCarriers";
     }
