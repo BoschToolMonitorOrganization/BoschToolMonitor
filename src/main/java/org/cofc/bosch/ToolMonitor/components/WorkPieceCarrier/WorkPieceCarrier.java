@@ -48,4 +48,11 @@ public class WorkPieceCarrier {
                 + productType + "\", "
                 + workPieceCarrierNumber + ")");
     }
+
+    public static void deleteWPC(String valueStream, String productionLine, String productType, int workPieceCarrierNumber, JdbcTemplate jdbcTemplate) {
+        jdbcTemplate.execute("Delete From WPCs where valueStream=\"" + valueStream +
+                "\" and productionLine=\"" + productionLine +
+                "\" and productType=\"" + productType + "\" and " +
+                "workPieceCarrierNumber=" +  workPieceCarrierNumber + ";");
+    }
 }
