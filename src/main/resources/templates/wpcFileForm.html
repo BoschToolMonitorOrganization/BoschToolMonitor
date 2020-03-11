@@ -75,10 +75,16 @@
         <h2>Revision Number: <input type="text" name="revisionNumber" th:field="*{revisionNumber}"/></h2>
         <h2>Revision Reason: <input type="text" name="revisionReason" th:field="*{revisionReason}"/></h2>
 
-        <h2>File Type: <input type="text" name="fileType" th:field="*{fileType}"/></h2>
-        <h2>File Name: <input type="text" name="fileName" th:field="*{fileName}"/></h2>
-        <h2>File Data: <input type="file" name="fileData" th:field="*{fileData}" multiple="multiple"/></h2>
-    </div>
+        <h2>File Type:
+            <select type="text" name="fileType" th:field="*{fileType}">
+                <option value="PDF">PDF</option>
+                <option value="CAD">CAD</option>
+                <option value="JPEG">JPEG</option>
+            </select>
+        </h2>
+
+        <h2>File Data: <input type="file" name="fileData" th:field="*{fileData}"/></h2>
+     </div>
 
         <input type="submit" value="Submit"/>
 
