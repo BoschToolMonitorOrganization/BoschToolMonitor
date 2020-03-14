@@ -42,6 +42,23 @@ button[type=submit]:hover {
     color: white;
 }
 
+/* Button styling for delete option within table */
+button[type=button] {
+    background-color: lightgray;
+    color: black;
+    /*padding: 12px 20px;*/
+    border: solid;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[type=button]:hover {
+    background-color: red;
+    border-color: black;
+    transition-duration: 0.1s;
+    color: white;
+}
+
 /* Table styling */
 table, th, td {
     border: 1px solid black;

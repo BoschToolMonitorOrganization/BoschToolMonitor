@@ -61,11 +61,11 @@
 
     <tbody>
     <tr th:each="combo : ${combos}">
-        <td th:text="${combo.valueStream}"/>
-        <td th:text="${combo.productionLine}"/>
-        <td th:text="${combo.productType}"/>
-        <td>
-            <a th:href="@{/wpccombo/delete(valueStream=${combo.valueStream}, productionLine=${combo.productionLine}, productType=${combo.productType})}" class="btn">Delete</a>
+        <td style="text-align:center" th:text="${combo.valueStream}"></td>
+        <td style="text-align:center" th:text="${combo.productionLine}"></td>
+        <td style="text-align:center" th:text="${combo.productType}"></td>
+        <td style="text-align:center">
+            <a th:href="@{/wpccombo/delete(valueStream=${combo.valueStream}, productionLine=${combo.productionLine}, productType=${combo.productType})}"><button type="button">Delete</button></a>
         </td>
     </tr>
     </tbody>
