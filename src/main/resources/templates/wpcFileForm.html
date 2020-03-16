@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" href="formStyles.css"/>
+<link rel="stylesheet" type="text/css" href="fileFormStyles.css"/>
 <head>
     <meta charset="UTF-8">
     <title>WPC File Form</title>
@@ -43,7 +43,7 @@
 </head>
 
 <body>
-    <h1>Create a WPC File</h1>
+    <h1>WPC File Form</h1>
 
     <label th:if="${error != null}" th:text="${error}"/>
     <form action="#" th:action="@{/createWPCFile}" th:object="${wpcFile}" method="post" enctype="multipart/form-data">
@@ -84,15 +84,14 @@
         </h2>
 
         <h2>File Data: <input type="file" name="fileData" th:field="*{fileData}"/></h2>
-     </div>
 
-        <input type="submit" value="Submit"/>
+         <input type="submit" value="Submit"/>
+       </form>
 
-    </form>
-
-    <form>
-        <button type="submit" id="cancel" formaction="./welcome">Cancel</button>
-    </form>
+        <form>
+            <button type="submit" id="cancel" formaction="./welcome">Cancel</button>
+        </form>
+    </div>
 
 </body>
 
