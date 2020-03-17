@@ -24,14 +24,6 @@ h2 {
     border-style: ridge;
 }
 
-label {
-    margin-right: 5px;
-    font-family: 'Cambria', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
-}
-
 select[type=text]{
     display: inline;
     width: 20%;

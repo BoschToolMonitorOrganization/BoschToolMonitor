@@ -1,7 +1,7 @@
-/* Style inputs, select elements and textareas */
-
+/* Style inputs, select elements and text areas */
 body {
-    background-color: orangered;
+    background-image: url("./img/lightbluebg.jpg");
+    margin-top: 75px;
 }
 
 h1 {
@@ -17,35 +17,29 @@ h2 {
 }
 
 .container {
-    border-radius: 50px;
     background-color: whitesmoke;
-    padding: 10px;
-    border-style: solid;
-}
-
-label {
-    margin-right: 5px;
-    font-family: 'Cambria', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-    text-align: center;
+    margin-left: 350px;
+    margin-right: 350px;
+    border-style: ridge;
 }
 
 select[type=text]{
     display: inline;
-    width: 11.5%;
-    padding: 20px;
+    width: 20%;
     border: 2px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
 }
 
 /* Extra margin to align inputs */
-#prodLine {
-    margin-right: 35px;
+#productionLine {
+    margin-right: 36px;
 }
-
-#prodType {
-    margin-right: 4px;
+#productType {
+    margin-right: 6px;
+}
+input[type=number] {
+    margin-right: 7px;
+    width: 19%;
 }
 
 /* Styles the submit and cancel buttons */
