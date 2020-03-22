@@ -83,13 +83,9 @@ public class WPCFile {
         this.fileName = fileName;
     }
 
-    public MultipartFile getFileData() {
-        return fileData;
-    }
+    public MultipartFile getFileData() { return fileData; }
 
-    public void setFileData(MultipartFile fileData) {
-        this.fileData = fileData;
-    }
+    public void setFileData(MultipartFile fileData) { this.fileData = fileData; }
 
     public void enterWPCFileIntoDatabase(JdbcTemplate jdbcTemplate) {
         jdbcTemplate.execute(
