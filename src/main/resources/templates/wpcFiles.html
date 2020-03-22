@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" href="wpcComboStyles.css"/>
+<link rel="stylesheet" type="text/css" href="wpcComboStyles.css?v=1.21"/>
 <head runat="mysql">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
@@ -45,21 +45,34 @@
             <th>Revision Reason</th>
             <th>File Type</th>
             <th>File Name</th>
+            <th>View File</th>
             <th>File Data</th>
+
         </tr>
         </thead>
 
         <tbody>
             <tr th:each="wpcFile : ${wpcFiles}">
-                <td th:text="${wpcFile.valueStream}"/>
-                <td th:text="${wpcFile.productionLine}"/>
-                <td th:text="${wpcFile.productType}"/>
-                <td th:text="${wpcFile.author}"/>
-                <td th:text="${wpcFile.revisionNumber}"/>
-                <td th:text="${wpcFile.revisionReason}"/>
-                <td th:text="${wpcFile.fileType}"/>
-                <td th:text="${wpcFile.fileName}"/>
-                <td th:text="${wpcFile.fileData}"/>
+                <td style="text-align:center" th:text="${wpcFile.valueStream}"/>
+                <td style="text-align:center" th:text="${wpcFile.productionLine}"/>
+                <td style="text-align:center" th:text="${wpcFile.productType}"/>
+                <td style="text-align:center" th:text="${wpcFile.author}"/>
+                <td style="text-align:center" th:text="${wpcFile.revisionNumber}"/>
+                <td style="text-align:center" th:text="${wpcFile.revisionReason}"/>
+                <td style="text-align:center" th:text="${wpcFile.fileType}"/>
+                <td style="text-align:center" th:text="${wpcFile.fileName}"/>
+
+                <td style="text-align:center">
+                    <a><button type="button">View</button></a>
+                </td>
+
+                <td style="text-align:center">
+                <a th:href="@{|/download/wpcFile(valueStream=${wpcFile.valueStream}, productionLine=${wpcFile.productionLine}, productType=${wpcFile.productType},
+                        author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, revisionReason=${wpcFile.revisionReason}, fileType=${wpcFile.fileType},
+                        fileName=${wpcFile.fileName})|}"><button type="button">Download</button><span th:text="${wpcFile.fileData}"></span></a>
+
+                </td>
+
             </tr>
         </tbody>
     </table>
