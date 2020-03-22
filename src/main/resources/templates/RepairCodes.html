@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head runat="mysql">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/wpcComboStyles.css"/>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').dataTable();
+        });
+    </script>
+    <meta charset="UTF-8"/>
+    <title>Repair Codes</title>
+</head>
+<body>
+
+<div class="container">
+    <form>
+        <button type="submit" formaction="/BoschToolMonitor/">Go to Home Page</button>
+    </form>
+    <form>
+        <button type="submit" formaction="/BoschToolMonitor/workpiece">Submit a Work Piece Carrier</button>
+    </form>
+    <form>
+        <button type="submit" formaction="/BoschToolMonitor/workpiececarriers">View Work Piece Carriers</button>
+    </form>
+</div>
+
+<br>
+
+<label th:if="${error != null}" th:text="${error}"/>
+
+<br>
+
+<form action="#" th:action="@{/createRepairCode}" th:object="${repairCode}" method="post">
+    <div class="container">
+        <h2>Create a WPC Combo</h2>
+        <label>ValueStream: <input type="text" th:field="*{valueStream}" step="1">
+        </label>
+        <br>
+        <label>Production Line: <input type="text" th:field="*{productionLine}">
+        </label>
+        <br>
+        <label>Repair Category <input type="text" th:field="*{repairCategory}">
+        </label>
+        <br>
+        <label>Repair Detail <input type="text" th:field="*{repairDetail}">
+        </label>
+        <br>
+        <input type="submit" value="Submit"/>
+    </div>
+
+</form>
+
+<br>
+
+<table id="myTable" class="display">
+
+    <thead>
+    <tr>
+        <th>Value Stream</th>
+        <th>Production Line</th>
+        <th>Repair Category</th>
+        <th>Repair Detail</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="repairCode : ${repairCodes}">
+        <td style="text-align:center" th:text="${repairCode.valueStream}"></td>
+        <td style="text-align:center" th:text="${repairCode.productionLine}"></td>
+        <td style="text-align:center" th:text="${repairCode.repairCategory}"></td>
+        <td style="text-align:center" th:text="${repairCode.repairDetail}"></td>
+        <td style="text-align:center">
+            <a th:href="@{/delete_repair_code(valueStream=${repairCode.valueStream}, productionLine=${repairCode.productionLine}, repairCategory=${repairCode.repairCategory}, repairDetail=${repairCode.repairDetail})}">
+                <button type="button">Delete</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>

@@ -28,6 +28,59 @@ create table wpcFiles (
     FOREIGN KEY (valueStream, productionLine, productType) REFERENCES WPCCombos(valueStream, productionLine, productType)
 );
 
+create table RepairCodes (
+    valueStream VARCHAR(50),
+    productionLine VARCHAR(50),
+    repairCategory VARCHAR(100),
+    repairDetail VARCHAR(100),
+    PRIMARY KEY (valueStream, productionLine, repairCategory, repairDetail)
+);
+
+INSERT INTO RepairCodes(valStream,prodLine,repairCategory,repairDetail) VALUES
+ ('CRIN','Test Line 1','WPC Backflow Failure','Pneum Cyl NOK')
+,('CRIN','Test Line 1','WPC Backflow Failure','Pneum Hose Leaking')
+,('CRIN','Test Line 1','WPC Backflow Failure','Backflow Hose Leaking')
+,('CRIN','Test Line 1','WPC Backflow Failure','Inj Contack Seal NOK')
+,('CRIN','Test Line 1','WPC Backflow Failure','Missing Fitting Seal')
+,('CRIN','Test Line 1','WPC Backflow Failure','Fitting NOK or Loose')
+,('CRIN','Test Line 1','WPC Backflow Failure','Contact Block NOK')
+,('CRIN','Test Line 1','WPC ID 80 / ID 40 Not Functioning','Station Faults Out')
+,('CRIN','Test Line 1','WPC ID 80 / ID 40 Not Functioning','Bracket Broken')
+,('CRIN','Test Line 1','WPC ID 80 / ID 40 Not Functioning','NOK at HP Leak')
+,('CRIN','Test Line 1','WPC ID 80 / ID 40 Not Functioning','NOK at EMI')
+,('CRIN','Test Line 1','WPC ID 80 / ID 40 Not Functioning','NOK at St. 7')
+,('CRIN','Test Line 1','WPC ID 80 / ID 40 Not Functioning','NOK at St. 400')
+,('CRIN','Test Line 1','WPC Base Failure','Base Plate Bent')
+,('CRIN','Test Line 1','WPC Base Failure','WPC Sticks on Pins')
+,('CRIN','Test Line 1','WPC Base Failure','Stripped Holes')
+,('CRIN','Test Line 1','WPC Base Failure','Missing Bushing')
+,('CRIN','Test Line 1','WPC Base Failure','Bushing NOT Flush')
+,('CRIN','Test Line 1','WPC Base Failure','Loose Bumpers')
+,('CRIN','Test Line 1','WPC Base Failure','Switch Exciter Plate NOK')
+,('CRIN','Test Line 1','WPC Interference with Injector','WPC Bore tight with Injector')
+,('CRIN','Test Line 1','WPC Interference with Injector','WPC Bore damaged at bore')
+,('CRIN','Test Line 1','WPC Interference with Injector','Backflow Seal interference')
+,('CRIN','Test Line 1','WPC Injector Latch NOK','Inj. Latch Slide Bent / Jammed')
+,('CRIN','Test Line 1','WPC Injector Latch NOK','Inj. Latch Slide Detent NOK')
+,('CRIN','Test Line 1','WPC Injector Latch NOK','Inj. Latch Slide Too Loose')
+,('CRIN','Test Line 1','WPC High Press. Leakage','High Pressure Nipple Dented')
+,('CRIN','Test Line 1','WPC High Press. Leakage','High Press Clamp Collar NOK')
+,('CRIN','Test Line 1','WPC High Press. Leakage','Creates High Pressure Mist')
+,('CRIN','Magnet Line 2','WPC Base Failure','Base Plate Bent')
+,('CRIN','Magnet Line 2','WPC Base Failure','WPC Sticks on Pins')
+,('CRIN','Magnet Line 2','WPC Base Failure','Stripped Holes')
+,('CRIN','Magnet Line 2','WPC Base Failure','Missing Bushing')
+,('CRIN','Magnet Line 2','WPC Base Failure','Bushing NOT Flush')
+,('CRIN','Magnet Line 2','WPC Base Failure','Loose Bumpers')
+,('CRIN','Magnet Line 2','WPC Base Failure','Switch Exciter Plate NOK')
+,('CRIN','Magnet Line 2','WPC ID80','NOK St1')
+,('CRIN','Magnet Line 2','WPC ID80','NOK St2')
+,('CRIN','Magnet Line 2','WPC ID80','NOK St3')
+,('CRIN','Magnet Line 2','WPC ID80','NOK St5')
+,('CRIN','Magnet Line 2','WPC part placement','Crash at Oring installation')
+,('CRIN','Magnet Line 2','WPC part placement','Crash at Laser')
+,('CRIN','Magnet Line 2','WPC part placement','Crash at Resistnace');
+
 INSERT INTO WPCCombos (valueStream, productionLine, productType)
 VALUES
     ('CRIN', 'Assembly Line 1', 'CRIN3'),
