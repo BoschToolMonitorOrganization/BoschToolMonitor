@@ -10,6 +10,13 @@
             $('#myTable').dataTable();
         });
     </script>
+<!--    <script>
+        $("#downloadButton").click(function() {
+            download("th:href="@{|/download/wpcFile(productionLine=${wpcFile.productionLine}, valueStream=${wpcFile.valueStream}, productType=${wpcFile.productType},
+                        author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType},
+                        fileName=${wpcFile.fileName})|}"", "${wpcFile.fileName}", "text/plain");
+        });
+    </script>-->
     <meta charset="UTF-8">
     <title>WPC Files</title>
 </head>
@@ -47,7 +54,6 @@
             <th>File Name</th>
             <th>View File</th>
             <th>File Data</th>
-
         </tr>
         </thead>
 
@@ -67,10 +73,15 @@
                 </td>
 
                 <td style="text-align:center">
-                <a th:href="@{|/download/wpcFile(valueStream=${wpcFile.valueStream}, productionLine=${wpcFile.productionLine}, productType=${wpcFile.productType},
-                        author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, revisionReason=${wpcFile.revisionReason}, fileType=${wpcFile.fileType},
-                        fileName=${wpcFile.fileName})|}"><button type="button">Download</button><span th:text="${wpcFile.fileData}"></span></a>
+                <a th:href="@{/download/wpcFile(valueStream=${wpcFile.valueStream}, productionLine=${wpcFile.productionLine}, productType=${wpcFile.productType},
+                        author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType},
+                        fileName=${wpcFile.fileName})}" download="fileData.txt"><button type="button">Download</button><span th:text="${wpcFile.fileData}"></span></a>
 
+<!--                    <a id="downloadButton"><button type="button">Download</button></a>-->
+
+<!--                    <a th:href="@{|/download/wpcFile(productionLine=${wpcFile.productionLine}, valueStream=${wpcFile.valueStream}, productType=${wpcFile.productType},
+                        author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType},
+                        fileName=${wpcFile.fileName})|}" id="downloadButton"><button type="button">Download</button><span th:text="${wpcFile.fileData}"></span></a>-->
                 </td>
 
             </tr>
