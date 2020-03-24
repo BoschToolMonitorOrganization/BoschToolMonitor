@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <title>WPC File Form</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
     <script type="text/javascript">
         function sendAjaxRequestValueStream() {
             var valueStream = $("#valueStream").val();
@@ -38,11 +40,18 @@
             $("#productionLine").change(function () {
                 sendAjaxRequestProductionLine();
             });
+            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
+
         });
      </script>
+
 </head>
 
 <body>
+
+<div id="nav-placeholder">
+</div>
+
     <h1>WPC File Form</h1>
 
     <label th:if="${error != null}" th:text="${error}"/>

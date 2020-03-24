@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Work Piece Carrier Form</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
 
@@ -39,10 +40,14 @@
             $("#productionLine").change(function () {
                 sendAjaxRequestProductionLine();
             });
+            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
         });
     </script>
 </head>
 <body>
+
+<div id="nav-placeholder">
+</div>
 
 <h1>Create a Work Piece Carrier</h1>
 

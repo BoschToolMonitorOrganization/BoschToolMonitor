@@ -8,6 +8,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#myTable').dataTable();
+            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
+
         });
     </script>
 <!--    <script>
@@ -22,23 +24,11 @@
 </head>
 <body>
 
+<div id="nav-placeholder">
+</div>
+
     <h1>WPC Files</h1>
 
-    <div class="container">
-        <form>
-            <button type="submit" formaction="./welcome">Go to Home Page</button>
-        </form>
-        <form>
-            <button type="submit" formaction="./workpiece">Submit a Work Piece Carrier</button>
-        </form>
-        <form>
-            <button type="submit" formaction="./wpccombos">Manage WPC Combos</button>
-        </form>
-        <form>
-            <button type="submit" formaction="./createWPCFile">Submit a WPC File</button>
-        </form>
-
-    </div>
     <br>
 
     <table id="myTable" class="display">

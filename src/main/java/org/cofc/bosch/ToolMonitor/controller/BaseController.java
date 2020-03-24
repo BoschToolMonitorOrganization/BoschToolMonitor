@@ -16,7 +16,6 @@ public class BaseController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-
     @GetMapping("/")
     public String homePage() {
         return "welcome";
@@ -27,6 +26,11 @@ public class BaseController {
         return "welcome";
     }
 
+    @GetMapping("/NavigationBar")
+    public String navbar() {
+        return "NavigationBar";
+    }
+
     @RequestMapping(value = "/productionLines")
     @ResponseBody
     public List<String> getProductionLines(@RequestParam String valueStream) {
@@ -35,7 +39,7 @@ public class BaseController {
 
     @RequestMapping(value = "/productTypes")
     @ResponseBody
-    public List<String> getRegions(@RequestParam String productionLine, @RequestParam String valueStream) {
+    public List<String> getProductTypes(@RequestParam String productionLine, @RequestParam String valueStream) {
         return jdbcTemplate.queryForList("Select Distinct productType From WPCCombos where valueStream=\"" + valueStream + "\" and productionLine=\"" + productionLine + "\";", String.class);
     }
 
