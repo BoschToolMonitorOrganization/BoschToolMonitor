@@ -36,6 +36,22 @@ create table RepairCodes (
     PRIMARY KEY (valueStream, productionLine, repairCategory, repairDetail)
 );
 
+Create Table OpenRepairTicket (
+    valueStream VARCHAR(50),
+    productionLine VARCHAR(50),
+    productType VARCHAR(50),
+    workPieceCarrierNumber int,
+    repairCategory VARCHAR(100),
+    repairDetail VARCHAR(100),
+    extraInfo VARCHAR(100),
+    userEntry VARCHAR(50),
+    timeStampOpened TIMESTAMP,
+    PRIMARY KEY (valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened),
+    FOREIGN KEY (valueStream, productionLine, repairCategory, repairDetail) REFERENCES RepairCodes (valueStream, productionLine, repairCategory, repairDetail)
+);
+
+
+
 INSERT INTO RepairCodes(valueStream, productionLine, repairCategory, repairDetail) VALUES
  ('CRIN','Test Line 1','WPC Backflow Failure','Pneum Cyl NOK')
 ,('CRIN','Test Line 1','WPC Backflow Failure','Pneum Hose Leaking')
