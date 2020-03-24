@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="wpcComboStyles.css?v=1.21"/>
+<head runat="mysql">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#myTable').dataTable();
+        });
+    </script>
+    <meta charset="UTF-8"/>
+    <title>Open Repair Tickets</title>
+</head>
+
+<body>
+
+<h1>Open Repair Tickets</h1>
+
+    <div class="container">
+        <form>
+            <button type="submit" formaction="./welcome">Go to Home Page</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./ADDLATER">Open a Repair Ticket</button>
+        </form>
+        <form>
+            <button type="submit" formaction="./ADDLATER">Manage Repair Combos</button>
+        </form>
+    </div>
+    <br>
+
+<table id="myTable" class="display">
+
+    <thead>
+        <tr>
+            <th>Value Stream</th>
+            <th>Production Line</th>
+            <th>Product Type</th>
+            <th>WPC Number</th>
+            <th>Repair Category</th>
+            <th>Repair Detail</th>
+            <th>Extra Info</th>
+            <th>User Entry</th>
+            <th>Time Stamp Opened</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr th:each="openTicket : ${openTickets}">
+            <td style="text-align:center" th:text="${openTicket.valueStream}"></td>
+            <td style="text-align:center" th:text="${openTicket.productionLine}"></td>
+            <td style="text-align:center" th:text="${openTicket.productType}"></td>
+            <td style="text-align:center" th:text="${openTicket.workPieceCarrierNumber}"></td>
+            <td style="text-align:center" th:text="${openTicket.repairCategory}"></td>
+            <td style="text-align:center" th:text="${openTicket.repairDetail}"></td>
+            <td style="text-align:center" th:text="${openTicket.extraInfo}"></td>
+            <td style="text-align:center" th:text="${openTicket.userEntry}"></td>
+            <td style="text-align:center" th:text="${openTicket.timeStampOpened}"></td>
+            <td style="text-align:center">
+                <a th:href="@{/delete_BACKEND@@@(valueStream=${openTicket.valueStream},
+                productionLine=${openTicket.productionLine}, productType=${openTicket.productType},
+                workPieceCarrierNumber=${openTicket.workPieceCarrierNumber}, repairCategory=${openTicket.repairCategory},
+                repairDetail=${openTicket.repairDetail}, extraInfo=${openTicket.extraInfo}, userEntry=${openTicket.userEntry},
+                timeStampOpened=${openTicket.timeStampOpened})}"><button type="button">Delete</button></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</body>
+
+</html>
