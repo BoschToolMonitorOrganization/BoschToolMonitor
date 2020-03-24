@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<link rel="stylesheet" type="text/css" href="fileFormStyles.css"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Open Repair Ticket Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        function sendAjaxRequestValueStream() {
+            var valueStream = $("#valueStream").val();
+            $.get("/BoschToolMonitor/productionLines?valueStream=" + valueStream, function (data) {
+                $("#productionLine").empty();
+                $("#productType").empty();
+                data.forEach(function (item, i) {
+                    var option = "<option>" + item + "</option>";
+                    $("#productionLine").append(option);
+                });
+            });
+        };
+
+        function sendAjaxRequestProductionLine() {
+            var productionLine = $("#productionLine").val();
+            var valueStream = $("#valueStream").val();
+            $.get("/BoschToolMonitor/productTypes?valueStream=" + valueStream + '&productionLine=' + productionLine, function (data) {
+                $("#productType").empty();
+                data.forEach(function (item, i) {
+                    var option = "<option>" + item + "</option>";
+                    $("#productType").append(option);
+                });
+            });
+        };
+
+        $(document).ready(function () {
+            $("#valueStream").change(function () {
+                sendAjaxRequestValueStream();
+                sendAjaxRequestProductionLine();
+            });
+            $("#productionLine").change(function () {
+                sendAjaxRequestProductionLine();
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Open Repair Ticket Form</h1>
+
+    <label th:if="${error != null}" th:text="${error}"/>
+    <form action="#" th:action="@{/@@@@@}" th:object="${@@@@}" method="post" enctype="multipart/form-data">
+
+    <div class="container">
+        <h2>Value Stream:
+            <select th:field="*{valueStream}" type="text" name="fileType" id="valueStream">
+                <option th:each="valueStream : ${valueStreams}"
+                        th:value="${valueStream}" th:text="${valueStream}"/>
+                </option>
+            </select>
+        </h2>
+
+        <h2>Production Line:
+            <select type="text" id="productionLine" th:if="${prodLines} != null" th:field="*{productionLine}">
+                <option th:each="prodLine : ${prodLines}"
+                        th:value="${prodLine}" th:text="${prodLine}"/>
+            </select>
+        </h2>
+
+        <h2>Product Type:
+            <select type="text" id="productType" th:if="${prodTypes} != null" th:field="*{productType}">
+                <option th:each="prodType : ${prodTypes}"
+                        th:value="${prodType}" th:text="${prodType}"/>
+            </select>
+        </h2>
+
+        <h2>WPC Number: <input type="number" name="points" th:field="*{workPieceCarrierNumber}" step="1"></h2>
+
+        <h2>Repair Category:
+            <select type="text" id="repairCategory" th:if="${repairCats} != null" th:field="*{repairCategory}">
+                <option th:each="repairCat : ${repairCats}"
+                        th:value="${repairCat}" th:text="${repairCat}"/>
+            </select>
+        </h2>
+
+        <h2>Repair Detail:
+            <select type="text" id="repairDetail" th:if="${repairDets} != null" th:field="*{repairDetail}">
+                <option th:each="repairDet : ${repairDets}"
+                        th:value="${repairDet}" th:text="${repairDet}"/>
+            </select>
+        </h2>
+
+        <h2>Extra Info: <input type="text" name="extraInfo" th:field="*{extraInfo}"/></h2>
+
+        <h2>User Entry: <input type="text" name="userEntry" th:field="*{userEntry}"/></h2>
+
+        <h2>Time Stamp Opened: <input type="text" name="timeStampOpened" th:field="*{timeStampOpened}"/></h2>
+
+        <input type="submit" value="Submit"/>
+    </form>
+
+        <form>
+            <button type="submit" id="cancel" formaction="./welcome">Cancel</button>
+        </form>
+
+    </div>
+</body>
+</html>
