@@ -36,7 +36,7 @@ create table RepairCodes (
     PRIMARY KEY (valueStream, productionLine, repairCategory, repairDetail)
 );
 
-INSERT INTO RepairCodes(valStream,prodLine,repairCategory,repairDetail) VALUES
+INSERT INTO RepairCodes(valueStream, productionLine, repairCategory, repairDetail) VALUES
  ('CRIN','Test Line 1','WPC Backflow Failure','Pneum Cyl NOK')
 ,('CRIN','Test Line 1','WPC Backflow Failure','Pneum Hose Leaking')
 ,('CRIN','Test Line 1','WPC Backflow Failure','Backflow Hose Leaking')
