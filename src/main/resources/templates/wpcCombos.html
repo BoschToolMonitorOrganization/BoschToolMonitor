@@ -8,25 +8,20 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#myTable').dataTable();
+            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
         });
     </script>
+
     <meta charset="UTF-8"/>
     <title>WPC Combos</title>
 </head>
 <body>
 
+<div id="nav-placeholder">
+</div>
+
 <label th:if="${error != null}" th:text="${error}"/>
-    <div class="container">
-        <form>
-            <button type="submit" formaction="/BoschToolMonitor/">Go to Home Page</button>
-        </form>
-        <form>
-            <button type="submit" formaction="/BoschToolMonitor/workpiece">Submit a Work Piece Carrier</button>
-        </form>
-        <form>
-            <button type="submit" formaction="/BoschToolMonitor/workpiececarriers">View Work Piece Carriers</button>
-        </form>
-    </div>
+
     <br>
 
 <form action="#" th:action="@{/wpccombo}" th:object="${combo}" method="post">

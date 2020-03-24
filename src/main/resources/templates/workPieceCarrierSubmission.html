@@ -5,7 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <title>You successfully submitted your work piece carrier.</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
+        });
+    </script>
+
 </head>
+
+<div id="nav-placeholder">
+</div>
 
 <body>
     <div class="container">
@@ -16,24 +26,6 @@
         <h2 th:text="'WPC#: ' + ${carrier.workPieceCarrierNumber}"/>
     </div>
     <br>
-    <div class="container">
-        <form>
-            <button type="submit" id="homePage" formaction="./welcome">Go To Home Page</button>
-        </form>
-
-        <form>
-            <button type="submit" id="submitWPC" formaction="./workpiece">Submit Another Work Piece Carrier</button>
-        </form>
-
-        <form>
-            <button type="submit" id="viewWPC" formaction="./workpiececarriers">View Work Piece Carriers</button>
-        </form>
-
-        <form>
-            <button type="submit" formaction="./wpccombos">Manage WPC Combos</button>
-        </form>
-    </div>
-
 
 </body>
 

@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Open Repair Ticket Form</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript">
         function sendAjaxRequestValueStream() {
@@ -38,11 +39,17 @@
             $("#productionLine").change(function () {
                 sendAjaxRequestProductionLine();
             });
+
+            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
         });
     </script>
 </head>
 
 <body>
+
+<div id="nav-placeholder">
+</div>
+
     <h1>Open Repair Ticket Form</h1>
 
     <label th:if="${error != null}" th:text="${error}"/>

@@ -8,6 +8,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#myTable').dataTable();
+            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
+
         });
     </script>
     <meta charset="UTF-8"/>
@@ -15,19 +17,10 @@
 </head>
 <body>
 
-<h1>Work Piece Carriers</h1>
+<div id="nav-placeholder">
+</div>
 
-    <div class="container">
-        <form>
-            <button type="submit" formaction="./welcome">Go to Home Page</button>
-        </form>
-        <form>
-            <button type="submit" formaction="./workpiece">Submit a Work Piece Carrier</button>
-        </form>
-        <form>
-            <button type="submit" formaction="./wpccombos">Manage WPC Combos</button>
-        </form>
-    </div>
+<h1>Work Piece Carriers</h1>
     <br>
 
 <table id="myTable" class="display">
