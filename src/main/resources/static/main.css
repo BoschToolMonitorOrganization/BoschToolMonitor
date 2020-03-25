@@ -6,6 +6,7 @@
 
 body {
     font-family: 'Nunito', sans-serif;
+    padding: 20px;
 }
 
 form {
@@ -50,10 +51,6 @@ select {
 input[type="radio"],
 input[type="checkbox"] {
     margin: 0 4px 8px 0;
-}
-
-table {
-    padding: 10px;
 }
 
 select {
