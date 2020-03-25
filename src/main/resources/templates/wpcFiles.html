@@ -12,13 +12,6 @@
 
         });
     </script>
-<!--    <script>
-        $("#downloadButton").click(function() {
-            download("th:href="@{|/download/wpcFile(productionLine=${wpcFile.productionLine}, valueStream=${wpcFile.valueStream}, productType=${wpcFile.productType},
-                        author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType},
-                        fileName=${wpcFile.fileName})|}"", "${wpcFile.fileName}", "text/plain");
-        });
-    </script>-->
     <meta charset="UTF-8">
     <title>WPC Files</title>
 </head>
@@ -42,7 +35,6 @@
             <th>Revision Reason</th>
             <th>File Type</th>
             <th>File Name</th>
-            <th>View File</th>
             <th>File Data</th>
         </tr>
         </thead>
@@ -57,29 +49,10 @@
                 <td style="text-align:center" th:text="${wpcFile.revisionReason}"/>
                 <td style="text-align:center" th:text="${wpcFile.fileType}"/>
                 <td style="text-align:center" th:text="${wpcFile.fileName}"/>
-
                 <td style="text-align:center">
-                    <a th:href="@{/wpcFilesForWPC(valueStream=${wpcFile.valueStream}, productionLine=${wpcFile.productionLine}, productType=${wpcFile.productType})}"><button type="button">View</button></a>
-                </td>
-
-                <td style="text-align:center">
-<!--                    <a>
-                        <button th:onclick="download(@{/download/wpcFile(valueStream=${wpcFile.valueStream}, productionLine=${wpcFile.productionLine}, productType=${wpcFile.productType},
-                        author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType},
-                        fileName=${wpcFile.fileName})})" type="button">Download</button>
-                    </a>-->
-
-<!--                    <a id="downloadButton"><button type="button">Download</button></a>
-
-th:href="@{|/download/wpcFile(productionLine=${wpcFile.productionLine}, valueStream=${wpcFile.valueStream}, productType=${wpcFile.productType},
-                        author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType},
-                        fileName=${wpcFile.fileName})|}"-->
                     <a th:href="@{/download/wpcFile(productionLine=${wpcFile.productionLine}, valueStream=${wpcFile.valueStream}, productType=${wpcFile.productType},
                         author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType},
-                        fileName=${wpcFile.fileName})}"
-                      th:download="@{/download/wpcFile(productionLine=${wpcFile.productionLine}, valueStream=${wpcFile.valueStream}, productType=${wpcFile.productType},
-                        author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType},
-                        fileName=${wpcFile.fileName})}" type="button">Download </a>
+                        fileName=${wpcFile.fileName})}" th:download="@{${wpcFile.fileName}}"><button type="button">Download</button></a>
                 </td>
 
             </tr>
