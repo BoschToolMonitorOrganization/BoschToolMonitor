@@ -15,6 +15,12 @@ public class RepairCode {
     }
 
     public static void deleteFromDB(String valueStream, String productionLine, String repairCategory, String repairDetail, JdbcTemplate jdbcTemplate) {
+        jdbcTemplate.execute(String.format("Delete From OpenRepairTicket where " +
+                        "valueStream=\"%s\"" +
+                        "and productionLine=\"%s\"" +
+                        "and repairCategory=\"%s\"" +
+                        "and repairDetail=\"%s\";",
+                valueStream, productionLine, repairCategory, repairDetail));
         jdbcTemplate.execute(String.format("Delete From RepairCodes where " +
                         "valueStream=\"%s\"" +
                         "and productionLine=\"%s\"" +
