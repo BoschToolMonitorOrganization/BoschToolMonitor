@@ -67,7 +67,8 @@
         <td style="text-align:center" th:text="${repairCode.repairCategory}"></td>
         <td style="text-align:center" th:text="${repairCode.repairDetail}"></td>
         <td style="text-align:center">
-            <a th:href="@{/delete_repair_code(valueStream=${repairCode.valueStream}, productionLine=${repairCode.productionLine}, repairCategory=${repairCode.repairCategory}, repairDetail=${repairCode.repairDetail})}">
+            <a th:href="@{/delete_repair_code(valueStream=${repairCode.valueStream}, productionLine=${repairCode.productionLine}, repairCategory=${repairCode.repairCategory}, repairDetail=${repairCode.repairDetail})}"
+               onclick="return confirm('Are you sure you want to delete this item? All associated repair tickets will be deleted.');">
                 <button type="button">Delete</button>
             </a>
         </td>

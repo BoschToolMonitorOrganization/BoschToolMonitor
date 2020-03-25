@@ -60,7 +60,9 @@
         <td style="text-align:center" th:text="${combo.productionLine}"></td>
         <td style="text-align:center" th:text="${combo.productType}"></td>
         <td style="text-align:center">
-            <a th:href="@{/wpccombo/delete(valueStream=${combo.valueStream}, productionLine=${combo.productionLine}, productType=${combo.productType})}"><button type="button">Delete</button></a>
+            <a th:href="@{/wpccombo/delete(valueStream=${combo.valueStream}, productionLine=${combo.productionLine}, productType=${combo.productType})}"
+               onclick="return confirm('Are you sure you want to delete this item? All associated WPCs and WPC Files will be deleted.');">
+                <button type="button">Delete</button></a>
         </td>
     </tr>
     </tbody>
