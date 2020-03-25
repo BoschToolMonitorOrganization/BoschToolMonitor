@@ -1,89 +1,3 @@
-/* Style inputs, select elements and text areas */
-body {
-    background-image: url("./img/lightbluebg.jpg");
-    margin-top: 75px;
-}
-
-h1 {
-    text-align: center;
-    text-decoration: none;
-    font-family: 'Cambria', sans-serif;
-}
-
-h2 {
-    text-align: center;
-    text-decoration: none;
-    font-family: 'Cambria', sans-serif;
-}
-
-.container {
-    background-color: whitesmoke;
-    margin-left: 350px;
-    margin-right: 350px;
-    border-style: ridge;
-}
-
-select[type=text]{
-    display: inline;
-    width: 20%;
-    border: 2px solid #ccc;
-    border-radius: 6px;
-}
-
-/* Extra margin to align inputs */
-#productionLine {
-    margin-right: 36px;
-}
-#productType {
-    margin-right: 6px;
-}
-input[type=number] {
-    margin-right: 7px;
-    width: 19%;
-}
-
-/* Styles the submit and cancel buttons */
-input[type=submit] {
-    font-weight: bold;
-    background-color: lightgray;
-    color: black;
-    padding: 12px 20px;
-    border: solid;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-    margin-top: 5px;
-    margin-bottom: 20px;
-}
-
-#cancel {
-    font-weight: bold;
-    background-color: lightgray;
-    color: black;
-    padding: 12px 20px;
-    border: solid;
-    border-radius: 4px;
-    cursor: pointer;
-    float: right;
-    margin-top: 5px;
-    margin-bottom: 20px;
-}
-
-/* Actions when hovered over submit/cancel buttons */
-input[type=submit]:hover {
-    background-color: forestgreen;
-    border-color: black;
-    transition-duration: 0.1s;
-    color: white;
-}
-
-#cancel:hover {
-    background-color: crimson;
-    border-color: black;
-    transition-duration: 0.1s;
-    color: white;
-}
-
 *, *:before, *:after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -92,7 +6,7 @@ input[type=submit]:hover {
 
 body {
     font-family: 'Nunito', sans-serif;
-    color: #384047;
+    padding: 20px;
 }
 
 form {

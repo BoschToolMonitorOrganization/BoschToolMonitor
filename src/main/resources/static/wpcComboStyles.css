@@ -11,6 +11,24 @@ body {
     text-align: center;
 }
 
+label{
+    display:inline-block;
+    width:200px;
+    margin-right:30px;
+    text-align:right;
+}
+
+
+input{
+
+}
+
+fieldset{
+    border:none;
+    width:500px;
+    margin:0px auto;
+}
+
 h1 {
     text-align: center;
     text-decoration: none;

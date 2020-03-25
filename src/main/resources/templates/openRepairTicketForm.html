@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" href="fileFormStyles.css"/>
 <head>
     <meta charset="UTF-8">
     <title>Open Repair Ticket Form</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css"/>
     <script type="text/javascript">
         function sendAjaxRequestValueStream() {
             var valueStream = $("#valueStream").val();
@@ -50,10 +50,10 @@
 <div id="nav-placeholder">
 </div>
 
-    <h1>Open Repair Ticket Form</h1>
+<h1>Open Repair Ticket Form</h1>
 
-    <label th:if="${error != null}" th:text="${error}"/>
-    <form action="#" th:action="@{/@@@@@}" th:object="${@@@@}" method="post" enctype="multipart/form-data">
+<label th:if="${error != null}" th:text="${error}"/>
+<form action="#" th:action="@{/@@@@@}" th:object="${@@@@}" method="post" enctype="multipart/form-data">
 
     <div class="container">
         <h2>Value Stream:
@@ -100,13 +100,10 @@
 
         <h2>Time Stamp Opened: <input type="text" name="timeStampOpened" th:field="*{timeStampOpened}"/></h2>
 
-        <input type="submit" value="Submit"/>
-    </form>
-
-        <form>
-            <button type="submit" id="cancel" formaction="./welcome">Cancel</button>
-        </form>
-
+        <button type="submit" value="Submit">Submit</button>
     </div>
+
+</form>
+
 </body>
 </html>

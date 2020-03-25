@@ -30,7 +30,7 @@
     font-weight: bold;
     font-family: arial;
     font-style: normal;
-    font-size: 12px;
+    font-size: 14px;
     color: #E7E5E5;
     text-decoration: none;
     display: block;
@@ -109,7 +109,7 @@
 #menu-bar ul a {
     padding:10px 0px 10px 15px;
     color:#424242 !important;
-    font-size:12px;
+    font-size:14px;
     font-style:normal;
     font-family:arial;
     font-weight: normal;

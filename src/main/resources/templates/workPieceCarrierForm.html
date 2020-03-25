@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" href="formStyles.css?v=1.10"/>
 <head>
     <meta charset="UTF-8">
     <title>Work Piece Carrier Form</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css"/>
     <script type="text/javascript">
 
         function sendAjaxRequestValueStream() {
@@ -81,15 +81,11 @@
         <h2>WPC Number: <input type="number" name="points" th:field="*{workPieceCarrierNumber}" step="1">
         </h2>
 
-    <input type="submit" value="Submit"/>
+        <button type="submit" value="Submit">Submit</button>
+    </div>
 
 </form>
 
-    <form>
-        <button type="submit" id="cancel" formaction="./welcome">Cancel</button>
-    </form>
-
-    </div>
 
 </body>
 </html>

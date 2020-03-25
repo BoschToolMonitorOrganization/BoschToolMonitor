@@ -4,7 +4,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
     <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/wpcComboStyles.css"/>
+    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css"/>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#myTable').dataTable();
@@ -28,19 +28,20 @@
 <form action="#" th:action="@{/createRepairCode}" th:object="${repairCode}" method="post">
     <div class="container">
         <h2>Create a WPC Combo</h2>
-        <label>ValueStream: <input type="text" th:field="*{valueStream}" step="1">
+        <label>ValueStream: <input placeholder="Value Stream" type="text" th:field="*{valueStream}">
         </label>
         <br>
-        <label>Production Line: <input type="text" th:field="*{productionLine}">
+        <label>Production Line: <input placeholder="Production Line" type="text" th:field="*{productionLine}">
         </label>
         <br>
-        <label>Repair Category <input type="text" th:field="*{repairCategory}">
+        <label>Repair Category: <input placeholder="Repair Category" type="text" th:field="*{repairCategory}">
         </label>
         <br>
-        <label>Repair Detail <input type="text" th:field="*{repairDetail}">
+        <label>Repair Detail:
+        <input placeholder="Repair Detail" type="text" th:field="*{repairDetail}">
         </label>
         <br>
-        <input type="submit" value="Submit"/>
+        <button type="submit" value="Submit">Submit</button>
     </div>
 
 </form>
