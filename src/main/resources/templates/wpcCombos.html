@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
-<link rel="stylesheet" type="text/css" href="/BoschToolMonitor/wpcComboStyles.css"/>
 <head runat="mysql">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
     <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css"/>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#myTable').dataTable();
@@ -26,7 +26,7 @@
 
 <form action="#" th:action="@{/wpccombo}" th:object="${combo}" method="post">
     <div class="container">
-        <h2>Create a WPC Combo</h2>
+        <h2>Create a Product Type</h2>
         <label>ValueStream: <input type="text" th:field="*{valueStream}" step="1">
         </label>
         <br>
@@ -36,7 +36,7 @@
         <label>Product Type: <input type="text" th:field="*{productType}">
         </label>
         <br>
-        <input type="submit" value="Submit"/>
+        <button type="submit" value="Submit">Submit</button>
     </div>
 
 </form>
