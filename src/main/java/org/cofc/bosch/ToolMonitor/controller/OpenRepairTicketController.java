@@ -60,18 +60,18 @@ public class OpenRepairTicketController {
 
     @GetMapping("/openedRepairTickets")
     public String openedRepairTickets(Model model) {
-        List<OpenRepairTicket> repairTickets = jdbcTemplate.query("Select * From OpenRepairTicket", new OpenRepairTicketMapper());
+        List<OpenRepairTicket> repairTickets = jdbcTemplate.query("Select * From RepairTickets", new OpenRepairTicketMapper());
         model.addAttribute("repairTickets", repairTickets);
 
-        return "openedRepairTickets";
+        return "openRepairTickets";
     }
 
     @GetMapping("/delete_repairTicket")
     public String deleteRepairTicket(@RequestParam String valueStream, @RequestParam String productionLine, @RequestParam String productType,
                                      @RequestParam int workPieceCarrierNumber, @RequestParam String repairCategory, @RequestParam String repairDetail,
-                                     @RequestParam String extraInfo, @RequestParam String userEntry, @RequestParam String timeStampOpened, Model model) {
+                                     @RequestParam String userEntry, @RequestParam String timeStampOpened, Model model) {
         OpenRepairTicket.deleteOpenRepairTicket(jdbcTemplate, valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, extraInfo, userEntry, timeStampOpened);
-        model.addAttribute("repairTickets", jdbcTemplate.query("Select * From OpenRepairTicket", new OpenRepairTicketMapper()));
+        model.addAttribute("repairTickets", jdbcTemplate.query("Select * From RepairTickets", new OpenRepairTicketMapper()));
 
         return "repairTickets";
     }

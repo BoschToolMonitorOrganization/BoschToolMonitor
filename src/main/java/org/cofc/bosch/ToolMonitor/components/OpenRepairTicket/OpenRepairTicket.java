@@ -93,7 +93,7 @@ public class OpenRepairTicket {
 
     public void enterOpenRepairTicketIntoDatabase(JdbcTemplate jdbcTemplate) {
         jdbcTemplate.execute(
-                "INSERT INTO OpenRepairTicket (valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, extraInfo, userEntry, timeStampOpened) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                "INSERT INTO RepairTickets (valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, extraInfo, userEntry, timeStampOpened) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 new PreparedStatementCallback<Boolean>() {
                     @Override
                     public Boolean doInPreparedStatement(PreparedStatement statement)
@@ -118,7 +118,7 @@ public class OpenRepairTicket {
     public static void deleteOpenRepairTicket(JdbcTemplate jdbcTemplate, String valueStream, String productionLine, String productType,
                                               int workPieceCarrierNumber, String repairCategory, String repairDetail, String extraInfo,
                                               String userEntry, String timeStampOpened) {
-        jdbcTemplate.execute("DELETE FROM OpenRepairTicket WHERE valueStream=\"" + valueStream + "\" and productionLine=\"" + productionLine +
+        jdbcTemplate.execute("DELETE FROM RepairTickets WHERE valueStream=\"" + valueStream + "\" and productionLine=\"" + productionLine +
                             "\" and productType=\"" + productType + "\" and workPieceCarrierNumber=\"" + workPieceCarrierNumber +
                             "\" and repairCategory=\"" + repairCategory + "\" and repairDetail=\"" + repairDetail +
                             "\" and extraInfo=\"" + extraInfo + "\" and userEntry=\"" + userEntry +
