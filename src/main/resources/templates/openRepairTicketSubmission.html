@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>You successfully submitted your open repair ticket.</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css"/>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
+        });
+    </script>
+
+</head>
+
+<div id="nav-placeholder">
+</div>
+
+<body>
+<div class="container">
+    <h1>Congrats! You submitted an open repair ticket!</h1>
+    <h2 th:text="'Value Stream: ' + ${repairTicket.valueStream}"/>
+    <h2 th:text="'Production Line: ' + ${repairTicket.productionLine}"/>
+    <h2 th:text="'Product Type: ' + ${repairTicket.productType}"/>
+    <h2 th:text="'WPC#: ' + ${repairTicket.workPieceCarrierNumber}"/>
+    <h2 th:text="'Repair Category: ' + ${repairTicket.repairCategory}"/>
+    <h2 th:text="'Repair Detail: ' + ${repairTicket.repairDetail}"/>
+    <h2 th:text="'Extra Info: ' + ${repairTicket.extraInfo}"/>
+    <h2 th:text="'User Entry: ' + ${repairTicket.userEntry}"/>
+    <h2 th:text="'Time Stamp Opened: ' + ${repairTicket.timeStampOpened}"/>
+</div>
+<br>
+
+</body>
+
+</html>

@@ -48,22 +48,22 @@
     </thead>
 
     <tbody>
-        <tr th:each="openTicket : ${openTickets}">
-            <td style="text-align:center" th:text="${openTicket.valueStream}"></td>
-            <td style="text-align:center" th:text="${openTicket.productionLine}"></td>
-            <td style="text-align:center" th:text="${openTicket.productType}"></td>
-            <td style="text-align:center" th:text="${openTicket.workPieceCarrierNumber}"></td>
-            <td style="text-align:center" th:text="${openTicket.repairCategory}"></td>
-            <td style="text-align:center" th:text="${openTicket.repairDetail}"></td>
-            <td style="text-align:center" th:text="${openTicket.extraInfo}"></td>
-            <td style="text-align:center" th:text="${openTicket.userEntry}"></td>
-            <td style="text-align:center" th:text="${openTicket.timeStampOpened}"></td>
+        <tr th:each="repairTicket : ${repairTickets}">
+            <td style="text-align:center" th:text="${repairTicket.valueStream}"></td>
+            <td style="text-align:center" th:text="${repairTicket.productionLine}"></td>
+            <td style="text-align:center" th:text="${repairTicket.productType}"></td>
+            <td style="text-align:center" th:text="${repairTicket.workPieceCarrierNumber}"></td>
+            <td style="text-align:center" th:text="${repairTicket.repairCategory}"></td>
+            <td style="text-align:center" th:text="${repairTicket.repairDetail}"></td>
+            <td style="text-align:center" th:text="${repairTicket.extraInfo}"></td>
+            <td style="text-align:center" th:text="${repairTicket.userEntry}"></td>
+            <td style="text-align:center" th:text="${repairTicket.timeStampOpened}"></td>
             <td style="text-align:center">
-                <a th:href="@{/delete_BACKEND@@@(valueStream=${openTicket.valueStream},
-                productionLine=${openTicket.productionLine}, productType=${openTicket.productType},
-                workPieceCarrierNumber=${openTicket.workPieceCarrierNumber}, repairCategory=${openTicket.repairCategory},
-                repairDetail=${openTicket.repairDetail}, extraInfo=${openTicket.extraInfo}, userEntry=${openTicket.userEntry},
-                timeStampOpened=${openTicket.timeStampOpened})}"><button type="button">Delete</button></a>
+                <a th:href="@{/delete_repairTicket(valueStream=${repairTicket.valueStream},
+                productionLine=${repairTicket.productionLine}, productType=${repairTicket.productType},
+                workPieceCarrierNumber=${repairTicket.workPieceCarrierNumber}, repairCategory=${repairTicket.repairCategory},
+                repairDetail=${repairTicket.repairDetail}, extraInfo=${repairTicket.extraInfo}, userEntry=${repairTicket.userEntry},
+                timeStampOpened=${repairTicket.timeStampOpened})}"><button type="button">Delete</button></a>
             </td>
         </tr>
     </tbody>
