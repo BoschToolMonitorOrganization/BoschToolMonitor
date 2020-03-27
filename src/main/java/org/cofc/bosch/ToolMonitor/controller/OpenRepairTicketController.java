@@ -70,7 +70,7 @@ public class OpenRepairTicketController {
     public String deleteRepairTicket(@RequestParam String valueStream, @RequestParam String productionLine, @RequestParam String productType,
                                      @RequestParam int workPieceCarrierNumber, @RequestParam String repairCategory, @RequestParam String repairDetail,
                                      @RequestParam String userEntry, @RequestParam String timeStampOpened, Model model) {
-        OpenRepairTicket.deleteOpenRepairTicket(jdbcTemplate, valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, extraInfo, userEntry, timeStampOpened);
+        OpenRepairTicket.deleteOpenRepairTicket(jdbcTemplate, valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened);
         model.addAttribute("repairTickets", jdbcTemplate.query("Select * From RepairTickets", new OpenRepairTicketMapper()));
 
         return "repairTickets";
