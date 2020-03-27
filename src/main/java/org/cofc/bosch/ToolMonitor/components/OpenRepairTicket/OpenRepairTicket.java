@@ -116,13 +116,13 @@ public class OpenRepairTicket {
     }
 
     public static void deleteOpenRepairTicket(JdbcTemplate jdbcTemplate, String valueStream, String productionLine, String productType,
-                                              int workPieceCarrierNumber, String repairCategory, String repairDetail, String extraInfo,
+                                              int workPieceCarrierNumber, String repairCategory, String repairDetail,
                                               String userEntry, String timeStampOpened) {
         jdbcTemplate.execute("DELETE FROM RepairTickets WHERE valueStream=\"" + valueStream + "\" and productionLine=\"" + productionLine +
                             "\" and productType=\"" + productType + "\" and workPieceCarrierNumber=\"" + workPieceCarrierNumber +
                             "\" and repairCategory=\"" + repairCategory + "\" and repairDetail=\"" + repairDetail +
-                            "\" and extraInfo=\"" + extraInfo + "\" and userEntry=\"" + userEntry +
-                            "\" and timeStampOpened=\"" + timeStampOpened + ";");
+                            "\" and userEntry=\"" + userEntry +
+                            "\" and timeStampOpened=\"" + timeStampOpened + "\";");
     }
 
 
