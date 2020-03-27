@@ -36,6 +36,7 @@
             <th>File Type</th>
             <th>File Name</th>
             <th>File Data</th>
+            <th>Delete</th>
         </tr>
         </thead>
 
@@ -54,7 +55,10 @@
                         author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType},
                         fileName=${wpcFile.fileName})}" th:download="@{${wpcFile.fileName}}"><button type="button">Download</button></a>
                 </td>
-
+                <td style="text-align:center">
+                    <a th:href="@{/delete_WPCFileForWPC(valueStream=${wpcFile.valueStream}, productionLine=${wpcFile.productionLine}, productType=${wpcFile.productType},
+                    author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType}, fileName=${wpcFile.fileName})}"><button type="button">Delete</button></a>
+                </td>
             </tr>
         </tbody>
     </table>
