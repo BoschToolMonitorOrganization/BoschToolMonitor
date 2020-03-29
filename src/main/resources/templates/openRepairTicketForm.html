@@ -23,9 +23,11 @@
 
             var minutes = ((today.getMinutes()) < 10 ? '0' : '') + (today.getMinutes())
 
-            var seconds = ((today.getSeconds()) < 10 ? '0' : '') + (today.getSeconds())
+            var amorpm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours==0 ? 12 : hours;
 
-            var dateTime = year+'-'+month+'-'+date+' '+hours+':'+minutes+':'+seconds;
+            var dateTime = year+'-'+month+'-'+date+' '+hours+':'+minutes+' '+amorpm;
 
             document.getElementById("timeStamp").value = dateTime;
         }
@@ -88,7 +90,6 @@
         <h2>User Entry: <input type="text" name="userEntry" th:field="*{userEntry}"/></h2>
 
         <h2>Time Stamp Opened: <input id="timeStamp" type="text" value="Current Date And Time" name="timeStampOpened" th:field="*{timeStampOpened}"/></h2>
-        <button type="button" onclick="getTimeStamp()">Get Current Timestamp</button>
 
         <button type="submit" value="Submit">Submit</button>
     </div>

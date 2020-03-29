@@ -45,7 +45,7 @@ Create Table RepairTickets (
     repairDetail VARCHAR(100),
     extraInfo VARCHAR(100),
     userEntry VARCHAR(50),
-    timeStampOpened TIMESTAMP,
+    timeStampOpened VARCHAR(50)
 
     PRIMARY KEY (valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened),
     FOREIGN KEY (valueStream, productionLine, repairCategory, repairDetail) REFERENCES RepairCodes (valueStream, productionLine, repairCategory, repairDetail)
