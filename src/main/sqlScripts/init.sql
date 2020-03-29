@@ -1,3 +1,10 @@
+Create table WPCCombos (
+    valueStream VARCHAR(50),
+    productionLine VARCHAR(50),
+    productType VARCHAR(50),
+    PRIMARY KEY (valueStream , productionLine , productType)
+);
+
 Create table WPCs (
     valueStream VARCHAR(50),
     productionLine VARCHAR(50),
@@ -5,13 +12,6 @@ Create table WPCs (
     workPieceCarrierNumber int,
     PRIMARY KEY (valueStream , productionLine , productType, workPieceCarrierNumber),
     FOREIGN KEY (valueStream, productionLine, productType) REFERENCES WPCCombos(valueStream, productionLine, productType)
-);
-
-Create table WPCCombos (
-    valueStream VARCHAR(50),
-    productionLine VARCHAR(50),
-    productType VARCHAR(50),
-    PRIMARY KEY (valueStream , productionLine , productType)
 );
 
 create table wpcFiles (
@@ -45,13 +45,11 @@ Create Table RepairTickets (
     repairDetail VARCHAR(100),
     extraInfo VARCHAR(100),
     userEntry VARCHAR(50),
-    timeStampOpened VARCHAR(50)
+    timeStampOpened VARCHAR(50),
 
     PRIMARY KEY (valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened),
     FOREIGN KEY (valueStream, productionLine, repairCategory, repairDetail) REFERENCES RepairCodes (valueStream, productionLine, repairCategory, repairDetail)
 );
-
-
 
 INSERT INTO RepairCodes(valueStream, productionLine, repairCategory, repairDetail) VALUES
  ('CRIN','Test Line 1','WPC Backflow Failure','Pneum Cyl NOK')
@@ -98,9 +96,8 @@ INSERT INTO RepairCodes(valueStream, productionLine, repairCategory, repairDetai
 ,('CRIN','Magnet Line 2','WPC part placement','Crash at Laser')
 ,('CRIN','Magnet Line 2','WPC part placement','Crash at Resistnace');
 
-INSERT INTO WPCCombos (valueStream, productionLine, productType)
-VALUES
-    ('CRIN', 'Assembly Line 1', 'CRIN3'),
+INSERT INTO WPCCombos (valueStream, productionLine, productType) VALUES
+  ('CRIN', 'Assembly Line 1', 'CRIN3'),
 	('CRIN', 'Assembly Line 1', 'CRIN1'),
 	('CRIN', 'Assembly Line 1', 'CAT'),
 	('CRIN', 'Assembly Line 1', 'IVECO'),

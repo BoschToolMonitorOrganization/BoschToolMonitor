@@ -2,7 +2,6 @@ package org.cofc.bosch.ToolMonitor.controller;
 
 import org.cofc.bosch.ToolMonitor.components.OpenRepairTicket.OpenRepairTicket;
 import org.cofc.bosch.ToolMonitor.components.OpenRepairTicket.OpenRepairTicketMapper;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,11 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
-
-import static org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities.initWPCCombosInModel;
 
 @Controller
 public class OpenRepairTicketController {
@@ -27,8 +22,35 @@ public class OpenRepairTicketController {
 
     @GetMapping("/createOpenRepairTicket")
     public String openRepairTicketForm(Model model) {
-        initWPCCombosInModel(model, jdbcTemplate);
+        List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
+        List<String> prodLines = null;
+        List<String> prodTypes = null;
+        List<String> repairDets = null;
+        List<String> repairCats = null;
+        if (!valueStreams.isEmpty()) {
+            prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos where valueStream=\""
+                    + valueStreams.get(0) + "\";", String.class);
+            if (!prodLines.isEmpty()) {
+                prodTypes = jdbcTemplate.queryForList("Select Distinct productType From WPCCombos where valueStream=\""
+                        + valueStreams.get(0) + "\" and productionLine=\"" + prodLines.get(0) + "\";", String.class);
+            }
+            if (!prodLines.isEmpty()) {
+                repairCats = jdbcTemplate.queryForList("Select Distinct repairCategory From RepairCodes where valueStream=\""
+                        + valueStreams.get(0) + "\" and productionLine=\"" + prodLines.get(0) + "\";", String.class);
+                if (!repairCats.isEmpty()) {
+                    repairDets = jdbcTemplate.queryForList("Select Distinct repairDetail From RepairCodes where valueStream=\""
+                            + valueStreams.get(0) + "\" and productionLine=\"" + prodLines.get(0) + "\" and " +
+                            "repairCategory=\"" + repairCats.get(0) + "\";", String.class);
+                }
+            }
+        }
+        model.addAttribute("valueStreams", valueStreams);
+        model.addAttribute("prodLines", prodLines);
+        model.addAttribute("prodTypes", prodTypes);
+        model.addAttribute("repairCats", repairCats);
+        model.addAttribute("repairDets", repairDets);
         model.addAttribute("repairTicket", new OpenRepairTicket());
+
         return "openRepairTicketForm";
     }
 
@@ -39,9 +61,12 @@ public class OpenRepairTicketController {
             repairTicket.enterOpenRepairTicketIntoDatabase(jdbcTemplate);
         } catch (DataAccessException e) {
             model.addAttribute("error", e.getMessage());
+
             List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
             List<String> prodLines = null;
             List<String> prodTypes = null;
+            List<String> repairDets = null;
+            List<String> repairCats = null;
             if (!valueStreams.isEmpty()) {
                 prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos where valueStream=\""
                         + repairTicket.getValueStream() + "\";", String.class);
@@ -49,10 +74,22 @@ public class OpenRepairTicketController {
                     prodTypes = jdbcTemplate.queryForList("Select Distinct productType From WPCCombos where valueStream=\""
                             + repairTicket.getValueStream() + "\" and productionLine=\"" + repairTicket.getProductionLine() + "\";", String.class);
                 }
+                if (!prodLines.isEmpty()) {
+                    repairCats = jdbcTemplate.queryForList("Select Distinct repairCategory From RepairCodes where valueStream=\""
+                            + repairTicket.getValueStream() + "\" and productionLine=\"" + repairTicket.getProductionLine() + "\";", String.class);
+                    if (!repairCats.isEmpty()) {
+                        repairDets = jdbcTemplate.queryForList("Select Distinct repairDetail From RepairCodes where valueStream=\""
+                                + repairTicket.getValueStream() + "\" and productionLine=\"" + repairTicket.getProductionLine() + "\" and " +
+                                "repairCategory=\"" + repairTicket.getRepairCategory() + "\";", String.class);
+                    }
+                }
             }
             model.addAttribute("valueStreams", valueStreams);
             model.addAttribute("prodLines", prodLines);
             model.addAttribute("prodTypes", prodTypes);
+            model.addAttribute("repairCats", repairCats);
+            model.addAttribute("repairDets", repairDets);
+
             return "openRepairTicketForm";
         }
         return "openRepairTicketSubmission";
