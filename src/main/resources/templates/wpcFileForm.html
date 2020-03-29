@@ -6,43 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css"/>
-    <script type="text/javascript">
-        function sendAjaxRequestValueStream() {
-            var valueStream = $("#valueStream").val();
-            $.get("/BoschToolMonitor/productionLines?valueStream=" + valueStream, function (data) {
-                $("#productionLine").empty();
-                $("#productType").empty();
-                data.forEach(function (item, i) {
-                    var option = "<option>" + item + "</option>";
-                    $("#productionLine").append(option);
-                });
-            });
-        };
-
-        function sendAjaxRequestProductionLine() {
-            var productionLine = $("#productionLine").val();
-            var valueStream = $("#valueStream").val();
-            $.get("/BoschToolMonitor/productTypes?valueStream=" + valueStream + '&productionLine=' + productionLine, function (data) {
-                $("#productType").empty();
-                data.forEach(function (item, i) {
-                    var option = "<option>" + item + "</option>";
-                    $("#productType").append(option);
-                });
-            });
-        };
-
-        $(document).ready(function () {
-            $("#valueStream").change(function () {
-                sendAjaxRequestValueStream();
-                sendAjaxRequestProductionLine();
-            });
-            $("#productionLine").change(function () {
-                sendAjaxRequestProductionLine();
-            });
-            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
-
-        });
-     </script>
+    <script src="dependencies.js"></script>
 
 </head>
 
