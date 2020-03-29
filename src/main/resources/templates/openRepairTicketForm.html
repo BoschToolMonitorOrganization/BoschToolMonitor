@@ -7,6 +7,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css?v=1.1"/>
     <script src="dependencies.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#valueStream").change(function () {
+                setValueStream();
+                updateProductionLines();
+                updateProductTypes();
+                updateRepairCategories();
+                updateRepairDetails()
+            });
+            $("#productionLine").change(function () {
+                setProductionLine();
+                updateProductTypes();
+                updateRepairCategories();
+                updateRepairDetails();
+            });
+            $("#repairCategory").change(function () {
+                setRepairCategory();
+                updateRepairDetails();
+            });
+            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
+        });
+    </script>
 
     <!-- JS for getting the current date and time = timeStampOpened -->
     <script>
@@ -25,15 +47,13 @@
 
             var amorpm = hours >= 12 ? 'PM' : 'AM';
             hours = hours % 12;
-            hours = hours==0 ? 12 : hours;
+            hours = hours == 0 ? 12 : hours;
 
-            var dateTime = year+'-'+month+'-'+date+' '+hours+':'+minutes+' '+amorpm;
+            var dateTime = year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ' ' + amorpm;
 
             document.getElementById("timeStamp").value = dateTime;
         }
     </script>
-
-
 </head>
 
 <body onload="getTimeStamp()">
@@ -44,7 +64,8 @@
 <h1>Open Repair Ticket Form</h1>
 
 <label th:if="${error != null}" th:text="${error}"/>
-<form action="#" th:action="@{/createOpenRepairTicket}" th:object="${repairTicket}" method="post" enctype="multipart/form-data">
+<form action="#" th:action="@{/createOpenRepairTicket}" th:object="${repairTicket}" method="post"
+      enctype="multipart/form-data">
 
     <div class="container">
         <h2>Value Stream:
@@ -56,15 +77,15 @@
         </h2>
 
         <h2>Production Line:
-            <select type="text" id="productionLine" th:if="${prodLines} != null" th:field="*{productionLine}">
-                <option th:each="prodLine : ${prodLines}"
+            <select type="text" id="productionLine" th:field="*{productionLine}">
+                <option th:if="${prodLines} != null" th:each="prodLine : ${prodLines}"
                         th:value="${prodLine}" th:text="${prodLine}"/>
             </select>
         </h2>
 
         <h2>Product Type:
-            <select type="text" id="productType" th:if="${prodTypes} != null" th:field="*{productType}">
-                <option th:each="prodType : ${prodTypes}"
+            <select type="text" id="productType" th:field="*{productType}">
+                <option th:if="${prodTypes} != null" th:each="prodType : ${prodTypes}"
                         th:value="${prodType}" th:text="${prodType}"/>
             </select>
         </h2>
@@ -72,15 +93,15 @@
         <h2>WPC Number: <input type="number" name="points" th:field="*{workPieceCarrierNumber}" step="1"></h2>
 
         <h2>Repair Category:
-            <select type="text" id="repairCategory" th:if="${repairCats} != null" th:field="*{repairCategory}">
-                <option th:each="repairCat : ${repairCats}"
+            <select type="text" id="repairCategory" th:field="*{repairCategory}">
+                <option th:if="${repairCats} != null" th:each="repairCat : ${repairCats}"
                         th:value="${repairCat}" th:text="${repairCat}"/>
             </select>
         </h2>
 
         <h2>Repair Detail:
-            <select type="text" id="repairDetail" th:if="${repairDets} != null" th:field="*{repairDetail}">
-                <option th:each="repairDet : ${repairDets}"
+            <select type="text" id="repairDetail" th:field="*{repairDetail}">
+                <option th:if="${repairDets} != null" th:each="repairDet : ${repairDets}"
                         th:value="${repairDet}" th:text="${repairDet}"/>
             </select>
         </h2>
@@ -89,7 +110,10 @@
 
         <h2>User Entry: <input type="text" name="userEntry" th:field="*{userEntry}"/></h2>
 
-        <h2>Time Stamp Opened: <input id="timeStamp" type="text" value="Current Date And Time" name="timeStampOpened" th:field="*{timeStampOpened}"/></h2>
+        <h2>Time Stamp Opened:
+            <input id="timeStamp" type="text" value="Current Date And Time" name="timeStampOpened"
+                   th:field="*{timeStampOpened}"/>
+        </h2>
 
         <button type="submit" value="Submit">Submit</button>
     </div>

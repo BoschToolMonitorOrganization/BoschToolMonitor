@@ -5,10 +5,15 @@
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css"/>
     <script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css"/>
+    <script src="/BoschToolMonitor/dependencies.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $('#myTable').dataTable();
             $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
+            $("#valueStream").change(function () {
+                setValueStream();
+                updateProductionLines();
+            });
         });
     </script>
     <meta charset="UTF-8"/>
@@ -28,17 +33,26 @@
 <form action="#" th:action="@{/createRepairCode}" th:object="${repairCode}" method="post">
     <div class="container">
         <h2>Create a Repair Code</h2>
-        <label>ValueStream: <input placeholder="Value Stream" type="text" th:field="*{valueStream}">
+        <label>Value Stream:
+            <select th:field="*{valueStream}" type="text" name="fileType" id="valueStream">
+                <option th:each="valueStream : ${valueStreams}"
+                        th:value="${valueStream}" th:text="${valueStream}"/>
+                </option>
+            </select>
         </label>
         <br>
-        <label>Production Line: <input placeholder="Production Line" type="text" th:field="*{productionLine}">
+        <label>Production Line:
+            <select type="text" id="productionLine" th:if="${prodLines} != null" th:field="*{productionLine}">
+                <option th:each="prodLine : ${prodLines}"
+                        th:value="${prodLine}" th:text="${prodLine}"/>
+            </select>
         </label>
         <br>
         <label>Repair Category: <input placeholder="Repair Category" type="text" th:field="*{repairCategory}">
         </label>
         <br>
         <label>Repair Detail:
-        <input placeholder="Repair Detail" type="text" th:field="*{repairDetail}">
+            <input placeholder="Repair Detail" type="text" th:field="*{repairDetail}">
         </label>
         <br>
         <button type="submit" value="Submit">Submit</button>

@@ -7,6 +7,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css"/>
     <script src="dependencies.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#valueStream").change(function () {
+                setValueStream();
+                updateProductionLines();
+                updateProductTypes();
+            });
+            $("#productionLine").change(function () {
+                setProductionLine();
+                updateProductTypes();
+            });
+
+            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
+        });
+    </script>
 </head>
 <body>
 

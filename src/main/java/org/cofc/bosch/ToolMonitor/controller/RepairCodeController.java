@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class RepairCodeController {
 
@@ -23,19 +25,40 @@ public class RepairCodeController {
         model.addAttribute("repairCode", new RepairCode());
         model.addAttribute("repairCodes", jdbcTemplate.query("select * from RepairCodes;", new RepairCodeMapper()));
 
+        List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
+        List<String> prodLines = null;
+        if (!valueStreams.isEmpty()) {
+            prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos where valueStream=\""
+                    + valueStreams.get(0) + "\";", String.class);
+        }
+        model.addAttribute("valueStreams", valueStreams);
+        model.addAttribute("prodLines", prodLines);
+
         return "RepairCodes";
     }
 
     @PostMapping("/createRepairCode")
     public String createRepairCode(@ModelAttribute RepairCode repairCode, Model model) {
+        List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
+        List<String> prodLines = null;
         try {
             repairCode.enterIntoDB(jdbcTemplate);
             model.addAttribute("repairCode", new RepairCode());
+            if (!valueStreams.isEmpty()) {
+                prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos where valueStream=\""
+                        + valueStreams.get(0) + "\";", String.class);
+            }
         } catch (DataAccessException e) {
             model.addAttribute("error", e.getMessage());
             model.addAttribute("repairCode", repairCode);
+            if (!valueStreams.isEmpty()) {
+                prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos where valueStream=\""
+                        + repairCode.getValueStream() + "\";", String.class);
+            }
         }
         model.addAttribute("repairCodes", jdbcTemplate.query("select * from RepairCodes;", new RepairCodeMapper()));
+        model.addAttribute("valueStreams", valueStreams);
+        model.addAttribute("prodLines", prodLines);
 
         return "RepairCodes";
     }
