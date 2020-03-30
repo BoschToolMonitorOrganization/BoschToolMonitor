@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css?v=1.1"/>
     <script src="dependencies.js"></script>
+    <script src="timeStamp.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#valueStream").change(function () {
@@ -28,31 +29,6 @@
             });
             $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
         });
-    </script>
-
-    <!-- JS for getting the current date and time = timeStampOpened -->
-    <script>
-        function getTimeStamp() {
-            var today = new Date();
-
-            var year = today.getFullYear();
-
-            var month = ((today.getMonth() + 1) < 10 ? '0' : '') + (today.getMonth() + 1);
-
-            var date = (today.getDate() < 10 ? '0' : '') + today.getDate();
-
-            var hours = ((today.getHours()) < 10 ? '0' : '') + (today.getHours())
-
-            var minutes = ((today.getMinutes()) < 10 ? '0' : '') + (today.getMinutes())
-
-            var amorpm = hours >= 12 ? 'PM' : 'AM';
-            hours = hours % 12;
-            hours = hours == 0 ? 12 : hours;
-
-            var dateTime = year + '-' + month + '-' + date + ' ' + hours + ':' + minutes + ' ' + amorpm;
-
-            document.getElementById("timeStamp").value = dateTime;
-        }
     </script>
 </head>
 

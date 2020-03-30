@@ -1,16 +1,16 @@
-package org.cofc.bosch.ToolMonitor.components.OpenRepairTicket;
+package org.cofc.bosch.ToolMonitor.components.RepairTicket;
 
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OpenRepairTicketMapper implements RowMapper<OpenRepairTicket> {
+public class RepairTicketMapper implements RowMapper<RepairTicket> {
 
     @Override
-    public OpenRepairTicket mapRow(ResultSet rs, int rowNum) throws SQLException {
+    public RepairTicket mapRow(ResultSet rs, int rowNum) throws SQLException {
 
-        OpenRepairTicket openTicket = new OpenRepairTicket();
+        RepairTicket openTicket = new RepairTicket();
 
         openTicket.setValueStream(rs.getString("valueStream"));
         openTicket.setProductionLine(rs.getString("productionLine"));
@@ -21,6 +21,8 @@ public class OpenRepairTicketMapper implements RowMapper<OpenRepairTicket> {
         openTicket.setExtraInfo(rs.getString("extraInfo"));
         openTicket.setUserEntry(rs.getString("userEntry"));
         openTicket.setTimeStampOpened(rs.getString("timeStampOpened"));
+        openTicket.setTimeStampClosed(rs.getString("timeStampClosed"));
+        openTicket.setRepairDetails(rs.getString("repairDetails"));
 
         return openTicket;
     }

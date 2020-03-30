@@ -1,7 +1,7 @@
 package org.cofc.bosch.ToolMonitor.controller;
 
-import org.cofc.bosch.ToolMonitor.components.OpenRepairTicket.OpenRepairTicket;
-import org.cofc.bosch.ToolMonitor.components.OpenRepairTicket.OpenRepairTicketMapper;
+import org.cofc.bosch.ToolMonitor.components.RepairTicket.RepairTicket;
+import org.cofc.bosch.ToolMonitor.components.RepairTicket.RepairTicketMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 @Controller
-public class OpenRepairTicketController {
+public class RepairTicketController {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -49,13 +49,13 @@ public class OpenRepairTicketController {
         model.addAttribute("prodTypes", prodTypes);
         model.addAttribute("repairCats", repairCats);
         model.addAttribute("repairDets", repairDets);
-        model.addAttribute("repairTicket", new OpenRepairTicket());
+        model.addAttribute("repairTicket", new RepairTicket());
 
         return "openRepairTicketForm";
     }
 
     @PostMapping("/createOpenRepairTicket")
-    public String openRepairTicketSubmission(@ModelAttribute OpenRepairTicket repairTicket, Model model) {
+    public String openRepairTicketSubmission(@ModelAttribute RepairTicket repairTicket, Model model) {
         model.addAttribute("repairTicket", repairTicket);
         try {
             repairTicket.enterOpenRepairTicketIntoDatabase(jdbcTemplate);
@@ -95,22 +95,46 @@ public class OpenRepairTicketController {
         return "openRepairTicketSubmission";
     }
 
-    @GetMapping("/openedRepairTickets")
+    @GetMapping("/repairTickets")
     public String openedRepairTickets(Model model) {
-        List<OpenRepairTicket> repairTickets = jdbcTemplate.query("Select * From RepairTickets", new OpenRepairTicketMapper());
+        List<RepairTicket> repairTickets = jdbcTemplate.query("Select * From RepairTickets", new RepairTicketMapper());
         model.addAttribute("repairTickets", repairTickets);
 
-        return "openRepairTickets";
+        return "repairTickets";
     }
 
     @GetMapping("/delete_repairTicket")
     public String deleteRepairTicket(@RequestParam String valueStream, @RequestParam String productionLine, @RequestParam String productType,
                                      @RequestParam int workPieceCarrierNumber, @RequestParam String repairCategory, @RequestParam String repairDetail,
                                      @RequestParam String userEntry, @RequestParam String timeStampOpened, Model model) {
-        OpenRepairTicket.deleteOpenRepairTicket(jdbcTemplate, valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened);
-        model.addAttribute("repairTickets", jdbcTemplate.query("Select * From RepairTickets", new OpenRepairTicketMapper()));
+        RepairTicket.deleteOpenRepairTicket(jdbcTemplate, valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened);
+        model.addAttribute("repairTickets", jdbcTemplate.query("Select * From RepairTickets", new RepairTicketMapper()));
 
         return "repairTickets";
+    }
+
+
+    @GetMapping("/closeRepairTicket")
+    public String closeRepairTicketForm(@RequestParam String valueStream, @RequestParam String productionLine,
+                                        @RequestParam String productType, @RequestParam int workPieceCarrierNumber,
+                                        @RequestParam String repairCategory, @RequestParam String repairDetail,
+                                        @RequestParam String userEntry, @RequestParam String timeStampOpened, Model model) {
+        model.addAttribute("repairTicket", RepairTicket.getRepairTicket(jdbcTemplate, valueStream, productionLine,
+                productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened));
+
+        return "closeRepairTicket";
+    }
+
+    @PostMapping("/closeRepairTicket")
+    public String closeRepairTicket(@ModelAttribute RepairTicket repairTicket, Model model) {
+        model.addAttribute("repairTicket", repairTicket);
+        try {
+            repairTicket.closeSelf(jdbcTemplate);
+            return "repairTicketClosedSubmission";
+        } catch (DataAccessException e) {
+            model.addAttribute("error", e.getMessage());
+            return "closeRepairTicket";
+        }
     }
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {

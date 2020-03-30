@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Close Repair Ticket Form</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css"/>
+    <script src="timeStamp.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
+        });
+    </script>
+</head>
+
+<body onload="getTimeStamp()">
+
+<div id="nav-placeholder">
+</div>
+
+<h1>Close Repair Ticket</h1>
+
+<label th:if="${error != null}" th:text="${error}"/>
+
+<form action="#" th:action="@{/closeRepairTicket}" th:object="${repairTicket}" method="post"
+      enctype="multipart/form-data">
+
+    <div class="container">
+        <h2>Value Stream: <input th:field="*{valueStream}" type="text" id="valueStream" readonly/></h2>
+
+        <h2>Production Line: <input type="text" id="productionLine" th:field="*{productionLine}" readonly/></h2>
+
+        <h2>Product Type: <input type="text" id="productType" th:field="*{productType}" readonly/></h2>
+
+        <h2>WPC Number: <input type="number" name="points" th:field="*{workPieceCarrierNumber}" readonly/></h2>
+
+        <h2>Repair Category: <input type="text" name="repairCategory" th:field="*{repairCategory}" readonly/></h2>
+
+        <h2>Repair Detail: <input type="text" name="repairDetail" th:field="*{repairDetail}" readonly/></h2>
+
+        <h2>Extra Info: <input type="text" name="extraInfo" th:field="*{extraInfo}" readonly/></h2>
+
+        <h2>User Entry: <input type="text" name="userEntry" th:field="*{userEntry}" readonly/></h2>
+
+        <h2>Time Stamp Opened: <input type="text" name="timeStampOpened" th:field="*{timeStampOpened}" readonly/></h2>
+
+        <h2>Repair Details: <input type="text" name="repairDetails" th:field="*{repairDetails}"/></h2>
+
+        <h2>Time Stamp Closed: <input type="text" id="timeStamp" name="timeStampClosed" th:field="*{timeStampClosed}"/></h2>
+
+        <button type="submit" value="Submit">Submit</button>
+    </div>
+
+</form>
+
+</body>
+</html>

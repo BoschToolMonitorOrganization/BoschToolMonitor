@@ -1,14 +1,12 @@
-package org.cofc.bosch.ToolMonitor.components.OpenRepairTicket;
+package org.cofc.bosch.ToolMonitor.components.RepairTicket;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class OpenRepairTicket {
+public class RepairTicket {
     String valueStream;
     String productionLine;
     String productType;
@@ -18,6 +16,24 @@ public class OpenRepairTicket {
     String extraInfo;
     String userEntry;
     String timeStampOpened;
+    String timeStampClosed;
+    String repairDetails;
+
+    public String getTimeStampClosed() {
+        return timeStampClosed;
+    }
+
+    public void setTimeStampClosed(String timeStampClosed) {
+        this.timeStampClosed = timeStampClosed;
+    }
+
+    public String getRepairDetails() {
+        return repairDetails;
+    }
+
+    public void setRepairDetails(String repairDetails) {
+        this.repairDetails = repairDetails;
+    }
 
     public String getValueStream() {
         return valueStream;
@@ -115,14 +131,48 @@ public class OpenRepairTicket {
 
     }
 
+    public static RepairTicket getRepairTicket(JdbcTemplate jdbcTemplate, String valueStream, String productionLine,
+                                               String productType, int workPieceCarrierNumber,
+                                               String repairCategory, String repairDetail,
+                                               String userEntry, String timeStampOpened) {
+        return jdbcTemplate.query(String.format("select * from RepairTickets where " +
+                        "valueStream=\"%s\" and " +
+                        "productionLine=\"%s\" and " +
+                        "productType=\"%s\" and " +
+                        "workPieceCarrierNumber=%d and " +
+                        "repairCategory=\"%s\" and " +
+                        "repairDetail=\"%s\" and "  +
+                        "userEntry=\"%s\" and " +
+                        "timeStampOpened=\"%s\";",
+                valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory,
+                repairDetail, userEntry, timeStampOpened),
+                new RepairTicketMapper()).get(0);
+    }
+
+    public void closeSelf(JdbcTemplate jdbcTemplate) {
+        jdbcTemplate.execute(String.format("UPDATE RepairTickets " +
+                        "SET timeStampClosed=\"%s\", repairDetails=\"%s\"" +
+                        " where " +
+                        "valueStream=\"%s\" and " +
+                        "productionLine=\"%s\" and " +
+                        "productType=\"%s\" and " +
+                        "workPieceCarrierNumber=%d and " +
+                        "repairCategory=\"%s\" and " +
+                        "repairDetail=\"%s\" and " +
+                        "userEntry=\"%s\" and " +
+                        "timeStampOpened=\"%s\";", timeStampClosed, repairDetails, valueStream, productionLine, productType,
+                workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened));
+
+    }
+
     public static void deleteOpenRepairTicket(JdbcTemplate jdbcTemplate, String valueStream, String productionLine, String productType,
                                               int workPieceCarrierNumber, String repairCategory, String repairDetail,
                                               String userEntry, String timeStampOpened) {
         jdbcTemplate.execute("DELETE FROM RepairTickets WHERE valueStream=\"" + valueStream + "\" and productionLine=\"" + productionLine +
-                            "\" and productType=\"" + productType + "\" and workPieceCarrierNumber=\"" + workPieceCarrierNumber +
-                            "\" and repairCategory=\"" + repairCategory + "\" and repairDetail=\"" + repairDetail +
-                            "\" and userEntry=\"" + userEntry +
-                            "\" and timeStampOpened=\"" + timeStampOpened + "\";");
+                "\" and productType=\"" + productType + "\" and workPieceCarrierNumber=\"" + workPieceCarrierNumber +
+                "\" and repairCategory=\"" + repairCategory + "\" and repairDetail=\"" + repairDetail +
+                "\" and userEntry=\"" + userEntry +
+                "\" and timeStampOpened=\"" + timeStampOpened + "\";");
     }
 
 

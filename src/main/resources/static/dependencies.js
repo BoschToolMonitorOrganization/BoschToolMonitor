@@ -49,6 +49,7 @@ function updateRepairCategories() {
           });
       });
 };
+
 function updateRepairDetails() {
     $.get("/BoschToolMonitor/repairDetails?valueStream=" + valueStream + '&productionLine=' + productionLine + '&repairCategory=' + repairCategory, function (data) {
         $("#repairDetail").empty();
