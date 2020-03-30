@@ -67,10 +67,13 @@
                 <option value="PDF">PDF</option>
                 <option value="CAD">CAD</option>
                 <option value="JPEG">JPEG</option>
+                <option value="Other">Other</option>
             </select>
         </h2>
 
+
         <h2>File Data: <input type="file" name="fileData" th:field="*{fileData}"/></h2>
+         <h5>Note: Max size of 60mb</h5>
 
          <button type="submit" value="Submit">Submit</button>
      </div>
