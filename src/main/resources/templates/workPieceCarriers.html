@@ -32,6 +32,7 @@
             <th>Product Type</th>
             <th>WPC Number</th>
             <th>View Files</th>
+            <th>View Repair Tickets</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -44,6 +45,9 @@
             <td style="text-align:center" th:text="${carrier.workPieceCarrierNumber}"></td>
             <td style="text-align:center">
                 <a th:href="@{/wpcFilesForWPC(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType})}"><button type="button">View</button></a>
+            </td>
+            <td style="text-align:center">
+                <a th:href="@{/repairTicketsForWPC(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType}, workPieceCarrierNumber=${carrier.workPieceCarrierNumber})}"><button type="button">View</button></a>
             </td>
             <td style="text-align:center">
                 <a th:href="@{/delete_wpc(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType}, workPieceCarrierNumber=${carrier.workPieceCarrierNumber})}"><button type="button">Delete</button></a>
