@@ -46,9 +46,12 @@ Create Table RepairTickets (
     extraInfo VARCHAR(100),
     userEntry VARCHAR(50),
     timeStampOpened VARCHAR(50),
+    repairDetails VARCHAR(250),
+    timeStampClosed VARCHAR(50),
 
     PRIMARY KEY (valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened),
-    FOREIGN KEY (valueStream, productionLine, repairCategory, repairDetail) REFERENCES RepairCodes (valueStream, productionLine, repairCategory, repairDetail)
+    FOREIGN KEY (valueStream, productionLine, repairCategory, repairDetail) REFERENCES RepairCodes (valueStream, productionLine, repairCategory, repairDetail),
+    FOREIGN KEY (valueStream, productionLine, productType, workPieceCarrierNumber) REFERENCES WPCs (valueStream, productionLine, productType, workPieceCarrierNumber)
 );
 
 INSERT INTO RepairCodes(valueStream, productionLine, repairCategory, repairDetail) VALUES

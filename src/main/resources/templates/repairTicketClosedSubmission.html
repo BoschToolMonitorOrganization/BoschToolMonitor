@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Close Repair Ticket Form</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css"/>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
+        });
+    </script>
+</head>
+
+<body>
+
+<div id="nav-placeholder">
+</div>
+
+<h1>Repair Ticket Closed</h1>
+<div class="container">
+    <h2 th:text="'Value Stream: ' + *{repairTicket.valueStream}" id="valueStream"/>
+
+    <h2 id="productionLine" th:text="'Production Line: ' + *{repairTicket.productionLine}"/>
+
+    <h2 id="productType" th:text="'Product Type: ' + *{repairTicket.productType}"/>
+
+    <h2 id="workPieceCarrierNumber" th:text="'WPC Number: ' + *{repairTicket.workPieceCarrierNumber}"/>
+
+    <h2 name="repairCategory" th:text="'Repair Category: ' + *{repairTicket.repairCategory}"/>
+
+    <h2 name="repairDetail" th:text="'Repair Detail: ' + *{repairTicket.repairDetail}"/>
+
+    <h2 name="extraInfo" th:text="'Extra Info: ' + *{repairTicket.extraInfo}"/>
+
+    <h2 name="userEntry" th:text="'User Entry: ' + *{repairTicket.userEntry}"/>
+
+    <h2 name="timeStampOpened" th:text="'Time Stamp Opened: ' + *{repairTicket.timeStampOpened}"/>
+
+    <h2 name="repairDetails" th:text="'Repair Details: ' + *{repairTicket.repairDetails}"/>
+
+    <h2 id="timeStamp" name="timeStampClosed" th:text="'Time Stamp Closed: ' + *{repairTicket.timeStampClosed}"/>
+</div>
+
+</body>
+</html>

@@ -32,6 +32,7 @@ public class WPCFileController {
 
     @PostMapping("/createWPCFile")
     public String wpcFileSubmission(@ModelAttribute WPCFile wpcFile, Model model) {
+        wpcFile.setFileName(wpcFile.getFileData().getOriginalFilename());
         model.addAttribute("wpcFile", wpcFile);
         try {
             wpcFile.enterWPCFileIntoDatabase(jdbcTemplate);
