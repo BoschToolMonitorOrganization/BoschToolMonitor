@@ -103,6 +103,18 @@ public class RepairTicketController {
         return "repairTickets";
     }
 
+    @GetMapping("/repairTicketsForWPC")
+    public String openRepairTicketsForWPC(@RequestParam String productionLine, @RequestParam String valueStream,
+                                          @RequestParam String productType, @RequestParam int workPieceCarrierNumber, Model model) {
+        List<RepairTicket> repairTickets = jdbcTemplate.query("Select * From RepairTickets where valueStream=\"" +
+                valueStream + "\" and productionLine=\"" + productionLine + "\" and productType=\"" +
+                productType + "\" and workPieceCarrierNumber=\"" + workPieceCarrierNumber +"\";", new RepairTicketMapper());
+        model.addAttribute("repairTickets", repairTickets);
+        model.addAttribute("isForWPC", true);
+
+        return "repairTickets";
+    }
+
     @GetMapping("/delete_repairTicket")
     public String deleteRepairTicket(@RequestParam String valueStream, @RequestParam String productionLine, @RequestParam String productType,
                                      @RequestParam int workPieceCarrierNumber, @RequestParam String repairCategory, @RequestParam String repairDetail,
