@@ -108,7 +108,7 @@ public class RepairTicketController {
                                           @RequestParam String productType, @RequestParam int workPieceCarrierNumber, Model model) {
         List<RepairTicket> repairTickets = jdbcTemplate.query("Select * From RepairTickets where valueStream=\"" +
                 valueStream + "\" and productionLine=\"" + productionLine + "\" and productType=\"" +
-                productType + "\" and workPieceCarrierNumber=\"" + workPieceCarrierNumber +"\";", new RepairTicketMapper());
+                productType + "\" and workPieceCarrierNumber=" + workPieceCarrierNumber + ";", new RepairTicketMapper());
         model.addAttribute("repairTickets", repairTickets);
         model.addAttribute("isForWPC", true);
 
