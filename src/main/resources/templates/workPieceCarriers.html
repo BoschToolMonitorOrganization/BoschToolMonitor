@@ -39,17 +39,17 @@
 
     <tbody>
         <tr th:each="carrier : ${carriers}">
-            <td style="text-align:center" th:text="${carrier.valueStream}"></td>
-            <td style="text-align:center" th:text="${carrier.productionLine}"></td>
-            <td style="text-align:center" th:text="${carrier.productType}"></td>
-            <td style="text-align:center" th:text="${carrier.workPieceCarrierNumber}"></td>
-            <td style="text-align:center">
+            <td th:text="${carrier.valueStream}"></td>
+            <td th:text="${carrier.productionLine}"></td>
+            <td th:text="${carrier.productType}"></td>
+            <td th:text="${carrier.workPieceCarrierNumber}"></td>
+            <td>
                 <a th:href="@{/wpcFilesForWPC(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType})}"><button type="button">View</button></a>
             </td>
-            <td style="text-align:center">
+            <td>
                 <a th:href="@{/repairTicketsForWPC(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType}, workPieceCarrierNumber=${carrier.workPieceCarrierNumber})}"><button type="button">View</button></a>
             </td>
-            <td style="text-align:center">
+            <td>
                 <a th:href="@{/delete_wpc(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType}, workPieceCarrierNumber=${carrier.workPieceCarrierNumber})}"><button type="button">Delete</button></a>
             </td>
         </tr>

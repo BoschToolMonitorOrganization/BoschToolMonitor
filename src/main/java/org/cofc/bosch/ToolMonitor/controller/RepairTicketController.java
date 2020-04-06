@@ -60,16 +60,17 @@ public class RepairTicketController {
 
         try {
             boolean alreadyOpen = jdbcTemplate.queryForList(String.format("Select count(*) From RepairTickets" +
-                    " where " +
-                    "valueStream=\"%s\" and " +
-                    "productionLine=\"%s\" and " +
-                    "productType=\"%s\" and " +
-                    "workPieceCarrierNumber=%d and " +
-                    " timeStampClosed is NULL;",
+                            " where " +
+                            "valueStream=\"%s\" and " +
+                            "productionLine=\"%s\" and " +
+                            "productType=\"%s\" and " +
+                            "workPieceCarrierNumber=%d and " +
+                            " timeStampClosed is NULL;",
                     repairTicket.getValueStream(), repairTicket.getProductionLine(), repairTicket.getProductType(), repairTicket.getWorkPieceCarrierNumber())
                     , Integer.class).get(0) > 0;
-            if(alreadyOpen) {
-                throw new DataAccessException("A repair ticket is already open for the specified work piece carrier!"){};
+            if (alreadyOpen) {
+                throw new DataAccessException("A repair ticket is already open for the specified work piece carrier!") {
+                };
             }
             repairTicket.enterOpenRepairTicketIntoDatabase(jdbcTemplate);
         } catch (DataAccessException e) {
