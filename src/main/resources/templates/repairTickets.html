@@ -38,7 +38,7 @@
             <th>Time Stamp Opened</th>
             <th>Repair Details</th>
             <th>Time Stamp Closed</th>
-            <th>Close Repair Ticket</th>
+            <th>Ticket Status</th>
             <th>Delete</th>
         </tr>
     </thead>
@@ -57,11 +57,13 @@
             <td style="text-align:center" th:text="${repairTicket.repairDetails}"></td>
             <td style="text-align:center" th:text="${repairTicket.timeStampClosed}"></td>
             <td style="text-align:center">
-                <a th:href="@{/closeRepairTicket(valueStream=${repairTicket.valueStream},
+                <span th:if="${repairTicket.timeStampClosed == null}">
+                <h3>Open</h3><a th:href="@{/closeRepairTicket(valueStream=${repairTicket.valueStream},
                 productionLine=${repairTicket.productionLine}, productType=${repairTicket.productType},
                 workPieceCarrierNumber=${repairTicket.workPieceCarrierNumber}, repairCategory=${repairTicket.repairCategory},
                 repairDetail=${repairTicket.repairDetail}, extraInfo=${repairTicket.extraInfo}, userEntry=${repairTicket.userEntry},
-                timeStampOpened=${repairTicket.timeStampOpened})}"><button type="button">Close Ticket</button></a>
+                timeStampOpened=${repairTicket.timeStampOpened})}"><button type="button">Close Ticket</button></a></span>
+                <span th:unless="${repairTicket.timeStampClosed == null}">Closed</span>
             </td>
             <td style="text-align:center">
                 <a th:href="@{/delete_repairTicket(valueStream=${repairTicket.valueStream},
