@@ -41,20 +41,20 @@
 
         <tbody>
             <tr th:each="wpcFile : ${wpcFiles}">
-                <td style="text-align:center" th:text="${wpcFile.valueStream}"/>
-                <td style="text-align:center" th:text="${wpcFile.productionLine}"/>
-                <td style="text-align:center" th:text="${wpcFile.productType}"/>
-                <td style="text-align:center" th:text="${wpcFile.author}"/>
-                <td style="text-align:center" th:text="${wpcFile.revisionNumber}"/>
-                <td style="text-align:center" th:text="${wpcFile.revisionReason}"/>
-                <td style="text-align:center" th:text="${wpcFile.fileType}"/>
-                <td style="text-align:center" th:text="${wpcFile.fileName}"/>
-                <td style="text-align:center">
+                <td th:text="${wpcFile.valueStream}"/>
+                <td  th:text="${wpcFile.productionLine}"/>
+                <td  th:text="${wpcFile.productType}"/>
+                <td  th:text="${wpcFile.author}"/>
+                <td  th:text="${wpcFile.revisionNumber}"/>
+                <td  th:text="${wpcFile.revisionReason}"/>
+                <td  th:text="${wpcFile.fileType}"/>
+                <td  th:text="${wpcFile.fileName}"/>
+                <td >
                     <a th:href="@{/download/wpcFile(productionLine=${wpcFile.productionLine}, valueStream=${wpcFile.valueStream}, productType=${wpcFile.productType},
                         author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType},
                         fileName=${wpcFile.fileName})}" th:download="@{${wpcFile.fileName}}"><button type="button">Download</button></a>
                 </td>
-                <td style="text-align:center">
+                <td >
                     <a th:href="@{/delete_WPCFile(valueStream=${wpcFile.valueStream}, productionLine=${wpcFile.productionLine}, productType=${wpcFile.productType},
                     author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType}, fileName=${wpcFile.fileName}, isForWPC=${isForWPC})}"><button type="button">Delete</button></a>
                 </td>

@@ -34,7 +34,7 @@ public class WPCController {
         try {
             carrier.enterWPCIntoDatabase(jdbcTemplate);
         } catch (DataAccessException e) {
-            model.addAttribute("error", e.getMessage());
+            model.addAttribute("error", "Uh oh. Something went wrong. Does this WPC already exist?");
             List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
             List<String> prodLines = null;
             List<String> prodTypes = null;
