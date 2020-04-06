@@ -23,8 +23,7 @@
 
 <label th:if="${error != null}" th:text="${error}"/>
 
-<form action="#" th:action="@{/closeRepairTicket}" th:object="${repairTicket}" method="post"
-      enctype="multipart/form-data">
+<form action="#" th:action="@{/closeRepairTicket}" th:object="${repairTicket}" method="post">
 
     <div class="container">
         <h2>Value Stream: <input th:field="*{valueStream}" type="text" id="valueStream" readonly/></h2>
