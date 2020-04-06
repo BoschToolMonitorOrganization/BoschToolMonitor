@@ -4,7 +4,6 @@ import org.cofc.bosch.ToolMonitor.components.RepairTicket.RepairTicket;
 import org.cofc.bosch.ToolMonitor.components.RepairTicket.RepairTicketMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -58,55 +57,27 @@ public class RepairTicketController {
     @PostMapping("/createOpenRepairTicket")
     public String openRepairTicketSubmission(@ModelAttribute RepairTicket repairTicket, Model model) {
         model.addAttribute("repairTicket", repairTicket);
-        List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
-        List<String> prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos;", String.class);
-        List<String> prodTypes = jdbcTemplate.queryForList("Select Distinct productType From WPCCombos;", String.class);
-        List<String> wpcNumber = jdbcTemplate.queryForList("Select Distinct workPieceCarrierNumber From workPieceCarriers;", String.class);
-
-        System.out.println("Value stream before: " + valueStreams + " Value streams after: " + repairTicket.getValueStream());
-
-        if (valueStreams.equals(repairTicket.getValueStream()) && prodLines.equals(repairTicket.getProductionLine())
-                && prodTypes.equals(repairTicket.getProductType()) && wpcNumber.equals(repairTicket.getWorkPieceCarrierNumber())){
-
-            throw new DataIntegrityViolationException("Duplicate Entry: Repair Ticket already opened for WPC.");
-        }
 
         try {
+            boolean alreadyOpen = jdbcTemplate.queryForList(String.format("Select count(*) From RepairTickets" +
+                    " where " +
+                    "valueStream=\"%s\" and " +
+                    "productionLine=\"%s\" and " +
+                    "productType=\"%s\" and " +
+                    "workPieceCarrierNumber=%d and " +
+                    " timeStampClosed is NULL;",
+                    repairTicket.getValueStream(), repairTicket.getProductionLine(), repairTicket.getProductType(), repairTicket.getWorkPieceCarrierNumber())
+                    , Integer.class).get(0) > 0;
+            if(alreadyOpen) {
+                throw new DataAccessException("A repair ticket is already open for the specified work piece carrier!"){};
+            }
             repairTicket.enterOpenRepairTicketIntoDatabase(jdbcTemplate);
-        }
-/*        catch(DataIntegrityViolationException e){
+        } catch (DataAccessException e) {
             model.addAttribute("error", e.getMessage());
 
             List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
-            List<String> prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos;", String.class);
-            List<String> prodTypes = jdbcTemplate.queryForList("Select Distinct productType From WPCCombos;", String.class);
-            List<String> wpcNumber = jdbcTemplate.queryForList("Select Distinct workPieceCarrierNumber From workPieceCarriers;", String.class);
-
-            if (valueStreams.equals(repairTicket.getValueStream()) && prodLines.equals(repairTicket.getProductionLine())
-                    && prodTypes.equals(repairTicket.getProductType()) && wpcNumber.equals(repairTicket.getWorkPieceCarrierNumber())){
-
-                throw new DataIntegrityViolationException("Duplicate Entry: Repair Ticket already opened for WPC.");
-            }
-*//*            if (wpcNumber.equals(repairTicket.getWorkPieceCarrierNumber())){
-                wpcNumber = jdbcTemplate.queryForList("Select Distinct workPieceCarrierNumber From WPCCombos where workPieceCarrierNumber=\""
-                        + repairTicket.getWorkPieceCarrierNumber() + "\";", String.class);
-
-                throw new DataIntegrityViolationException("Duplicate Entry: Repair Ticket already opened for WPC.");
-            }*//*
-
-            model.addAttribute("valueStreams", valueStreams);
-            model.addAttribute("prodLines", prodLines);
-            model.addAttribute("prodTypes", prodTypes);
-            model.addAttribute("wpcNumber", wpcNumber);
-
-            return "openRepairTicketForm";
-        }*/
-        catch (DataAccessException e) {
-            model.addAttribute("error", e.getMessage());
-
-             valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
-             prodLines = null;
-             prodTypes = null;
+            List<String> prodLines = null;
+            List<String> prodTypes = null;
             List<String> repairDets = null;
             List<String> repairCats = null;
             if (!valueStreams.isEmpty()) {
