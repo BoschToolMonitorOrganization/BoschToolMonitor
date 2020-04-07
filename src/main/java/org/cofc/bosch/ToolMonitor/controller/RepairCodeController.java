@@ -2,8 +2,10 @@ package org.cofc.bosch.ToolMonitor.controller;
 
 import org.cofc.bosch.ToolMonitor.components.RepairCode.RepairCode;
 import org.cofc.bosch.ToolMonitor.components.RepairCode.RepairCodeMapper;
+import org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +51,11 @@ public class RepairCodeController {
                         + valueStreams.get(0) + "\";", String.class);
             }
         } catch (DataAccessException e) {
-            model.addAttribute("error", e.getMessage());
+            if (e instanceof DuplicateKeyException) {
+                model.addAttribute("error", "It looks like this repair code already exists!");
+            } else {
+                model.addAttribute("error", ControllerUtilities.buildErrorLog(e));
+            }
             model.addAttribute("repairCode", repairCode);
             if (!valueStreams.isEmpty()) {
                 prodLines = jdbcTemplate.queryForList("Select Distinct productionLine From WPCCombos where valueStream=\""

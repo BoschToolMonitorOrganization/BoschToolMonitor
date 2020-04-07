@@ -4,6 +4,7 @@ import org.cofc.bosch.ToolMonitor.components.WorkPieceCarrier.WorkPieceCarrier;
 import org.cofc.bosch.ToolMonitor.components.WorkPieceCarrier.WorkPieceCarrierMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+import static org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities.buildErrorLog;
 import static org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities.initWPCCombosInModel;
 
 @Controller
@@ -34,7 +36,11 @@ public class WPCController {
         try {
             carrier.enterWPCIntoDatabase(jdbcTemplate);
         } catch (DataAccessException e) {
-            model.addAttribute("error", "Uh oh. Something went wrong. Does this WPC already exist?");
+            if (e instanceof DuplicateKeyException) {
+                model.addAttribute("error", "It looks like this work piece carrier already exists!");
+            } else {
+                model.addAttribute("error", buildErrorLog(e));
+            }
             List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
             List<String> prodLines = null;
             List<String> prodTypes = null;

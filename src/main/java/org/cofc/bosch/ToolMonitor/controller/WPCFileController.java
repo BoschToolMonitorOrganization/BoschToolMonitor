@@ -4,6 +4,7 @@ import org.cofc.bosch.ToolMonitor.components.WPCFile.WPCFile;
 import org.cofc.bosch.ToolMonitor.components.WPCFile.WPCFileRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import static org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities.buildErrorLog;
 import static org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities.initWPCCombosInModel;
 
 @Controller
@@ -37,7 +39,11 @@ public class WPCFileController {
         try {
             wpcFile.enterWPCFileIntoDatabase(jdbcTemplate);
         } catch (DataAccessException e) {
-            model.addAttribute("error", e.getMessage());
+            if (e instanceof DuplicateKeyException) {
+                model.addAttribute("error", "It looks like a WPC File with the specified details already exists!");
+            } else {
+                model.addAttribute("error", buildErrorLog(e));
+            }
             List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
             List<String> prodLines = null;
             List<String> prodTypes = null;

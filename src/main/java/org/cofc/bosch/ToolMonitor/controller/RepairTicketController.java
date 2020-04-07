@@ -2,8 +2,10 @@ package org.cofc.bosch.ToolMonitor.controller;
 
 import org.cofc.bosch.ToolMonitor.components.RepairTicket.RepairTicket;
 import org.cofc.bosch.ToolMonitor.components.RepairTicket.RepairTicketMapper;
+import org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,36 +61,26 @@ public class RepairTicketController {
         model.addAttribute("repairTicket", repairTicket);
 
         try {
-            boolean doesNotExist = jdbcTemplate.queryForList(String.format("Select count(*) From WPCs" +
-                            " where " +
-                            "valueStream=\"%s\" and " +
-                            "productionLine=\"%s\" and " +
-                            "productType=\"%s\" and " +
-                            "workPieceCarrierNumber=%d;",
-                    repairTicket.getValueStream(), repairTicket.getProductionLine(), repairTicket.getProductType(), repairTicket.getWorkPieceCarrierNumber())
-                    , Integer.class).get(0) > 0;
-
-            boolean alreadyOpen = jdbcTemplate.queryForList(String.format("Select count(*) From RepairTickets" +
-                            " where " +
+            if (jdbcTemplate.queryForList(String.format("Select count(*) From RepairTickets where " +
                             "valueStream=\"%s\" and " +
                             "productionLine=\"%s\" and " +
                             "productType=\"%s\" and " +
                             "workPieceCarrierNumber=%d and " +
                             " timeStampClosed is NULL;",
                     repairTicket.getValueStream(), repairTicket.getProductionLine(), repairTicket.getProductType(), repairTicket.getWorkPieceCarrierNumber())
-                    , Integer.class).get(0) > 0;
-            if (alreadyOpen) {
-                throw new DataAccessException("A repair ticket is already open for the specified work piece carrier!") {
-                };
-            }
-            if(!doesNotExist) {
-                throw new DataAccessException("This work piece carrier does not exist.") {
-                };
+                    , Integer.class).get(0) > 0) {
+                throw new AlreadyExistsException();
             }
 
             repairTicket.enterOpenRepairTicketIntoDatabase(jdbcTemplate);
         } catch (DataAccessException e) {
-            model.addAttribute("error", e.getMessage());
+            if (e instanceof DuplicateKeyException) {
+                model.addAttribute("error", "It looks like a repair ticket already exists with the specified details!");
+            } else if (e instanceof AlreadyExistsException) {
+                model.addAttribute("error", e.getMessage());
+            } else {
+                model.addAttribute("error", ControllerUtilities.buildErrorLog(e));
+            }
 
             List<String> valueStreams = jdbcTemplate.queryForList("Select Distinct valueStream From WPCCombos;", String.class);
             List<String> prodLines = null;
@@ -180,5 +172,11 @@ public class RepairTicketController {
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    private class AlreadyExistsException extends DataAccessException {
+        public AlreadyExistsException() {
+            super("It looks like a repair ticket is already open for this Work Piece Carrier!");
+        }
     }
 }
