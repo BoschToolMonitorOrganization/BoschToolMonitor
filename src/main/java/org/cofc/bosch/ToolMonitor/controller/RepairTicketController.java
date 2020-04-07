@@ -5,6 +5,7 @@ import org.cofc.bosch.ToolMonitor.components.RepairTicket.RepairTicketMapper;
 import org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Controller
@@ -69,15 +71,21 @@ public class RepairTicketController {
                             " timeStampClosed is NULL;",
                     repairTicket.getValueStream(), repairTicket.getProductionLine(), repairTicket.getProductType(), repairTicket.getWorkPieceCarrierNumber())
                     , Integer.class).get(0) > 0) {
-                throw new AlreadyExistsException();
+                throw new AlreadyOpenException();
             }
 
             repairTicket.enterOpenRepairTicketIntoDatabase(jdbcTemplate);
         } catch (DataAccessException e) {
             if (e instanceof DuplicateKeyException) {
                 model.addAttribute("error", "It looks like a repair ticket already exists with the specified details!");
-            } else if (e instanceof AlreadyExistsException) {
+            } else if (e instanceof AlreadyOpenException) {
                 model.addAttribute("error", e.getMessage());
+            } else if (e instanceof DataIntegrityViolationException) {
+                if(e.getCause() instanceof  SQLIntegrityConstraintViolationException) {
+                    model.addAttribute("error", "Check your values.");
+                } else {
+                    model.addAttribute("error", "Repair Tickets can't exist for Work Piece Carriers that don't exist!\n");
+                }
             } else {
                 model.addAttribute("error", ControllerUtilities.buildErrorLog(e));
             }
@@ -174,8 +182,8 @@ public class RepairTicketController {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private class AlreadyExistsException extends DataAccessException {
-        public AlreadyExistsException() {
+    private class AlreadyOpenException extends DataAccessException {
+        public AlreadyOpenException() {
             super("It looks like a repair ticket is already open for this Work Piece Carrier!");
         }
     }
