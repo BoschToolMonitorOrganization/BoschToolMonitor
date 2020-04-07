@@ -15,18 +15,13 @@ public class RepairCode {
     }
 
     public static void deleteFromDB(String valueStream, String productionLine, String repairCategory, String repairDetail, JdbcTemplate jdbcTemplate) {
-        jdbcTemplate.execute(String.format("Delete From RepairTickets where " +
-                        "valueStream=\"%s\"" +
-                        "and productionLine=\"%s\"" +
-                        "and repairCategory=\"%s\"" +
+        String where = String.format(" where " +
+                        "valueStream=\"%s\" " +
+                        "and productionLine=\"%s\" " +
+                        "and repairCategory=\"%s\" " +
                         "and repairDetail=\"%s\";",
-                valueStream, productionLine, repairCategory, repairDetail));
-        jdbcTemplate.execute(String.format("Delete From RepairCodes where " +
-                        "valueStream=\"%s\"" +
-                        "and productionLine=\"%s\"" +
-                        "and repairCategory=\"%s\"" +
-                        "and repairDetail=\"%s\";",
-                valueStream, productionLine, repairCategory, repairDetail));
+                valueStream, productionLine, repairCategory, repairDetail);
+        jdbcTemplate.batchUpdate("Delete From RepairTickets" + where, "Delete From RepairCodes" + where);
     }
 
     public String getValueStream() {

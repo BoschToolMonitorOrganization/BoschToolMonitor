@@ -42,14 +42,14 @@ public class WPCCombo {
     }
 
     public static void deleteWPCCombo(String valueStream, String productionLine, String productType, JdbcTemplate jdbcTemplate) {
-        jdbcTemplate.execute("Delete From WPCs where valueStream=\"" + valueStream +
-                "\" and productionLine=\"" + productionLine +
-                "\" and productType=\"" + productType + "\";");
-        jdbcTemplate.execute("Delete From wpcFiles where valueStream=\"" + valueStream +
-                "\" and productionLine=\"" + productionLine +
-                "\" and productType=\"" + productType + "\";");
-        jdbcTemplate.execute("Delete From WPCCombos where valueStream=\"" + valueStream +
-                "\" and productionLine=\"" + productionLine +
-                "\" and productType=\"" + productType + "\";");
+        String where =
+                " where valueStream=\"" + valueStream +
+                        "\" and productionLine=\"" + productionLine +
+                        "\" and productType=\"" + productType + "\";";
+        jdbcTemplate.batchUpdate(
+                "Delete From RepairTickets" + where,
+                "Delete From WPCs" + where,
+                "Delete From wpcFiles" + where,
+                "Delete From WPCCombos" + where);
     }
 }
