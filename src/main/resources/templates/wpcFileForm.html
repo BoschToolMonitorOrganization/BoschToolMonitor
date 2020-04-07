@@ -59,7 +59,9 @@
         </h2>
 
         <h2>Author: <input type="text" name="author" th:field="*{author}"/></h2>
-        <h2>Revision Number: <input type="text" name="revisionNumber" th:field="*{revisionNumber}"/></h2>
+
+         <h2>Revision Number: <input type="number" min="1" name="points" th:field="*{revisionNumber}" step="1"></h2>
+
         <h2>Revision Reason: <input type="text" name="revisionReason" th:field="*{revisionReason}"/></h2>
 
         <h2>File Type:
