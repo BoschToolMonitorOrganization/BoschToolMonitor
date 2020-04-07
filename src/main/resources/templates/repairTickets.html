@@ -58,11 +58,11 @@
             <td th:text="${repairTicket.timeStampClosed}"></td>
             <td>
                 <span th:if="${repairTicket.timeStampClosed == null}">
-                <h3>Open</h3><a th:href="@{/closeRepairTicket(valueStream=${repairTicket.valueStream},
+                <a th:href="@{/closeRepairTicket(valueStream=${repairTicket.valueStream},
                 productionLine=${repairTicket.productionLine}, productType=${repairTicket.productType},
                 workPieceCarrierNumber=${repairTicket.workPieceCarrierNumber}, repairCategory=${repairTicket.repairCategory},
                 repairDetail=${repairTicket.repairDetail}, extraInfo=${repairTicket.extraInfo}, userEntry=${repairTicket.userEntry},
-                timeStampOpened=${repairTicket.timeStampOpened})}"><button type="button">Close Ticket</button></a></span>
+                timeStampOpened=${repairTicket.timeStampOpened})}"><button type="button" id="closebtn">Close Ticket</button></a></span>
                 <span th:unless="${repairTicket.timeStampClosed == null}">Closed</span>
             </td>
             <td>
@@ -70,7 +70,7 @@
                 productionLine=${repairTicket.productionLine}, productType=${repairTicket.productType},
                 workPieceCarrierNumber=${repairTicket.workPieceCarrierNumber}, repairCategory=${repairTicket.repairCategory},
                 repairDetail=${repairTicket.repairDetail}, extraInfo=${repairTicket.extraInfo}, userEntry=${repairTicket.userEntry},
-                timeStampOpened=${repairTicket.timeStampOpened})}"><button type="button">Delete</button></a>
+                timeStampOpened=${repairTicket.timeStampOpened})}"><button type="button" id="deletebtn">Delete</button></a>
             </td>
 
         </tr>

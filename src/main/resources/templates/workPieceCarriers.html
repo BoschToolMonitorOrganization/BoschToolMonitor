@@ -44,13 +44,13 @@
             <td th:text="${carrier.productType}"></td>
             <td th:text="${carrier.workPieceCarrierNumber}"></td>
             <td>
-                <a th:href="@{/wpcFilesForWPC(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType})}"><button type="button">View</button></a>
+                <a th:href="@{/wpcFilesForWPC(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType})}"><button type="button" id="viewbtn">View</button></a>
             </td>
             <td>
-                <a th:href="@{/repairTicketsForWPC(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType}, workPieceCarrierNumber=${carrier.workPieceCarrierNumber})}"><button type="button">View</button></a>
+                <a th:href="@{/repairTicketsForWPC(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType}, workPieceCarrierNumber=${carrier.workPieceCarrierNumber})}"><button type="button" id="viewbtn">View</button></a>
             </td>
             <td>
-                <a th:href="@{/delete_wpc(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType}, workPieceCarrierNumber=${carrier.workPieceCarrierNumber})}"><button type="button">Delete</button></a>
+                <a th:href="@{/delete_wpc(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType}, workPieceCarrierNumber=${carrier.workPieceCarrierNumber})}"><button type="button" id="deletebtn">Delete</button></a>
             </td>
         </tr>
     </tbody>
