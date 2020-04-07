@@ -5,7 +5,6 @@ import org.cofc.bosch.ToolMonitor.components.RepairTicket.RepairTicketMapper;
 import org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
@@ -80,12 +79,9 @@ public class RepairTicketController {
                 model.addAttribute("error", "It looks like a repair ticket already exists with the specified details!");
             } else if (e instanceof AlreadyOpenException) {
                 model.addAttribute("error", e.getMessage());
-            } else if (e instanceof DataIntegrityViolationException) {
-                if(e.getCause() != null && e.getCause() instanceof  SQLIntegrityConstraintViolationException) {
-                    model.addAttribute("error", "Check your values.");
-                } else {
-                    model.addAttribute("error", "Repair Tickets can't exist for Work Piece Carriers that don't exist!\n");
-                }
+            } else if (e.getCause() != null && e.getCause() instanceof SQLIntegrityConstraintViolationException) {
+                model.addAttribute("error", "Either a work piece carrier doesn't exist with the " +
+                        "specified details or a primary key attribute was null.");
             } else {
                 model.addAttribute("error", ControllerUtilities.buildErrorLog(e));
             }
