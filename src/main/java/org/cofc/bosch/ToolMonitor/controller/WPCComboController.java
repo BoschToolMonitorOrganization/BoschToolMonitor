@@ -2,8 +2,10 @@ package org.cofc.bosch.ToolMonitor.controller;
 
 import org.cofc.bosch.ToolMonitor.components.WPCCombo.WPCCombo;
 import org.cofc.bosch.ToolMonitor.components.WPCCombo.WPCComboRowMapper;
+import org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +37,11 @@ public class WPCComboController {
             combo.enterWPCComboIntoDB(jdbcTemplate);
             model.addAttribute("combo", new WPCCombo());
         } catch (DataAccessException e) {
-            model.addAttribute("error", e.getMessage());
+            if (e instanceof DuplicateKeyException) {
+                model.addAttribute("error", "It looks like that product type already exists!");
+            } else {
+                model.addAttribute("error", ControllerUtilities.buildErrorLog(e));
+            }
             model.addAttribute("combo", combo);
         }
         List<WPCCombo> combos = jdbcTemplate.query("Select * from WPCCombos", new WPCComboRowMapper());

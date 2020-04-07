@@ -23,4 +23,11 @@ public class ControllerUtilities {
         model.addAttribute("prodLines", prodLines);
         model.addAttribute("prodTypes", prodTypes);
     }
+
+    public static String buildErrorLog(Exception e) {
+        StringBuilder retVal = new StringBuilder();
+        retVal.append("Error Type   : " + e.getClass().getName());
+        retVal.append("Error Message: " + e.getMessage());
+        return retVal.toString();
+    }
 }
