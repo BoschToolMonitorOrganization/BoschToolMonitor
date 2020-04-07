@@ -64,7 +64,7 @@ select {
     border-radius: 2px;
 }
 
-button {
+button[type=submit] {
     padding: 19px 39px 18px 39px;
     color: #FFF;
     background-color: #4bc970;
@@ -77,6 +77,67 @@ button {
     border-width: 1px 1px 3px;
     box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
     margin-bottom: 10px;
+}
+
+/* Buttons within table */
+#deletebtn {
+    border: 2px solid black;
+    padding: 6px 16px;
+    font-size: 16px;
+    color: #FFFFFF;
+    background-color: red;
+    text-align: center;
+}
+
+#deletebtn:hover {
+    background-color: darkred;
+    cursor: pointer;
+    transition-delay: 1ms;
+}
+
+#viewbtn {
+    border: 2px solid black;
+    padding: 6px 16px;
+    font-size: 16px;
+    color: #FFFFFF;
+    background-color: dodgerblue;
+    text-align: center;
+}
+
+#viewbtn:hover {
+    background-color: blue;
+    cursor: pointer;
+    transition-delay: 1ms;
+}
+
+#downloadbtn {
+    border: 2px solid black;
+    padding: 6px 16px;
+    font-size: 16px;
+    color: #FFFFFF;
+    background-color: forestgreen;
+    text-align: center;
+}
+
+#downloadbtn:hover {
+    background-color: green;
+    cursor: pointer;
+    transition-delay: 1ms;
+}
+
+#closebtn {
+    border: 2px solid black;
+    padding: 6px 16px;
+    font-size: 16px;
+    color: #FFFFFF;
+    background-color: forestgreen;
+    text-align: center;
+}
+
+#closebtn:hover {
+    background-color: green;
+    cursor: pointer;
+    transition-delay: 1ms;
 }
 
 fieldset {

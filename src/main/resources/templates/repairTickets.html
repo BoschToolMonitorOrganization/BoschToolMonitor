@@ -59,7 +59,7 @@
                 productionLine=${repairTicket.productionLine}, productType=${repairTicket.productType},
                 workPieceCarrierNumber=${repairTicket.workPieceCarrierNumber}, repairCategory=${repairTicket.repairCategory},
                 repairDetail=${repairTicket.repairDetail}, extraInfo=${repairTicket.extraInfo}, userEntry=${repairTicket.userEntry},
-                timeStampOpened=${repairTicket.timeStampOpened})}"><button type="button">Close Ticket</button></a>
+                timeStampOpened=${repairTicket.timeStampOpened})}"><button id="closebtn" type="button">Close Ticket</button></a>
                 <label th:unless="${repairTicket.timeStampClosed == null}" th:text="${repairTicket.timeStampClosed}"/>
             </td>
             <td>
@@ -67,7 +67,7 @@
                 productionLine=${repairTicket.productionLine}, productType=${repairTicket.productType},
                 workPieceCarrierNumber=${repairTicket.workPieceCarrierNumber}, repairCategory=${repairTicket.repairCategory},
                 repairDetail=${repairTicket.repairDetail}, extraInfo=${repairTicket.extraInfo}, userEntry=${repairTicket.userEntry},
-                timeStampOpened=${repairTicket.timeStampOpened})}"><button type="button">Delete</button></a>
+                timeStampOpened=${repairTicket.timeStampOpened})}"><button type="button" id="deletebtn">Delete</button></a>
             </td>
 
         </tr>

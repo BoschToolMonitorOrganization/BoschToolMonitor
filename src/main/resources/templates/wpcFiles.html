@@ -52,11 +52,11 @@
                 <td >
                     <a th:href="@{/download/wpcFile(productionLine=${wpcFile.productionLine}, valueStream=${wpcFile.valueStream}, productType=${wpcFile.productType},
                         author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType},
-                        fileName=${wpcFile.fileName})}" th:download="@{${wpcFile.fileName}}"><button type="button">Download</button></a>
+                        fileName=${wpcFile.fileName})}" th:download="@{${wpcFile.fileName}}"><button type="button" id="downloadbtn">Download</button></a>
                 </td>
                 <td >
                     <a th:href="@{/delete_WPCFile(valueStream=${wpcFile.valueStream}, productionLine=${wpcFile.productionLine}, productType=${wpcFile.productType},
-                    author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType}, fileName=${wpcFile.fileName}, isForWPC=${isForWPC})}"><button type="button">Delete</button></a>
+                    author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType}, fileName=${wpcFile.fileName}, isForWPC=${isForWPC})}"><button type="button" id="deletebtn">Delete</button></a>
                 </td>
             </tr>
         </tbody>
