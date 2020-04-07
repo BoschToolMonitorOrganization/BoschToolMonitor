@@ -81,7 +81,7 @@ public class RepairTicketController {
             } else if (e instanceof AlreadyOpenException) {
                 model.addAttribute("error", e.getMessage());
             } else if (e instanceof DataIntegrityViolationException) {
-                if(e.getCause() instanceof  SQLIntegrityConstraintViolationException) {
+                if(e.getCause() != null && e.getCause() instanceof  SQLIntegrityConstraintViolationException) {
                     model.addAttribute("error", "Check your values.");
                 } else {
                     model.addAttribute("error", "Repair Tickets can't exist for Work Piece Carriers that don't exist!\n");
