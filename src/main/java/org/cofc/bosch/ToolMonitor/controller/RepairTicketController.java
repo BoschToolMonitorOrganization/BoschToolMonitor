@@ -59,6 +59,15 @@ public class RepairTicketController {
         model.addAttribute("repairTicket", repairTicket);
 
         try {
+            boolean doesNotExist = jdbcTemplate.queryForList(String.format("Select count(*) From WPCs" +
+                            " where " +
+                            "valueStream=\"%s\" and " +
+                            "productionLine=\"%s\" and " +
+                            "productType=\"%s\" and " +
+                            "workPieceCarrierNumber=%d;",
+                    repairTicket.getValueStream(), repairTicket.getProductionLine(), repairTicket.getProductType(), repairTicket.getWorkPieceCarrierNumber())
+                    , Integer.class).get(0) > 0;
+
             boolean alreadyOpen = jdbcTemplate.queryForList(String.format("Select count(*) From RepairTickets" +
                             " where " +
                             "valueStream=\"%s\" and " +
@@ -72,6 +81,11 @@ public class RepairTicketController {
                 throw new DataAccessException("A repair ticket is already open for the specified work piece carrier!") {
                 };
             }
+            if(!doesNotExist) {
+                throw new DataAccessException("This work piece carrier does not exist.") {
+                };
+            }
+
             repairTicket.enterOpenRepairTicketIntoDatabase(jdbcTemplate);
         } catch (DataAccessException e) {
             model.addAttribute("error", e.getMessage());
