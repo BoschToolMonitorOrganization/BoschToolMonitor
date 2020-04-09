@@ -20,6 +20,8 @@ import java.util.List;
 @Controller
 public class RepairTicketController {
 
+    boolean repairTicketsForWPC = false;
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -125,6 +127,8 @@ public class RepairTicketController {
         List<RepairTicket> repairTickets = jdbcTemplate.query("Select * From RepairTickets", new RepairTicketMapper());
         model.addAttribute("repairTickets", repairTickets);
 
+        repairTicketsForWPC = false;
+
         return "repairTickets";
     }
 
@@ -137,6 +141,8 @@ public class RepairTicketController {
         model.addAttribute("repairTickets", repairTickets);
         model.addAttribute("isForWPC", true);
 
+        repairTicketsForWPC = true;
+
         return "repairTickets";
     }
 
@@ -144,6 +150,19 @@ public class RepairTicketController {
     public String deleteRepairTicket(@RequestParam String valueStream, @RequestParam String productionLine, @RequestParam String productType,
                                      @RequestParam int workPieceCarrierNumber, @RequestParam String repairCategory, @RequestParam String repairDetail,
                                      @RequestParam String userEntry, @RequestParam String timeStampOpened, Model model) {
+
+        if (repairTicketsForWPC){
+            RepairTicket.deleteOpenRepairTicket(jdbcTemplate, valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened);
+
+            List<RepairTicket> repairTickets = jdbcTemplate.query("Select * From RepairTickets where valueStream=\"" +
+                    valueStream + "\" and productionLine=\"" + productionLine + "\" and productType=\"" +
+                    productType + "\" and workPieceCarrierNumber=" + workPieceCarrierNumber + ";", new RepairTicketMapper());
+
+            model.addAttribute("repairTickets", repairTickets);
+
+            return "repairTickets";
+        }
+
         RepairTicket.deleteOpenRepairTicket(jdbcTemplate, valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened);
         model.addAttribute("repairTickets", jdbcTemplate.query("Select * From RepairTickets", new RepairTicketMapper()));
 
