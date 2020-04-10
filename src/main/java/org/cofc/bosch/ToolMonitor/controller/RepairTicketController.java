@@ -2,6 +2,8 @@ package org.cofc.bosch.ToolMonitor.controller;
 
 import org.cofc.bosch.ToolMonitor.components.RepairTicket.RepairTicket;
 import org.cofc.bosch.ToolMonitor.components.RepairTicket.RepairTicketMapper;
+import org.cofc.bosch.ToolMonitor.components.WPCFile.WPCFile;
+import org.cofc.bosch.ToolMonitor.components.WPCFile.WPCFileRowMapper;
 import org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -19,8 +21,6 @@ import java.util.List;
 
 @Controller
 public class RepairTicketController {
-
-    boolean repairTicketsForWPC = false;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -126,8 +126,7 @@ public class RepairTicketController {
     public String openedRepairTickets(Model model) {
         List<RepairTicket> repairTickets = jdbcTemplate.query("Select * From RepairTickets", new RepairTicketMapper());
         model.addAttribute("repairTickets", repairTickets);
-
-        repairTicketsForWPC = false;
+        model.addAttribute("isForWPC", false);
 
         return "repairTickets";
     }
@@ -141,30 +140,26 @@ public class RepairTicketController {
         model.addAttribute("repairTickets", repairTickets);
         model.addAttribute("isForWPC", true);
 
-        repairTicketsForWPC = true;
-
         return "repairTickets";
     }
 
     @GetMapping("/delete_repairTicket")
     public String deleteRepairTicket(@RequestParam String valueStream, @RequestParam String productionLine, @RequestParam String productType,
                                      @RequestParam int workPieceCarrierNumber, @RequestParam String repairCategory, @RequestParam String repairDetail,
-                                     @RequestParam String userEntry, @RequestParam String timeStampOpened, Model model) {
-
-        if (repairTicketsForWPC){
-            RepairTicket.deleteOpenRepairTicket(jdbcTemplate, valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened);
-
-            List<RepairTicket> repairTickets = jdbcTemplate.query("Select * From RepairTickets where valueStream=\"" +
-                    valueStream + "\" and productionLine=\"" + productionLine + "\" and productType=\"" +
-                    productType + "\" and workPieceCarrierNumber=" + workPieceCarrierNumber + ";", new RepairTicketMapper());
-
-            model.addAttribute("repairTickets", repairTickets);
-
-            return "repairTickets";
-        }
+                                     @RequestParam String userEntry, @RequestParam String timeStampOpened, @RequestParam boolean isForWPC, Model model) {
 
         RepairTicket.deleteOpenRepairTicket(jdbcTemplate, valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened);
-        model.addAttribute("repairTickets", jdbcTemplate.query("Select * From RepairTickets", new RepairTicketMapper()));
+        List<RepairTicket> repairTickets;
+        if (isForWPC) {
+            repairTickets = jdbcTemplate.query("Select * From RepairTickets where valueStream=\"" +
+                    valueStream + "\" and productionLine=\"" + productionLine + "\" and productType=\"" +
+                    productType + "\" and workPieceCarrierNumber=" + workPieceCarrierNumber + ";", new RepairTicketMapper());
+            model.addAttribute("isForWPC", true);
+        } else {
+            repairTickets = jdbcTemplate.query("Select * From RepairTickets", new RepairTicketMapper());
+            model.addAttribute("isForWPC", false);
+        }
+        model.addAttribute("repairTickets", repairTickets);
 
         return "repairTickets";
     }
