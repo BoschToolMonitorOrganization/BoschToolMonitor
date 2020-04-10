@@ -45,7 +45,7 @@
             <td th:text="${carrier.productType}"></td>
             <td th:text="${carrier.workPieceCarrierNumber}"></td>
             <td>
-                <a th:href="@{/createOpenRepairTicket(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType}, workPieceCarrierNumber=${carrier.workPieceCarrierNumber})}"><button type="button" id="openbtn">Open</button></a>
+                <a th:href="@{/createOpenRepairTicketForWPC(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType}, workPieceCarrierNumber=${carrier.workPieceCarrierNumber})}"><button type="button" id="openbtn">Open</button></a>
             </td>
             <td>
                 <a th:href="@{/repairTicketsForWPC(valueStream=${carrier.valueStream}, productionLine=${carrier.productionLine}, productType=${carrier.productType}, workPieceCarrierNumber=${carrier.workPieceCarrierNumber})}"><button type="button" id="viewbtn">View</button></a>
