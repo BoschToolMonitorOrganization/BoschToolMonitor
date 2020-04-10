@@ -65,7 +65,7 @@
             </select>
         </h2>
 
-        <h2>WPC Number: <input type="number" value="1" min="1" name="points" th:field="*{workPieceCarrierNumber}" step="1"></h2>
+        <h2>WPC Number: <input type="number" th:min="1" name="points" th:value="${workPieceCarrierNumber} ? ${workPieceCarrierNumber} : '1'" step="1" th:field="*{workPieceCarrierNumber}"></h2>
 
         <h2>Repair Category:
             <select type="text" id="repairCategory" th:field="*{repairCategory}">

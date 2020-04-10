@@ -2,8 +2,6 @@ package org.cofc.bosch.ToolMonitor.controller;
 
 import org.cofc.bosch.ToolMonitor.components.RepairTicket.RepairTicket;
 import org.cofc.bosch.ToolMonitor.components.RepairTicket.RepairTicketMapper;
-import org.cofc.bosch.ToolMonitor.components.WPCFile.WPCFile;
-import org.cofc.bosch.ToolMonitor.components.WPCFile.WPCFileRowMapper;
 import org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -52,6 +50,31 @@ public class RepairTicketController {
         model.addAttribute("valueStreams", valueStreams);
         model.addAttribute("prodLines", prodLines);
         model.addAttribute("prodTypes", prodTypes);
+        model.addAttribute("repairCats", repairCats);
+        model.addAttribute("repairDets", repairDets);
+        model.addAttribute("repairTicket", new RepairTicket());
+
+        return "openRepairTicketForm";
+    }
+
+    @GetMapping("/createOpenRepairTicketForWPC")
+    public String openRepairTicketFormForWPC(@RequestParam String productionLine, @RequestParam String valueStream,
+                                                @RequestParam String productType, @RequestParam int workPieceCarrierNumber, Model model) {
+        List<String> repairDets = null;
+        List<String> repairCats = null;
+            if (!productionLine.isEmpty()) {
+                repairCats = jdbcTemplate.queryForList("Select Distinct repairCategory From RepairCodes where valueStream=\""
+                        + valueStream + "\" and productionLine=\"" + productionLine + "\";", String.class);
+                if (!repairCats.isEmpty()) {
+                    repairDets = jdbcTemplate.queryForList("Select Distinct repairDetail From RepairCodes where valueStream=\""
+                            + valueStream + "\" and productionLine=\"" + productionLine + "\" and " +
+                            "repairCategory=\"" + repairCats.get(0) + "\";", String.class);
+                }
+            }
+        model.addAttribute("valueStreams", valueStream);
+        model.addAttribute("prodLines", productionLine);
+        model.addAttribute("prodTypes", productType);
+        model.addAttribute("workPieceCarrierNumber", workPieceCarrierNumber);
         model.addAttribute("repairCats", repairCats);
         model.addAttribute("repairDets", repairDets);
         model.addAttribute("repairTicket", new RepairTicket());
