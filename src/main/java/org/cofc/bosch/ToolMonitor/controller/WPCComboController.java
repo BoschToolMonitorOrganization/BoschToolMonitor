@@ -34,7 +34,7 @@ public class WPCComboController {
     @PostMapping("/wpccombo")
     public String wpcComboSubmit(@ModelAttribute WPCCombo combo, Model model) {
         try {
-            combo.enterWPCComboIntoDB(jdbcTemplate);
+            combo.enterIntoDB(jdbcTemplate);
             model.addAttribute("combo", new WPCCombo());
         } catch (DataAccessException e) {
             if (e instanceof DuplicateKeyException) {

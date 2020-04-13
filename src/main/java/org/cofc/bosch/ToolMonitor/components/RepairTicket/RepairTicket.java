@@ -1,23 +1,29 @@
 package org.cofc.bosch.ToolMonitor.components.RepairTicket;
 
+import org.cofc.bosch.ToolMonitor.components.RepairCode.RepairCode;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class RepairTicket {
-    String valueStream;
-    String productionLine;
-    String productType;
-    int workPieceCarrierNumber;
-    String repairCategory;
-    String repairDetail;
-    String extraInfo;
-    String userEntry;
-    String timeStampOpened;
-    String timeStampClosed;
-    String repairDetails;
+public class RepairTicket extends RepairCode {
+
+    protected String productType;
+    protected int workPieceCarrierNumber;
+    protected String extraInfo;
+    protected String userEntry;
+    protected String timeStampOpened;
+    protected String timeStampClosed;
+    protected String repairDetails;
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
 
     public String getTimeStampClosed() {
         return timeStampClosed;
@@ -35,44 +41,12 @@ public class RepairTicket {
         this.repairDetails = repairDetails;
     }
 
-    public String getValueStream() {
-        return valueStream;
-    }
-
-    public void setValueStream(String valueStream) {
-        this.valueStream = valueStream;
-    }
-
-    public String getProductionLine() {
-        return productionLine;
-    }
-
-    public void setProductionLine(String productionLine) {
-        this.productionLine = productionLine;
-    }
-
-    public String getProductType() {
-        return productType;
-    }
-
-    public void setProductType(String productType) {
-        this.productType = productType;
-    }
-
     public int getWorkPieceCarrierNumber() {
         return workPieceCarrierNumber;
     }
 
     public void setWorkPieceCarrierNumber(int workPieceCarrierNumber) {
         this.workPieceCarrierNumber = workPieceCarrierNumber;
-    }
-
-    public String getRepairCategory() {
-        return repairCategory;
-    }
-
-    public void setRepairCategory(String repairCategory) {
-        this.repairCategory = repairCategory;
     }
 
     public String getRepairDetail() {
@@ -107,7 +81,8 @@ public class RepairTicket {
         this.timeStampOpened = timeStampOpened;
     }
 
-    public void enterOpenRepairTicketIntoDatabase(JdbcTemplate jdbcTemplate) {
+    @Override
+    public void enterIntoDB(JdbcTemplate jdbcTemplate) {
         jdbcTemplate.execute(
                 "INSERT INTO RepairTickets (valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, extraInfo, userEntry, timeStampOpened) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 new PreparedStatementCallback<Boolean>() {
@@ -141,7 +116,7 @@ public class RepairTicket {
                         "productType=\"%s\" and " +
                         "workPieceCarrierNumber=%d and " +
                         "repairCategory=\"%s\" and " +
-                        "repairDetail=\"%s\" and "  +
+                        "repairDetail=\"%s\" and " +
                         "userEntry=\"%s\" and " +
                         "timeStampOpened=\"%s\";",
                 valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory,
@@ -165,9 +140,9 @@ public class RepairTicket {
 
     }
 
-    public static void deleteOpenRepairTicket(JdbcTemplate jdbcTemplate, String valueStream, String productionLine, String productType,
-                                              int workPieceCarrierNumber, String repairCategory, String repairDetail,
-                                              String userEntry, String timeStampOpened) {
+    public static void deleteRepairTicket(JdbcTemplate jdbcTemplate, String valueStream, String productionLine, String productType,
+                                          int workPieceCarrierNumber, String repairCategory, String repairDetail,
+                                          String userEntry, String timeStampOpened) {
         jdbcTemplate.execute("DELETE FROM RepairTickets WHERE valueStream=\"" + valueStream + "\" and productionLine=\"" + productionLine +
                 "\" and productType=\"" + productType + "\" and workPieceCarrierNumber=\"" + workPieceCarrierNumber +
                 "\" and repairCategory=\"" + repairCategory + "\" and repairDetail=\"" + repairDetail +

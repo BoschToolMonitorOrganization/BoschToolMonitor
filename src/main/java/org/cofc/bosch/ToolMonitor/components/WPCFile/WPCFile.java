@@ -1,5 +1,6 @@
 package org.cofc.bosch.ToolMonitor.components.WPCFile;
 
+import org.cofc.bosch.ToolMonitor.components.WPCCombo.WPCCombo;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,40 +9,14 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class WPCFile {
-    String valueStream;
-    String productionLine;
-    String productType;
-    String author;
-    int revisionNumber;
-    String revisionReason;
-    String fileType;
-    String fileName;
-    MultipartFile fileData;
+public class WPCFile extends WPCCombo {
 
-    public String getValueStream() {
-        return valueStream;
-    }
-
-    public void setValueStream(String valueStream) {
-        this.valueStream = valueStream;
-    }
-
-    public String getProductionLine() {
-        return productionLine;
-    }
-
-    public void setProductionLine(String productionLine) {
-        this.productionLine = productionLine;
-    }
-
-    public String getProductType() {
-        return productType;
-    }
-
-    public void setProductType(String productType) {
-        this.productType = productType;
-    }
+    protected String author;
+    protected int revisionNumber;
+    protected String revisionReason;
+    protected String fileType;
+    protected String fileName;
+    protected MultipartFile fileData;
 
     public String getAuthor() {
         return author;
@@ -83,11 +58,16 @@ public class WPCFile {
         this.fileName = fileName;
     }
 
-    public MultipartFile getFileData() { return fileData; }
+    public MultipartFile getFileData() {
+        return fileData;
+    }
 
-    public void setFileData(MultipartFile fileData) { this.fileData = fileData; }
+    public void setFileData(MultipartFile fileData) {
+        this.fileData = fileData;
+    }
 
-    public void enterWPCFileIntoDatabase(JdbcTemplate jdbcTemplate) {
+    @Override
+    public void enterIntoDB(JdbcTemplate jdbcTemplate) {
         jdbcTemplate.execute(
                 "INSERT INTO WPCFiles (valueStream, productionLine, productType, author, revisionNumber, revisionReason, fileType, fileName, fileData) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 new PreparedStatementCallback<Boolean>() {

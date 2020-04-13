@@ -98,7 +98,7 @@ public class RepairTicketController {
                 throw new AlreadyOpenException();
             }
 
-            repairTicket.enterOpenRepairTicketIntoDatabase(jdbcTemplate);
+            repairTicket.enterIntoDB(jdbcTemplate);
         } catch (DataAccessException e) {
             if (e instanceof DuplicateKeyException) {
                 model.addAttribute("error", "It looks like a repair ticket already exists with the specified details!");
@@ -170,8 +170,7 @@ public class RepairTicketController {
     public String deleteRepairTicket(@RequestParam String valueStream, @RequestParam String productionLine, @RequestParam String productType,
                                      @RequestParam int workPieceCarrierNumber, @RequestParam String repairCategory, @RequestParam String repairDetail,
                                      @RequestParam String userEntry, @RequestParam String timeStampOpened, @RequestParam boolean isForWPC, Model model) {
-
-        RepairTicket.deleteOpenRepairTicket(jdbcTemplate, valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened);
+        RepairTicket.deleteRepairTicket(jdbcTemplate, valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened);
         List<RepairTicket> repairTickets;
         if (isForWPC) {
             repairTickets = jdbcTemplate.query("Select * From RepairTickets where valueStream=\"" +

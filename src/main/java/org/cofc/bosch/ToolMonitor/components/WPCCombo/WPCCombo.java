@@ -1,29 +1,11 @@
 package org.cofc.bosch.ToolMonitor.components.WPCCombo;
 
+import org.cofc.bosch.ToolMonitor.components.ProductionLine;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class WPCCombo {
+public class WPCCombo extends ProductionLine {
 
-    private String valueStream;
-    private String productionLine;
-    private String productType;
-
-
-    public String getValueStream() {
-        return valueStream;
-    }
-
-    public void setValueStream(String valueStream) {
-        this.valueStream = valueStream;
-    }
-
-    public String getProductionLine() {
-        return productionLine;
-    }
-
-    public void setProductionLine(String productionLine) {
-        this.productionLine = productionLine;
-    }
+    protected String productType;
 
     public String getProductType() {
         return productType;
@@ -33,8 +15,8 @@ public class WPCCombo {
         this.productType = productType;
     }
 
-
-    public void enterWPCComboIntoDB(JdbcTemplate jdbcTemplate) {
+    @Override
+    public void enterIntoDB(JdbcTemplate jdbcTemplate) {
         jdbcTemplate.execute("insert into WPCCombos values(\""
                 + valueStream + "\", \""
                 + productionLine + "\", \""

@@ -34,7 +34,7 @@ public class WPCController {
     public String workPieceCarrierSubmit(@ModelAttribute WorkPieceCarrier carrier, Model model) {
         model.addAttribute("carrier", carrier);
         try {
-            carrier.enterWPCIntoDatabase(jdbcTemplate);
+            carrier.enterIntoDB(jdbcTemplate);
         } catch (DataAccessException e) {
             if (e instanceof DuplicateKeyException) {
                 model.addAttribute("error", "It looks like this work piece carrier already exists!");

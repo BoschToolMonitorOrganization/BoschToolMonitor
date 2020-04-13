@@ -37,7 +37,7 @@ public class WPCFileController {
         wpcFile.setFileName(wpcFile.getFileData().getOriginalFilename());
         model.addAttribute("wpcFile", wpcFile);
         try {
-            wpcFile.enterWPCFileIntoDatabase(jdbcTemplate);
+            wpcFile.enterIntoDB(jdbcTemplate);
         } catch (DataAccessException e) {
             if (e instanceof DuplicateKeyException) {
                 model.addAttribute("error", "It looks like a WPC File with the specified details already exists!");
