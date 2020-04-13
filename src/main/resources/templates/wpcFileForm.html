@@ -30,12 +30,12 @@
 <div id="nav-placeholder">
 </div>
 
-    <h1>WPC File Form</h1>
+<h1>WPC File Form</h1>
 
-    <label th:if="${error != null}" th:text="${error}"/>
-    <form action="#" th:action="@{/createWPCFile}" th:object="${wpcFile}" method="post" enctype="multipart/form-data">
+<label th:if="${error != null}" th:text="${error}"/>
+<form action="#" th:action="@{/createWPCFile}" th:object="${wpcFile}" method="post" enctype="multipart/form-data">
 
-     <div class="container">
+    <div class="container">
         <h2>Value Stream:
             <select th:field="*{valueStream}" type="text" name="fileType" id="valueStream">
                 <option th:each="valueStream : ${valueStreams}"
@@ -60,7 +60,7 @@
 
         <h2>Author: <input type="text" name="author" th:field="*{author}"/></h2>
 
-         <h2>Revision Number: <input type="number" min="1" name="points" th:field="*{revisionNumber}" step="1"></h2>
+        <h2>Revision Number: <input type="number" min="1" name="points" th:field="*{revisionNumber}" step="1"></h2>
 
         <h2>Revision Reason: <input type="text" name="revisionReason" th:field="*{revisionReason}"/></h2>
 
@@ -75,12 +75,12 @@
 
 
         <h2>File: <input type="file" name="fileData" th:field="*{fileData}"/></h2>
-         <h5>Note: Max size of 16MB</h5>
+        <h5>Note: Max size of 16MB</h5>
 
-         <button type="submit" value="Submit">Submit</button>
-     </div>
+        <button type="submit" value="Submit">Submit</button>
+    </div>
 
-    </form>
+</form>
 
 </body>
 

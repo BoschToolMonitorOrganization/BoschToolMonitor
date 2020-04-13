@@ -19,48 +19,52 @@
 <div id="nav-placeholder">
 </div>
 
-    <h1>WPC Files</h1>
+<h1>WPC Files</h1>
 
-    <br>
+<br>
 
-    <table id="myTable" class="display">
-        <thead>
-        <tr>
-            <th>Value Stream</th>
-            <th>Production Line</th>
-            <th>Production Type</th>
-            <th>Author</th>
-            <th>Revision Number</th>
-            <th>Revision Reason</th>
-            <th>File Type</th>
-            <th>File Name</th>
-            <th>Download</th>
-            <th>Delete</th>
-        </tr>
-        </thead>
+<table id="myTable" class="display">
+    <thead>
+    <tr>
+        <th>Value Stream</th>
+        <th>Production Line</th>
+        <th>Production Type</th>
+        <th>Author</th>
+        <th>Revision Number</th>
+        <th>Revision Reason</th>
+        <th>File Type</th>
+        <th>File Name</th>
+        <th>Download</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
 
-        <tbody>
-            <tr th:each="wpcFile : ${wpcFiles}">
-                <td th:text="${wpcFile.valueStream}"/>
-                <td  th:text="${wpcFile.productionLine}"/>
-                <td  th:text="${wpcFile.productType}"/>
-                <td  th:text="${wpcFile.author}"/>
-                <td  th:text="${wpcFile.revisionNumber}"/>
-                <td  th:text="${wpcFile.revisionReason}"/>
-                <td  th:text="${wpcFile.fileType}"/>
-                <td  th:text="${wpcFile.fileName}"/>
-                <td >
-                    <a th:href="@{/download/wpcFile(productionLine=${wpcFile.productionLine}, valueStream=${wpcFile.valueStream}, productType=${wpcFile.productType},
+    <tbody>
+    <tr th:each="wpcFile : ${wpcFiles}">
+        <td th:text="${wpcFile.valueStream}"/>
+        <td th:text="${wpcFile.productionLine}"/>
+        <td th:text="${wpcFile.productType}"/>
+        <td th:text="${wpcFile.author}"/>
+        <td th:text="${wpcFile.revisionNumber}"/>
+        <td th:text="${wpcFile.revisionReason}"/>
+        <td th:text="${wpcFile.fileType}"/>
+        <td th:text="${wpcFile.fileName}"/>
+        <td>
+            <a th:href="@{/download/wpcFile(productionLine=${wpcFile.productionLine}, valueStream=${wpcFile.valueStream}, productType=${wpcFile.productType},
                         author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType},
-                        fileName=${wpcFile.fileName})}" th:download="@{${wpcFile.fileName}}"><button type="button" id="downloadbtn">Download</button></a>
-                </td>
-                <td >
-                    <a th:href="@{/delete_WPCFile(valueStream=${wpcFile.valueStream}, productionLine=${wpcFile.productionLine}, productType=${wpcFile.productType},
-                    author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType}, fileName=${wpcFile.fileName}, isForWPC=${isForWPC})}"><button type="button" id="deletebtn">Delete</button></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+                        fileName=${wpcFile.fileName})}" th:download="@{${wpcFile.fileName}}">
+                <button type="button" id="downloadbtn">Download</button>
+            </a>
+        </td>
+        <td>
+            <a th:href="@{/delete_WPCFile(valueStream=${wpcFile.valueStream}, productionLine=${wpcFile.productionLine}, productType=${wpcFile.productType},
+                    author=${wpcFile.author}, revisionNumber=${wpcFile.revisionNumber}, fileType=${wpcFile.fileType}, fileName=${wpcFile.fileName}, isForWPC=${isForWPC})}">
+                <button type="button" id="deletebtn">Delete</button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 
 </body>
 </html>

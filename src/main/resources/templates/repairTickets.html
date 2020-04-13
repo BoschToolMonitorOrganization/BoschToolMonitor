@@ -26,50 +26,54 @@
 <table id="myTable" class="display">
 
     <thead>
-        <tr>
-            <th>Value Stream</th>
-            <th>Production Line</th>
-            <th>Product Type</th>
-            <th>WPC Number</th>
-            <th>Repair Category</th>
-            <th>Repair Detail</th>
-            <th>Extra Info</th>
-            <th>User Entry</th>
-            <th>Time Stamp Opened</th>
-            <th>Repair Details</th>
-            <th>Closed</th>
-            <th>Delete</th>
-        </tr>
+    <tr>
+        <th>Value Stream</th>
+        <th>Production Line</th>
+        <th>Product Type</th>
+        <th>WPC Number</th>
+        <th>Repair Category</th>
+        <th>Repair Detail</th>
+        <th>Extra Info</th>
+        <th>User Entry</th>
+        <th>Time Stamp Opened</th>
+        <th>Repair Details</th>
+        <th>Closed</th>
+        <th>Delete</th>
+    </tr>
     </thead>
 
     <tbody>
-        <tr th:each="repairTicket : ${repairTickets}">
-            <td th:text="${repairTicket.valueStream}"></td>
-            <td th:text="${repairTicket.productionLine}"></td>
-            <td th:text="${repairTicket.productType}"></td>
-            <td th:text="${repairTicket.workPieceCarrierNumber}"></td>
-            <td th:text="${repairTicket.repairCategory}"></td>
-            <td th:text="${repairTicket.repairDetail}"></td>
-            <td th:text="${repairTicket.extraInfo}"></td>
-            <td th:text="${repairTicket.userEntry}"></td>
-            <td th:text="${repairTicket.timeStampOpened}"></td>
-            <td th:text="${repairTicket.repairDetails}"></td>
-            <td>
-               <a th:if="${repairTicket.timeStampClosed == null}" th:href="@{/closeRepairTicket(valueStream=${repairTicket.valueStream},
+    <tr th:each="repairTicket : ${repairTickets}">
+        <td th:text="${repairTicket.valueStream}"></td>
+        <td th:text="${repairTicket.productionLine}"></td>
+        <td th:text="${repairTicket.productType}"></td>
+        <td th:text="${repairTicket.workPieceCarrierNumber}"></td>
+        <td th:text="${repairTicket.repairCategory}"></td>
+        <td th:text="${repairTicket.repairDetail}"></td>
+        <td th:text="${repairTicket.extraInfo}"></td>
+        <td th:text="${repairTicket.userEntry}"></td>
+        <td th:text="${repairTicket.timeStampOpened}"></td>
+        <td th:text="${repairTicket.repairDetails}"></td>
+        <td>
+            <a th:if="${repairTicket.timeStampClosed == null}" th:href="@{/closeRepairTicket(valueStream=${repairTicket.valueStream},
                 productionLine=${repairTicket.productionLine}, productType=${repairTicket.productType},
                 workPieceCarrierNumber=${repairTicket.workPieceCarrierNumber}, repairCategory=${repairTicket.repairCategory},
                 repairDetail=${repairTicket.repairDetail}, extraInfo=${repairTicket.extraInfo}, userEntry=${repairTicket.userEntry},
-                timeStampOpened=${repairTicket.timeStampOpened})}"><button id="closebtn" type="button">Close Ticket</button></a>
-                <label th:unless="${repairTicket.timeStampClosed == null}" th:text="${repairTicket.timeStampClosed}"/>
-            </td>
-            <td>
-                <a th:href="@{/delete_repairTicket(valueStream=${repairTicket.valueStream},
+                timeStampOpened=${repairTicket.timeStampOpened})}">
+                <button id="closebtn" type="button">Close Ticket</button>
+            </a>
+            <label th:unless="${repairTicket.timeStampClosed == null}" th:text="${repairTicket.timeStampClosed}"/>
+        </td>
+        <td>
+            <a th:href="@{/delete_repairTicket(valueStream=${repairTicket.valueStream},
                 productionLine=${repairTicket.productionLine}, productType=${repairTicket.productType},
                 workPieceCarrierNumber=${repairTicket.workPieceCarrierNumber}, repairCategory=${repairTicket.repairCategory},
                 repairDetail=${repairTicket.repairDetail}, extraInfo=${repairTicket.extraInfo}, userEntry=${repairTicket.userEntry},
-                timeStampOpened=${repairTicket.timeStampOpened}, isForWPC=${isForWPC})}"><button type="button" id="deletebtn">Delete</button></a>
-            </td>
-        </tr>
+                timeStampOpened=${repairTicket.timeStampOpened}, isForWPC=${isForWPC})}">
+                <button type="button" id="deletebtn">Delete</button>
+            </a>
+        </td>
+    </tr>
     </tbody>
 </table>
 
