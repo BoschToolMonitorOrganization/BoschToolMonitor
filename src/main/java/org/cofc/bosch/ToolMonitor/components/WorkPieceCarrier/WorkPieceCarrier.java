@@ -1,13 +1,11 @@
 package org.cofc.bosch.ToolMonitor.components.WorkPieceCarrier;
 
+import org.cofc.bosch.ToolMonitor.components.WPCCombo.WPCCombo;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-public class WorkPieceCarrier {
+public class WorkPieceCarrier extends WPCCombo {
 
     private int workPieceCarrierNumber;
-    private String valueStream;
-    private String productionLine;
-    private String productType;
 
     public int getWorkPieceCarrierNumber() {
         return workPieceCarrierNumber;
@@ -17,31 +15,8 @@ public class WorkPieceCarrier {
         this.workPieceCarrierNumber = workPieceCarrierNumber;
     }
 
-    public String getValueStream() {
-        return valueStream;
-    }
-
-    public void setValueStream(String valueStream) {
-        this.valueStream = valueStream;
-    }
-
-    public String getProductionLine() {
-        return productionLine;
-    }
-
-    public void setProductionLine(String productionLine) {
-        this.productionLine = productionLine;
-    }
-
-    public String getProductType() {
-        return productType;
-    }
-
-    public void setProductType(String productType) {
-        this.productType = productType;
-    }
-
-    public  void enterWPCIntoDatabase(JdbcTemplate jdbcTemplate) {
+    @Override
+    public void enterIntoDB(JdbcTemplate jdbcTemplate) {
         jdbcTemplate.execute("insert into WPCs values(\""
                 + valueStream + "\", \""
                 + productionLine + "\", \""
@@ -53,6 +28,6 @@ public class WorkPieceCarrier {
         jdbcTemplate.execute("Delete From WPCs where valueStream=\"" + valueStream +
                 "\" and productionLine=\"" + productionLine +
                 "\" and productType=\"" + productType + "\" and " +
-                "workPieceCarrierNumber=" +  workPieceCarrierNumber + ";");
+                "workPieceCarrierNumber=" + workPieceCarrierNumber + ";");
     }
 }

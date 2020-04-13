@@ -74,7 +74,7 @@ public class RepairCodeController {
                                    @RequestParam String repairCategory, @RequestParam String repairDetail,
                                    Model model) {
         try {
-            RepairCode.deleteFromDB(valueStream, productionLine, repairCategory, repairDetail, jdbcTemplate);
+            RepairCode.deleteRepairCode(valueStream, productionLine, repairCategory, repairDetail, jdbcTemplate);
         } catch (DataAccessException e) {
             model.addAttribute("error", e.getMessage());
         }
