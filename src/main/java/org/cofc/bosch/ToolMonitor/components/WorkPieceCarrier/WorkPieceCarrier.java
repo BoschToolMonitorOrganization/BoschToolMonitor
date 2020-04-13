@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 public class WorkPieceCarrier extends WPCCombo {
 
-    private int workPieceCarrierNumber;
+    protected int workPieceCarrierNumber;
 
     public int getWorkPieceCarrierNumber() {
         return workPieceCarrierNumber;
@@ -25,9 +25,13 @@ public class WorkPieceCarrier extends WPCCombo {
     }
 
     public static void deleteWPC(String valueStream, String productionLine, String productType, int workPieceCarrierNumber, JdbcTemplate jdbcTemplate) {
-        jdbcTemplate.execute("Delete From WPCs where valueStream=\"" + valueStream +
-                "\" and productionLine=\"" + productionLine +
-                "\" and productType=\"" + productType + "\" and " +
-                "workPieceCarrierNumber=" + workPieceCarrierNumber + ";");
+        String where =
+                " where valueStream=\"" + valueStream +
+                        "\" and productionLine=\"" + productionLine +
+                        "\" and productType=\"" + productType +
+                        "\" and workPieceCarrierNumber=" + workPieceCarrierNumber + ";";
+        jdbcTemplate.batchUpdate(
+                "Delete From RepairTickets" + where,
+                "Delete From WPCs" + where);
     }
 }

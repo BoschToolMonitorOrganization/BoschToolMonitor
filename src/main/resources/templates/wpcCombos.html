@@ -61,7 +61,7 @@
         <td th:text="${combo.productType}"></td>
         <td>
             <a th:href="@{/wpccombo/delete(valueStream=${combo.valueStream}, productionLine=${combo.productionLine}, productType=${combo.productType})}"
-               onclick="return confirm('Are you sure you want to delete this item? All associated WPCs and WPC Files will be deleted.');">
+               onclick="return confirm('Are you sure you want to delete this item? All associated Repair Tickets, WPCs and WPC Files will be deleted.');">
                 <button type="button" id="deletebtn">Delete</button></a>
         </td>
     </tr>
