@@ -57,6 +57,31 @@ public class RepairTicketController {
         return "openRepairTicketForm";
     }
 
+    @GetMapping("/createOpenRepairTicketForWPC")
+    public String openRepairTicketFormForWPC(@RequestParam String productionLine, @RequestParam String valueStream,
+                                                @RequestParam String productType, @RequestParam int workPieceCarrierNumber, Model model) {
+        List<String> repairDets = null;
+        List<String> repairCats = null;
+            if (!productionLine.isEmpty()) {
+                repairCats = jdbcTemplate.queryForList("Select Distinct repairCategory From RepairCodes where valueStream=\""
+                        + valueStream + "\" and productionLine=\"" + productionLine + "\";", String.class);
+                if (!repairCats.isEmpty()) {
+                    repairDets = jdbcTemplate.queryForList("Select Distinct repairDetail From RepairCodes where valueStream=\""
+                            + valueStream + "\" and productionLine=\"" + productionLine + "\" and " +
+                            "repairCategory=\"" + repairCats.get(0) + "\";", String.class);
+                }
+            }
+        model.addAttribute("valueStreams", valueStream);
+        model.addAttribute("prodLines", productionLine);
+        model.addAttribute("prodTypes", productType);
+        model.addAttribute("workPieceCarrierNumber", workPieceCarrierNumber);
+        model.addAttribute("repairCats", repairCats);
+        model.addAttribute("repairDets", repairDets);
+        model.addAttribute("repairTicket", new RepairTicket());
+
+        return "openRepairTicketForm";
+    }
+
     @PostMapping("/createOpenRepairTicket")
     public String openRepairTicketSubmission(@ModelAttribute RepairTicket repairTicket, Model model) {
         model.addAttribute("repairTicket", repairTicket);
@@ -124,6 +149,7 @@ public class RepairTicketController {
     public String openedRepairTickets(Model model) {
         List<RepairTicket> repairTickets = jdbcTemplate.query("Select * From RepairTickets", new RepairTicketMapper());
         model.addAttribute("repairTickets", repairTickets);
+        model.addAttribute("isForWPC", false);
 
         return "repairTickets";
     }
@@ -143,9 +169,19 @@ public class RepairTicketController {
     @GetMapping("/delete_repairTicket")
     public String deleteRepairTicket(@RequestParam String valueStream, @RequestParam String productionLine, @RequestParam String productType,
                                      @RequestParam int workPieceCarrierNumber, @RequestParam String repairCategory, @RequestParam String repairDetail,
-                                     @RequestParam String userEntry, @RequestParam String timeStampOpened, Model model) {
+                                     @RequestParam String userEntry, @RequestParam String timeStampOpened, @RequestParam boolean isForWPC, Model model) {
         RepairTicket.deleteRepairTicket(jdbcTemplate, valueStream, productionLine, productType, workPieceCarrierNumber, repairCategory, repairDetail, userEntry, timeStampOpened);
-        model.addAttribute("repairTickets", jdbcTemplate.query("Select * From RepairTickets", new RepairTicketMapper()));
+        List<RepairTicket> repairTickets;
+        if (isForWPC) {
+            repairTickets = jdbcTemplate.query("Select * From RepairTickets where valueStream=\"" +
+                    valueStream + "\" and productionLine=\"" + productionLine + "\" and productType=\"" +
+                    productType + "\" and workPieceCarrierNumber=" + workPieceCarrierNumber + ";", new RepairTicketMapper());
+            model.addAttribute("isForWPC", true);
+        } else {
+            repairTickets = jdbcTemplate.query("Select * From RepairTickets", new RepairTicketMapper());
+            model.addAttribute("isForWPC", false);
+        }
+        model.addAttribute("repairTickets", repairTickets);
 
         return "repairTickets";
     }
