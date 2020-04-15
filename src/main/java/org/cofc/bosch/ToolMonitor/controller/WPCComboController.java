@@ -18,6 +18,7 @@ import java.util.List;
 
 @Controller
 public class WPCComboController {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
