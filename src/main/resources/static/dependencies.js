@@ -27,8 +27,7 @@ function updateProductionLines() {
             $("#productionLine").append(option);
         });
     });
-};
-
+}
 function updateProductTypes() {
     $.get("/BoschToolMonitor/productTypes?valueStream=" + valueStream + '&productionLine=' + productionLine, function (data) {
         $("#productType").empty();
@@ -37,8 +36,7 @@ function updateProductTypes() {
             $("#productType").append(option);
         });
     });
-};
-
+}
 function updateRepairCategories() {
       $.get("/BoschToolMonitor/repairCategories?valueStream=" + valueStream + '&productionLine=' + productionLine, function (data) {
           $("#repairCategory").empty();
@@ -48,8 +46,7 @@ function updateRepairCategories() {
               $("#repairCategory").append(option);
           });
       });
-};
-
+}
 function updateRepairDetails() {
     $.get("/BoschToolMonitor/repairDetails?valueStream=" + valueStream + '&productionLine=' + productionLine + '&repairCategory=' + repairCategory, function (data) {
         $("#repairDetail").empty();
@@ -58,4 +55,4 @@ function updateRepairDetails() {
             $("#repairDetail").append(option);
         });
     });
-};
+}

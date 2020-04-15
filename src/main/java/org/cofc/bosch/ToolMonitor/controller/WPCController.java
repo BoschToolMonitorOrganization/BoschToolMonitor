@@ -20,6 +20,7 @@ import static org.cofc.bosch.ToolMonitor.utilities.ControllerUtilities.initWPCCo
 
 @Controller
 public class WPCController {
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

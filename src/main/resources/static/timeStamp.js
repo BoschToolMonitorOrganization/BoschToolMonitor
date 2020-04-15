@@ -7,9 +7,9 @@ function getTimeStamp() {
 
     var date = (today.getDate() < 10 ? '0' : '') + today.getDate();
 
-    var hours = ((today.getHours()) < 10 ? '0' : '') + (today.getHours())
+    var hours = ((today.getHours()) < 10 ? '0' : '') + (today.getHours());
 
-    var minutes = ((today.getMinutes()) < 10 ? '0' : '') + (today.getMinutes())
+    var minutes = ((today.getMinutes()) < 10 ? '0' : '') + (today.getMinutes());
 
     var amorpm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
