@@ -1,6 +1,5 @@
 #menu-bar {
     width: 95%;
-    margin: 0px 0px 0px 0px;
     padding: 6px 6px 4px 6px;
     height: 40px;
     line-height: 100%;
@@ -11,10 +10,10 @@
     -webkit-box-shadow: 2px 2px 3px #666666;
     -moz-box-shadow: 2px 2px 3px #666666;
     background: #8B8B8B;
-    background: linear-gradient(top,  #A9A9A9,  #7A7A7A);
-    background: -ms-linear-gradient(top,  #A9A9A9,  #7A7A7A);
-    background: -webkit-gradient(linear, left top, left bottom, from(#A9A9A9), to(#7A7A7A));
-    background: -moz-linear-gradient(top,  #A9A9A9,  #7A7A7A);
+    background: linear-gradient(top,  #DEE4EA,  #F9FCFF);
+    background: -ms-linear-gradient(top,  #DEE4EA,  #F9FCFF);
+    background: -webkit-gradient(linear, left top, left bottom, from(#DEE4EA), to(#F9FCFF));
+    background: -moz-linear-gradient(top,  #DEE4EA,  #F9FCFF);
     border: solid 1px #6D6D6D;
     position:fixed;
     top: 5px;
@@ -32,7 +31,7 @@
     font-family: arial;
     font-style: normal;
     font-size: 14px;
-    color: #E7E5E5;
+    color: black;
     text-decoration: none;
     display: block;
     padding: 6px 20px 6px 20px;
@@ -41,7 +40,6 @@
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
-    text-shadow: 2px 2px 3px #000000;
 }
 #menu-bar li ul li a {
     margin: 0;

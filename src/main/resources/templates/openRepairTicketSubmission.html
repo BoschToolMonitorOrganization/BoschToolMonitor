@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>You successfully submitted your open repair ticket.</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css"/>
+    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css?v=1.15"/>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
@@ -13,12 +13,13 @@
 
 </head>
 
-<div id="nav-placeholder">
-</div>
+<div id="nav-placeholder"></div>
 
 <body>
-<div class="container">
-    <h1>Congrats! You submitted an open repair ticket!</h1>
+
+<h1>You successfully opened a repair ticket.</h1>
+
+<div class="submissionContainer">
     <h2 th:text="'Value Stream: ' + ${repairTicket.valueStream}"/>
     <h2 th:text="'Production Line: ' + ${repairTicket.productionLine}"/>
     <h2 th:text="'Product Type: ' + ${repairTicket.productType}"/>
