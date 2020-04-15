@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <title>Work Piece Carrier Home Page</title>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css"/>
+    <link rel="stylesheet" type="text/css" href="/BoschToolMonitor/main.css?v=1.25"/>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#nav-placeholder").load("/BoschToolMonitor/NavigationBar");
@@ -12,13 +12,19 @@
 </head>
 
 <body>
+    <div id="nav-placeholder"></div>
 
-<div id="nav-placeholder">
-</div>
+    <img src="/BoschToolMonitor/img/boschLogo.png" alt="logo" height="80" width="250">
+    <br>
+    <img src="/BoschToolMonitor/img/boschTitle.png" alt="title" class="boschTitle">
 
-<div class="container">
-    <h1>Welcome to your Bosch Tool Monitor!</h1>
-</div>
+    <div class="welcomeImages">
+        <img src="/BoschToolMonitor/img/boschPlantOutside.jpg" alt="plant" height="400" width="500">
+        <img src="/BoschToolMonitor/img/boschUserExample.jpg" alt="user" height="400" width="500">
+    </div>
+
+
+
 </body>
 
 </html>

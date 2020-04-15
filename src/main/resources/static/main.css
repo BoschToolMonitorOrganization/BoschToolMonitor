@@ -5,6 +5,8 @@
 }
 
 body {
+    background: url("/BoschToolMonitor/img/boschRGBGraphic.png") center top fixed no-repeat;
+    background-size: 1370px 15px;
     font-family: 'Nunito', sans-serif;
     padding: 20px;
     margin-top: 50px;
@@ -19,6 +21,8 @@ form {
 }
 
 h1 {
+    font-family: 'Palatino', sans-serif;
+    color: #008ECF;
     margin: 0 0 30px 0;
     text-align: center;
 }
@@ -64,6 +68,21 @@ select {
     border-radius: 2px;
 }
 
+.boschTitle {
+    display: block;
+    margin-left: 347px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    width: 50%;
+
+}
+
+.welcomeImages {
+    display: inline;
+    margin-left: 150px;
+}
+
+
 button[type=submit] {
     padding: 19px 39px 18px 39px;
     color: #FFF;
@@ -73,10 +92,27 @@ button[type=submit] {
     font-style: normal;
     border-radius: 5px;
     width: 100%;
-    border: 1px solid #3ac162;
+    border: 1px solid #4bc970;
     border-width: 1px 1px 3px;
     box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
     margin-bottom: 10px;
+}
+
+button[type=submit]:hover {
+    padding: 19px 39px 18px 39px;
+    color: #FFF;
+    background-color: green;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid green;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition-delay: 1ms;
 }
 
 /* Buttons within table */
@@ -138,6 +174,13 @@ button[type=submit] {
     background-color: green;
     cursor: pointer;
     transition-delay: 1ms;
+}
+
+.submissionContainer {
+    border-style: groove;
+    padding-left: 5px;
+    background: url("/BoschToolMonitor/img/submissionPageBackground.jpg");
+    background-size: 100% 100%;
 }
 
 fieldset {
